@@ -1,7 +1,7 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Navbar from './components/layout/navbar';
-import HomePageForm from './components/pages/home/homePageForm';
+import HomePageForm from './pages/home/homePageForm';
 import './App.css';
 
 function App() {

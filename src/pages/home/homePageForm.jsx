@@ -1,6 +1,6 @@
 import { Fragment } from "react";
-import classes from '../homePageForm.module.css';
-import logo from '../../../images/educationSchoolLogo.jpg';
+import classes from './homePageForm.module.css';
+import logo from '../../images/educationSchoolLogo.jpg';
 
 const homePageForm = () => {
     return(
