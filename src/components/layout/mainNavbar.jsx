@@ -24,12 +24,12 @@ const MainNavbar = () => {
                 }
                 {isLoggedIn &&
                     <li>
-                        <button onClick={logoutHandler}>Logout</button>
+                        <img src={logo} alt="Logo" className={classes.image} />
                     </li>
                 }
                 {isLoggedIn &&
                     <li>
-                        <img src={logo} alt="Logo" className={classes.image} />
+                        <button onClick={logoutHandler}>Logout</button>
                     </li>
                 }
                 {!isLoggedIn &&

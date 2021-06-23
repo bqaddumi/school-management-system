@@ -11,6 +11,12 @@ function App() {
         <Route path='/home' exact>
           <HomePageForm />
         </Route>
+        <Route path='/login' exact>
+          {/* <HomePageForm /> */}
+        </Route>
+        <Route path='/signup' exact>
+          {/* <HomePageForm /> */}
+        </Route>
         <Route path='*' exact>
           <Redirect to='/home' />
         </Route>
