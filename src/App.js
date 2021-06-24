@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import CommonSigninSignup from'./commonComponent/SigninSignup';
+import SigninForm from'./pages/signIn/signinPageForm';
 
 function App() {
   return (
     <div className="App">
-      <CommonSigninSignup/>
+      <SigninForm/>
       
     </div>
   );

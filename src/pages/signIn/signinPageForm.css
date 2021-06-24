@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .signinForm {
+    font: inherit;
+    background-color: rgb(235, 235, 235);
+    color: black;
+    border-radius: 4px;
+    border: 1px solid black;
+    width: 40%;
+    align-items: center;
+    align-content: center;
+    padding: 020rem;
+    visibility: hidden;
+ 
+  }
+
+  
