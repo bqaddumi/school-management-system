@@ -2,6 +2,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Navbar from './components/layout/navbar';
 import HomePageForm from './pages/home/homePageForm';
+import SignupPageForm from './pages/signUp/signupPageForm';
 import './App.css';
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
           {/* <HomePageForm /> */}
         </Route>
         <Route path='/signup' exact>
-          {/* <HomePageForm /> */}
+          <SignupPageForm />
         </Route>
         <Route path='*' exact>
           <Redirect to='/home' />

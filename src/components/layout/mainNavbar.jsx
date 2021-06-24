@@ -1,14 +1,15 @@
 import logo from '../../images/educationSchoolLogo.jpg';
 import classes from './mainNavbar.module.css';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 
 const MainNavbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const history = useHistory();
 
     const logoutHandler = () => {
-        console.log("onClickLogoutHandler");
+        history.push("/home");
         setIsLoggedIn(!isLoggedIn);
     };
     return (
