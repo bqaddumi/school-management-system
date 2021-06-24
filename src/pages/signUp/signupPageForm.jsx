@@ -1,12 +1,20 @@
-import { useRef } from 'react';
 import classes from './signupPageForm.module.css';
+import { useRef } from 'react';
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import AuthContext from '../../components/authentication/configureFirebase';
 
 const SignupPageForm = () => {
+    const history = useHistory();
     const userNameInputRef = useRef();
+    const authCtx = useContext(AuthContext);
+
 
     const submitHandler = (event) => {
         event.preventDefault();
-        const enteredUserName = userNameInputRef.current.value;
+        // const enteredUserName = userNameInputRef.current.value;
+        authCtx.login('test');
+        history.push("/home");
     };
 
     return (
@@ -15,7 +23,7 @@ const SignupPageForm = () => {
             <form onSubmit={submitHandler}>
                 <div className={classes.control}>
                     <label htmlFor='userName'>User Name</label>
-                    <input type='text' id='userName' required ref={userNameInputRef} placeholder='User Name'/>
+                    <input type='text' id='userName' required ref={userNameInputRef} placeholder='User Name' />
                 </div>
                 <div className={classes.actions}>
                     <button>Login</button>

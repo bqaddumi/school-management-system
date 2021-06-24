@@ -1,15 +1,17 @@
 import logo from '../../images/educationSchoolLogo.jpg';
 import classes from './mainNavbar.module.css';
 import { NavLink, useHistory } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext } from 'react';
+import AuthContext from '../authentication/configureFirebase';
 
 const MainNavbar = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const authCtx = useContext(AuthContext);
+    const isLoggedIn = authCtx.isLoggedIn;
     const history = useHistory();
 
     const logoutHandler = () => {
+        authCtx.logout();
         history.push("/home");
-        setIsLoggedIn(!isLoggedIn);
     };
     return (
         <header className={classes.header}>
