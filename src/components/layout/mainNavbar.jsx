@@ -1,6 +1,5 @@
 import logo from '../../images/educationSchoolLogo.jpg';
 import classes from './mainNavbar.module.css';
-
 import { NavLink, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 
