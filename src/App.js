@@ -1,22 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import Navbar from './components/layout/navbar';
+import HomePage from './pages/home/homePage';
+import SignupPageForm from './pages/signUp/signupPageForm';
+import SigninPageForm from './pages/signIn/signinPageForm';
+import classes from './App.module.css';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-          Edit <code>src/App.js</code> and save to reload.
-        
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className={classes.mainContainer}>
+      <Navbar />
+      <Switch>
+        <Route path='/home' exact>
+          <HomePage />
+        </Route>
+        <Route path='/login'>
+          <SigninPageForm />
+        </Route>
+        <Route path='/signup'>
+          <SignupPageForm />
+        </Route>
+        <Route path='*'>
+          <Redirect to='/home' />
+        </Route>
+      </Switch>
+    </main>
+
   );
 }
 
