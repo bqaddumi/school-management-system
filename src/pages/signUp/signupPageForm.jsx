@@ -1,19 +1,13 @@
-import classes from './signupPageForm.module.css';
 import { useRef } from 'react';
-import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import AuthContext from '../../components/authentication/configureFirebase';
+import classes from './signupPageForm.module.css';
 
 const SignupPageForm = () => {
     const history = useHistory();
     const userNameInputRef = useRef();
-    const authCtx = useContext(AuthContext);
-
 
     const submitHandler = (event) => {
         event.preventDefault();
-        // const enteredUserName = userNameInputRef.current.value;
-        authCtx.login('test');
         history.push("/home");
     };
 

@@ -1,29 +1,31 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Navbar from './components/layout/navbar';
-import HomePageForm from './pages/home/homePageForm';
+import HomePage from './pages/home/homePage';
 import SignupPageForm from './pages/signUp/signupPageForm';
-
-import './App.css';
+import SigninPageForm from './pages/signIn/signinPageForm';
+import classes from './App.module.css';
 
 function App() {
 
   return (
-    <Navbar>
+    <main className={classes.mainContainer}>
+      <Navbar />
       <Switch>
         <Route path='/home' exact>
-          <HomePageForm />
+          <HomePage />
         </Route>
-        <Route path='/login' exact>
-          {/* <HomePageForm /> */}
+        <Route path='/login'>
+          <SigninPageForm />
         </Route>
-        <Route path='/signup' exact>
+        <Route path='/signup'>
           <SignupPageForm />
         </Route>
-        <Route path='*' exact>
+        <Route path='*'>
           <Redirect to='/home' />
         </Route>
       </Switch>
-    </Navbar>
+    </main>
+
   );
 }
 
