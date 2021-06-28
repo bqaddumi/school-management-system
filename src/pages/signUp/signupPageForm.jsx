@@ -11,9 +11,9 @@ const SignupPageForm = () => {
   const [name, setName] = useState("");
   const history = useHistory();
 
-  const submitHandler = (event) => {
+  const onSignupHandler = (event) => {
     event.preventDefault();
-    if (password == confirmPassword) {
+    if (password === confirmPassword) {
       history.push("/home");
     }
   };
@@ -36,7 +36,7 @@ const SignupPageForm = () => {
 
   return (
     <section className={classes.header}>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={onSignupHandler}>
         <InputField
           label="UserName"
           onChange={onNameChanged}
@@ -77,7 +77,7 @@ const SignupPageForm = () => {
           checkConfirm={password}
         />
         <div className={classes.actions}>
-          <button className={classes.signupButton}>SignUp</button>
+          <button className={classes.signupButton}>Sign Up</button>
         </div>
       </form>
     </section>

@@ -9,15 +9,18 @@ import classes from "./signinPageForm.module.css";
 const SigninForm = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   const onEmailChanged = (event) => {
     setEmail(event.target.value);
   };
+
   const onPasswordChanged = (event) => {
     setPassword(event.target.value);
   };
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const submitHandler = (event) => {
+
+  const onSigninHandler = (event) => {
     event.preventDefault();
     history.push("/home");
     dispatch(authActions.login());
@@ -25,7 +28,7 @@ const SigninForm = () => {
 
   return (
     <section className={classes.header}>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={onSigninHandler}>
         <InputField
           label="Email"
           onChange={onEmailChanged}
