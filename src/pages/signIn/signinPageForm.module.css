@@ -18,7 +18,7 @@ body {
   color: black;
 }
 
-.signupButton {
+.signinButton {
   cursor: pointer;
   font: inherit;
   color: black;
@@ -28,7 +28,7 @@ body {
   padding: 8px 40px;
 }
 
-.signupButton:hover {
+.signinButton:hover {
   background-color: #37079f;
   border-color: #37079f;
 }
