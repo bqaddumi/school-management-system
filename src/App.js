@@ -1,3 +1,4 @@
+
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Navbar from './components/layout/navbar';
 import HomePage from './pages/home/homePage';

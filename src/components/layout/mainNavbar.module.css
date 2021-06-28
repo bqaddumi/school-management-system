@@ -26,13 +26,13 @@
   font-size: 1.5rem;
 }
 
-.header a{
+.link {
   display: flex;
   text-decoration: none;
   color: #000000;
 }
 
-.header button {
+.buttonLogout {
   font: inherit;
   background-color: transparent;
   color: #000000;
@@ -41,11 +41,11 @@
   cursor: pointer;
 }
 
-.header a:hover {
+.link:hover {
   color: #243bbe;
 }
 
-.header button:hover {
+.buttonLogout:hover {
   color: #243bbe;
 }
 
