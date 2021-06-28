@@ -11,10 +11,28 @@ const MainNavbar = () => {
   const [showResults, setShowResults] = useState(true);
   const [showResultsSuccess, setShowResultsSuccess] = useState(true);
   const history = useHistory();
+
   const logoutHandler = () => {
     dispatch(authActions.logout());
     history.push("/home");
   };
+
+  const navItems = [
+    <div>userName</div>,
+    <img src={logo} alt="Logo" className={classes.image} />,
+    <button className={classes.buttonLogout} onClick={logoutHandler}>
+      Logout
+    </button>,
+  ];
+  const navItemsLink = [
+    <NavLink className={classes.link} to="/login">
+      Login
+    </NavLink>,
+    <NavLink className={classes.link} to="/signup">
+      Signup
+    </NavLink>,
+  ];
+
   useEffect(() => {
     {
       !isAuth &&
@@ -29,6 +47,7 @@ const MainNavbar = () => {
         }, 1000);
     }
   }, [isAuth]);
+
   return (
     <>
       <div className={classes.header}>
@@ -38,34 +57,16 @@ const MainNavbar = () => {
         <ul className={classes.navContainerList}>
           {isAuth && (
             <>
-              <li className={classes.navList}>
-                <div>userName</div>
-              </li>
-              <li className={classes.navList}>
-                <img src={logo} alt="Logo" className={classes.image} />
-              </li>
-              <li className={classes.navList}>
-                <button
-                  className={classes.buttonLogout}
-                  onClick={logoutHandler}
-                >
-                  Logout
-                </button>
-              </li>
+              {navItems.map((item) => {
+                return <li className={classes.navList}>{item}</li>;
+              })}
             </>
           )}
           {!isAuth && (
             <>
-              <li className={classes.navList}>
-                <NavLink className={classes.link} to="/login">
-                  Login
-                </NavLink>
-              </li>
-              <li className={classes.navList}>
-                <NavLink className={classes.link} to="/signup">
-                  Signup
-                </NavLink>
-              </li>
+              {navItemsLink.map((item) => {
+                return <li className={classes.navList}>{item}</li>;
+              })}
             </>
           )}
         </ul>

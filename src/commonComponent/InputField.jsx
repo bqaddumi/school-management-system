@@ -3,36 +3,41 @@ import classes from "./InputField.module.css";
 
 const InputField = (props) => {
   const {
-    className,
     label,
     onChange,
     type,
     placeholder,
     value,
     valdationRegex,
-    errorMessage,
+    errorEmailMessage,
+    errorPasswordMessage,
     required,
     id,
+    checkConfirm,
   } = props;
-  const isValidated = !!(value?.match(valdationRegex) || "");
-
+  const isValidated = !!value?.match(valdationRegex);
+  const isConfirm = value === checkConfirm;
   return (
-    <form>
-      <div>
-        <label className={classes.label}>{label}</label>
-        <input
-          className={classes.input}
-          type={type}
-          placeholder={placeholder}
-          onChange={onChange}
-          className={`${!isValidated ? classes.errorInput : ""}`}
-          value={value}
-          required={required}
-          id={id}
-        />
-        {<p>{!isValidated ? errorMessage : ""}</p>}
-      </div>
-    </form>
+    <div>
+      <label className={classes.label}>{label}</label>
+      <input
+        type={type}
+        placeholder={placeholder}
+        onChange={onChange}
+        className={`${
+          !isValidated && value != "" ? classes.errorInput : classes.input
+        }`}
+        value={value}
+        required={required}
+        id={id}
+      />
+      <p className={classes.errorMessage}>
+        {!isValidated && value != "" ? errorEmailMessage : ""}
+      </p>
+      <p className={classes.errorMessage}>
+        {!isConfirm && value != "" ? errorPasswordMessage : ""}
+      </p>
+    </div>
   );
 };
 export default InputField;

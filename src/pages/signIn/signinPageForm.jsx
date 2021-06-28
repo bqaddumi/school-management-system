@@ -4,7 +4,7 @@ import { emailRegex } from "../../consts/RegEx";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/Action";
-import "./signinPageForm.css";
+import classes from "./signinPageForm.module.css";
 
 const SigninForm = () => {
   const [password, setPassword] = useState("");
@@ -24,30 +24,28 @@ const SigninForm = () => {
   };
 
   return (
-    <section className="auth">
+    <section className={classes.header}>
       <form onSubmit={submitHandler}>
-        <div>
-          <InputField
-            className="input"
-            label="Email"
-            onChange={onEmailChanged}
-            type="email"
-            placeholder="userName@gmail.com"
-            valdationRegex={emailRegex}
-            value={email}
-            errorMessage={"It should be an e-mail"}
-          />
-          <InputField
-            className="input"
-            label="Password"
-            onChange={onPasswordChanged}
-            type="password"
-            placeholder=""
-            value={password}
-          />
-        </div>
-        <div className="actions">
-          <button>SignIN</button>
+        <InputField
+          label="Email"
+          onChange={onEmailChanged}
+          type="email"
+          placeholder="userName@gmail.com"
+          valdationRegex={emailRegex}
+          value={email}
+          errorEmailMessage={"It should be an e-mail"}
+          required={true}
+        />
+        <InputField
+          label="Password"
+          onChange={onPasswordChanged}
+          type="password"
+          placeholder="password"
+          value={password}
+          required={true}
+        />
+        <div className={classes.actions}>
+          <button className={classes.signinButton}>Sign In</button>
         </div>
       </form>
     </section>

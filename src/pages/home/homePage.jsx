@@ -1,7 +1,7 @@
 import classes from './homePage.module.css';
 import logo from '../../images/educationSchoolLogo.jpg';
 
-const homePage = () => {
+const HomePage = () => {
     return (
         <div className={classes.homePageContainer}>
             <img src={logo} alt="Logo Home Page" className={classes.image} />
@@ -9,4 +9,4 @@ const homePage = () => {
     );
 };
 
-export default homePage;
+export default HomePage;
