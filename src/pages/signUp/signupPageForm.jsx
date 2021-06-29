@@ -14,6 +14,7 @@ const SignupPageForm = () => {
   const onSignupHandler = (event) => {
     event.preventDefault();
     if (password === confirmPassword) {
+      setIsClickedSignup(false);
       history.push("/home");
     }
   };

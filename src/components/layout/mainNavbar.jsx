@@ -51,7 +51,7 @@ const MainNavbar = () => {
         <NavLink to="/home" className={classes.link}>
           <div className={classes.logo}>Home</div>
         </NavLink>
-        <ul className={classes.navContainerList}>
+        <ul className={classes.navContainer}>
           {isAuth ? (
             <>
               {navItems.map((item) => {

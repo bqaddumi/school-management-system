@@ -14,7 +14,7 @@
   text-transform: uppercase;
 }
 
-.navContainerList {
+.navContainer {
   list-style: none;
   display: flex;
   padding-right: 10px;
