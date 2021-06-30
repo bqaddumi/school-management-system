@@ -11,7 +11,6 @@ const LoginAccount = (props) => {
   const dispatch = useDispatch();
 
   const errorLogin = (error) => {
-    console.log(error);
     setError(error.message);
   };
 
