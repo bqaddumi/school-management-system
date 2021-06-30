@@ -27,7 +27,7 @@ const CreateAccount = (props) => {
     .then(successCreateAccount)
     .catch(errorCreateAccount);
 
-  return <p>error</p>;
+  return <p>{error}</p>;
 };
 
 export default CreateAccount;
