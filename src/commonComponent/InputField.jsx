@@ -17,7 +17,7 @@ const InputField = (props) => {
     checkConfirm,
   } = props;
   const isValid = !!value?.match(valdationRegex);
-  const isValidated = !isValid && value != "";
+  const isValidated = !isValid && value !== "";
   const isConfirm = value === checkConfirm;
 
   let classEmailValid = classNames({
@@ -41,7 +41,7 @@ const InputField = (props) => {
         {isValidated ? errorEmailMessage : ""}
       </p>
       <p className={classes.errorMessage}>
-        {!isConfirm && value != "" ? errorPasswordMessage : ""}
+        {!isConfirm && value !== "" ? errorPasswordMessage : ""}
       </p>
     </div>
   );

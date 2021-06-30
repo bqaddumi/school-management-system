@@ -1,24 +1,39 @@
 import schoolLogo from "../../images/educationSchoolLogo.jpg";
 import classes from "./mainNavbar.module.css";
+import Firebase from "../../database/config";
 import { NavLink, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { authActions } from "../../store/Action";
-import { useSelector, useDispatch } from "react-redux";
 
 const MainNavbar = () => {
+  const database = Firebase.firestore();
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.auth.isAuthenticated);
-  const [showResultWarning, setShowResultWarning] = useState(true);
-  const [showResultsSuccess, setShowResultsSuccess] = useState(true);
   const history = useHistory();
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const [showResultWarning, setShowResultWarning] = useState(false);
+  const [showResultsSuccess, setShowResultsSuccess] = useState(true);
+  const [getInformation, setInformation] = useState('');
+
+  Firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      database.collection("users")
+        .doc(user.email)
+        .get()
+        .then((doc) => {
+          setInformation(doc.data().userName);
+        });
+    }
+  });
 
   const logoutHandler = () => {
+    Firebase.auth().signOut();
     dispatch(authActions.logout());
     history.push("/home");
   };
 
   const navItems = [
-    <div>userName</div>,
+    <div>{getInformation}</div>,
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
     <button className={classes.buttonLogout} onClick={logoutHandler}>
       Logout
@@ -37,11 +52,11 @@ const MainNavbar = () => {
     {
       isAuth
         ? setTimeout(function () {
-            setShowResultsSuccess(!showResultsSuccess);
-          }, 1000)
+          setShowResultsSuccess(!showResultsSuccess);
+        }, 1000)
         : setTimeout(function () {
-            setShowResultWarning(!showResultWarning);
-          }, 1000);
+          setShowResultWarning(!showResultWarning);
+        }, 1000);
     }
   }, [isAuth]);
 
@@ -67,7 +82,6 @@ const MainNavbar = () => {
           )}
         </ul>
       </div>
-
       {isAuth ? (
         showResultsSuccess ? (
           <div className={classes.success}>

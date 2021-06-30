@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import InputField from "../../commonComponent/InputField";
+import { useState } from "react";
 import { emailRegex } from "../../consts/RegEx";
-import { useHistory } from "react-router-dom";
+import InputField from "../../commonComponent/InputField";
 import classes from "./signupPageForm.module.css";
+import CreateAccount from '../../database/signupDatabase';
 
 const SignupPageForm = () => {
-  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const history = useHistory();
 
   const onSignupHandler = (event) => {
     event.preventDefault();
     if (password === confirmPassword) {
-      history.push("/home");
+      setIsButtonClicked(true);
     }
   };
 
@@ -80,6 +80,14 @@ const SignupPageForm = () => {
           <button className={classes.signupButton}>Sign Up</button>
         </div>
       </form>
+      {isButtonClicked ? (
+        <>
+          <CreateAccount email={email} password={password} name={name} />
+        </>
+      ) : (
+        ""
+      )}
+
     </section>
   );
 };
