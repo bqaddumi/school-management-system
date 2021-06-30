@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import InputField from "../../commonComponent/InputField";
+import { useState } from "react";
 import { emailRegex } from "../../consts/RegEx";
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { authActions } from "../../store/Action";
+import InputField from "../../commonComponent/InputField";
 import classes from "./signinPageForm.module.css";
+import LoginAccount from "../../database/signinDatabase";
 
 const SigninForm = () => {
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const history = useHistory();
-  const dispatch = useDispatch();
 
   const onEmailChanged = (event) => {
     setEmail(event.target.value);
@@ -22,8 +19,7 @@ const SigninForm = () => {
 
   const onSigninHandler = (event) => {
     event.preventDefault();
-    history.push("/home");
-    dispatch(authActions.login());
+    setIsButtonClicked(true);
   };
 
   return (
@@ -51,6 +47,13 @@ const SigninForm = () => {
           <button className={classes.signinButton}>Sign In</button>
         </div>
       </form>
+      {isButtonClicked ? (
+        <div>
+          <LoginAccount email={email} password={password} />
+        </div>
+      ) : (
+        ""
+      )}
     </section>
   );
 };
