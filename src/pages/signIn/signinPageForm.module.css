@@ -32,3 +32,17 @@ body {
   background-color: #37079f;
   border-color: #37079f;
 }
+
+.errorMessage {
+  color: red;
+}
+
+.warning {
+  background-color: red;
+  color: black;
+  text-align: center;
+  padding-top: 0.5px;
+  font-size: large;
+  padding-left: 10%;
+  padding-right: 10%;
+}

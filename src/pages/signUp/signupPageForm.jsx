@@ -3,18 +3,19 @@ import InputField from "../../commonComponent/InputField";
 import { emailRegex } from "../../consts/RegEx";
 import { useHistory } from "react-router-dom";
 import classes from "./signupPageForm.module.css";
+import CreateAccount from "../../database/signupDatabase";
 
 const SignupPageForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const history = useHistory();
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const onSignupHandler = (event) => {
     event.preventDefault();
     if (password === confirmPassword) {
-      history.push("/home");
+      setIsButtonClicked(true);
     }
   };
 
@@ -38,7 +39,7 @@ const SignupPageForm = () => {
     <section className={classes.header}>
       <form onSubmit={onSignupHandler}>
         <InputField
-          label="UserName"
+          label="User name"
           onChange={onNameChanged}
           type="text"
           id="userName"
@@ -57,7 +58,7 @@ const SignupPageForm = () => {
           required={true}
         />
         <InputField
-          label="pasword"
+          label="Pasword"
           onChange={onPasswordChanged}
           type="password"
           id="pasword"
@@ -66,7 +67,7 @@ const SignupPageForm = () => {
           required={true}
         />
         <InputField
-          label="confirmPassword"
+          label="Confirm password"
           onChange={onConfirmPasswordChanged}
           type="password"
           id="confirmPassword"
@@ -80,6 +81,13 @@ const SignupPageForm = () => {
           <button className={classes.signupButton}>Sign Up</button>
         </div>
       </form>
+      {isButtonClicked ? (
+        <>
+          <CreateAccount userName={name} email={email} password={password} />
+        </>
+      ) : (
+        ""
+      )}
     </section>
   );
 };

@@ -32,3 +32,7 @@ body {
   background-color: #37079f;
   border-color: #37079f;
 }
+
+.errorMessage {
+  color: red;
+}

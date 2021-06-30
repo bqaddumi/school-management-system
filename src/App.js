@@ -4,6 +4,7 @@ import HomePage from "./pages/home/homePage";
 import SignupPageForm from "./pages/signUp/signupPageForm";
 import SigninPageForm from "./pages/signIn/signinPageForm";
 import classes from "./App.module.css";
+require("dotenv").config();
 
 function App() {
   return (

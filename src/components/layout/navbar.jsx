@@ -1,6 +1,6 @@
 import MainNavbar from "./mainNavbar";
 
-const Navbar = (props) => {
+const Navbar = () => {
     return (
         <MainNavbar />
     );

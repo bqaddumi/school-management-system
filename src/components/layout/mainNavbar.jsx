@@ -1,20 +1,22 @@
 import schoolLogo from "../../images/educationSchoolLogo.jpg";
 import classes from "./mainNavbar.module.css";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { authActions } from "../../store/Action";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import SignoutAccount from "../../database/signoutDatabase";
 
 const MainNavbar = () => {
-  const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
-  const [showResultWarning, setShowResultWarning] = useState(true);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [showResultsSuccess, setShowResultsSuccess] = useState(true);
-  const history = useHistory();
 
   const logoutHandler = () => {
-    dispatch(authActions.logout());
-    history.push("/home");
+    setIsButtonClicked(true);
+    {
+      setTimeout(function () {
+        setIsButtonClicked(false);
+      }, 500);
+    }
   };
 
   const navItems = [
@@ -35,13 +37,10 @@ const MainNavbar = () => {
 
   useEffect(() => {
     {
-      isAuth
-        ? setTimeout(function () {
-            setShowResultsSuccess(!showResultsSuccess);
-          }, 1000)
-        : setTimeout(function () {
-            setShowResultWarning(!showResultWarning);
-          }, 1000);
+      isAuth &&
+        setTimeout(function () {
+          setShowResultsSuccess(!showResultsSuccess);
+        }, 1000);
     }
   }, [isAuth]);
 
@@ -68,17 +67,14 @@ const MainNavbar = () => {
         </ul>
       </div>
 
-      {isAuth ? (
-        showResultsSuccess ? (
-          <div className={classes.success}>
-            <p>Success login</p>
-          </div>
-        ) : (
-          ""
-        )
-      ) : showResultWarning ? (
-        <div className={classes.warning}>
-          <p>failed login</p>
+      {isAuth && showResultsSuccess && (
+        <div className={classes.success}>
+          <p>Success login</p>
+        </div>
+      )}
+      {isButtonClicked ? (
+        <div className={classes.errorMessage}>
+          <SignoutAccount />
         </div>
       ) : (
         ""
