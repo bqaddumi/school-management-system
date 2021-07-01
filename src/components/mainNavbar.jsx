@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "../store/Action";
+import { actions } from "../store/Action";
 import Firebase from "../database/config";
 import classes from "./mainNavbar.module.css";
 import schoolLogo from "../images/educationSchoolLogo.jpg";
@@ -27,7 +27,7 @@ const MainNavbar = () => {
   });
 
   const logoutUser = () => {
-    dispatch(authActions.logout());
+    dispatch(actions.logout());
     history.push("/home");
   };
 

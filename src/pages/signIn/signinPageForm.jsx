@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { emailRegex } from "../../consts/RegEx";
-import { authActions } from "../../store/Action";
+import { actions } from "../../store/Action";
 import Firebase from "../../database/config";
 import InputField from "../../components/common/InputField";
 import classes from "./signinPageForm.module.css";
@@ -31,16 +31,16 @@ const SigninForm = () => {
   };
 
   const errorLogin = (error) => {
-    dispatch(authActions.errorMsg(setError(error.message)));
+    dispatch(actions.errorMsg(setError(error.message)));
     setTimeout(() => {
-      dispatch(authActions.errorMsg(setError(false)));
+      dispatch(actions.errorMsg(setError(false)));
     }, 1000);
     setIsLoading(false);
   };
 
   const successLogin = () => {
     setIsLoading(false);
-    dispatch(authActions.login());
+    dispatch(actions.login());
     history.push("/home");
   };
 
