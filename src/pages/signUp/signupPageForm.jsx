@@ -15,15 +15,9 @@ const SignupPageForm = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const isError = useSelector((state) => state.error.isError);
-
-  const setError = (errorMsg) => {
-    return {
-      error: errorMsg,
-    };
-  };
+  const isLoading = useSelector((state) => state.loader.isLoading);
 
   const informationDataAccount = {
     uid: email,
@@ -31,23 +25,29 @@ const SignupPageForm = () => {
   };
 
   const errorCreateAccount = (error) => {
-    dispatch(actions.errorMsg(setError(error.message)));
+    dispatch(actions.setIsLoading({ isLoading: false }));
+    dispatch(actions.errorMsg({
+      error: error.message,
+    }));
     setTimeout(() => {
-      dispatch(actions.errorMsg(setError(false)));
+      dispatch(actions.errorMsg({
+        error: '',
+      }));
     }, 1000);
-    setIsLoading(false);
   };
 
   const successCreateAccountInformation = () => {
-    setIsLoading(false);
     history.push("/home");
   };
 
   const errorCreateAccountInformation = (error) => {
-    dispatch(actions.errorMsg(setError(error.message)));
+    dispatch(actions.errorMsg({
+      error: error.message,
+    }));
   };
 
   const successCreateAccount = () => {
+    dispatch(actions.setIsLoading({ isLoading: false }));
     database
       .collection("users")
       .doc(informationDataAccount.uid.toString())
@@ -60,7 +60,7 @@ const SignupPageForm = () => {
     event.preventDefault();
     setIsButtonClicked(true);
     if (password === confirmPassword) {
-      setIsLoading(true);
+      dispatch(actions.setIsLoading({ isLoading: true }));
       Firebase.auth()
         .createUserWithEmailAndPassword(email, password)
         .then(successCreateAccount)
@@ -138,7 +138,6 @@ const SignupPageForm = () => {
             <button className={classes.signupButton}>Sign Up</button>
           </div>
         </form>
-        {isLoading && <p>loading..</p>}
       </section>
     </>
   );

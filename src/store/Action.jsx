@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isAuthenticated: false,
+  isLoading: false,
   isError: false,
 };
 
@@ -17,6 +18,9 @@ const slice = createSlice({
     },
     errorMsg(state, action) {
       state.isError = action.payload.error;
+    },
+    setIsLoading(state, action) {
+      state.isLoading = action.payload.isLoading;
     },
   },
 });

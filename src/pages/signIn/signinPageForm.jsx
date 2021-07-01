@@ -40,6 +40,7 @@ const SigninForm = () => {
 
   const successLogin = () => {
     setIsLoading(false);
+    dispatch(actions.setIsLoading({isLoading:false}));
     dispatch(actions.login());
     history.push("/home");
   };
@@ -47,6 +48,7 @@ const SigninForm = () => {
   const onSigninHandler = (event) => {
     event.preventDefault();
     setIsLoading(true);
+    dispatch(actions.setIsLoading({isLoading:true}));
     setIsButtonClicked(true);
     Firebase.auth()
       .signInWithEmailAndPassword(email, password)
@@ -61,7 +63,7 @@ const SigninForm = () => {
           <p>{isError}</p>
         </div>
       )}
-      <section className={classes.header}>
+      <section className={classes.singInPageSection}>
         <form onSubmit={onSigninHandler}>
           <InputField
             label="Email"
@@ -86,7 +88,6 @@ const SigninForm = () => {
             <button className={classes.signinButton}>Login</button>
           </div>
         </form>
-        {isLoading && <p>loading..</p>}
       </section>
     </>
   );

@@ -7,7 +7,8 @@ body {
   align-items: center;
 }
 
-.header {
+.singInPageSection {
+  position: relative;
   margin: 5% 30%;
   max-width: 40%;
   border-radius: 6px;
