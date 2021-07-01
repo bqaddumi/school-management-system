@@ -15,13 +15,13 @@ body {
   box-shadow: 0 1px 4px #000000;
   padding: 24px;
   text-align: center;
-  color: black;
+  color: #000;
 }
 
 .signinButton {
   cursor: pointer;
   font: inherit;
-  color: black;
+  color: #000;
   background-color: #ebebeb;
   border: 1px solid #453e4a;
   border-radius: 4px;
@@ -33,26 +33,9 @@ body {
   border-color: #37079f;
 }
 
-.errorMessage {
-  color: red;
-}
-
-.success {
-  visibility: visible;
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
-  color: #3c763d;
-  text-align: center;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
 .warning {
-  background-color: red;
-  color: black;
+  background-color: #FF0000;
+  color: #000;
   text-align: center;
-  padding-top: 0.5px;
-  font-size: large;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding: 5px;
 }
