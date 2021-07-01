@@ -1,20 +1,70 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { emailRegex } from "../../consts/RegEx";
-import InputField from "../../commonComponent/InputField";
+import { actions } from "../../store/Action";
+import Firebase from "../../database/config";
+import InputField from "../../components/common/InputField";
 import classes from "./signupPageForm.module.css";
-import CreateAccount from '../../database/signupDatabase';
 
 const SignupPageForm = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const database = Firebase.firestore();
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const isError = useSelector((state) => state.error.isError);
+  const isLoading = useSelector((state) => state.loader.isLoading);
+
+  const informationDataAccount = {
+    uid: email,
+    userName: name,
+  };
+
+  const errorCreateAccount = (error) => {
+    dispatch(actions.setIsLoading({ isLoading: false }));
+    dispatch(actions.errorMsg({
+      error: error.message,
+    }));
+    setTimeout(() => {
+      dispatch(actions.errorMsg({
+        error: '',
+      }));
+    }, 1000);
+  };
+
+  const successCreateAccountInformation = () => {
+    history.push("/home");
+  };
+
+  const errorCreateAccountInformation = (error) => {
+    dispatch(actions.errorMsg({
+      error: error.message,
+    }));
+  };
+
+  const successCreateAccount = () => {
+    dispatch(actions.setIsLoading({ isLoading: false }));
+    database
+      .collection("users")
+      .doc(informationDataAccount.uid.toString())
+      .set(informationDataAccount)
+      .then(successCreateAccountInformation)
+      .catch(errorCreateAccountInformation);
+  };
 
   const onSignupHandler = (event) => {
     event.preventDefault();
+    setIsButtonClicked(true);
     if (password === confirmPassword) {
-      setIsButtonClicked(true);
+      dispatch(actions.setIsLoading({ isLoading: true }));
+      Firebase.auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(successCreateAccount)
+        .catch(errorCreateAccount);
     }
   };
 
@@ -35,60 +85,61 @@ const SignupPageForm = () => {
   };
 
   return (
-    <section className={classes.header}>
-      <form onSubmit={onSignupHandler}>
-        <InputField
-          label="UserName"
-          onChange={onNameChanged}
-          type="text"
-          id="userName"
-          placeholder="userName"
-          value={name}
-          required={true}
-        />
-        <InputField
-          label="Email"
-          onChange={onEmailChanged}
-          type="email"
-          placeholder="userName@gmail.com"
-          valdationRegex={emailRegex}
-          value={email}
-          errorEmailMessage={"It should be an e-mail"}
-          required={true}
-        />
-        <InputField
-          label="pasword"
-          onChange={onPasswordChanged}
-          type="password"
-          id="pasword"
-          placeholder="password"
-          value={password}
-          required={true}
-        />
-        <InputField
-          label="confirmPassword"
-          onChange={onConfirmPasswordChanged}
-          type="password"
-          id="confirmPassword"
-          placeholder="confirmPassword"
-          value={confirmPassword}
-          errorPasswordMessage={"It should be match password"}
-          required={true}
-          checkConfirm={password}
-        />
-        <div className={classes.actions}>
-          <button className={classes.signupButton}>Sign Up</button>
+    <>
+      {!isLoading && isError && (
+        <div className={classes.warning}>
+          <p>{isError}</p>
         </div>
-      </form>
-      {isButtonClicked ? (
-        <>
-          <CreateAccount email={email} password={password} name={name} />
-        </>
-      ) : (
-        ""
       )}
-
-    </section>
+      <section className={classes.header}>
+        <form onSubmit={onSignupHandler}>
+          <InputField
+            label="User name"
+            onChange={onNameChanged}
+            type="text"
+            id="userName"
+            placeholder="userName"
+            value={name}
+            required={true}
+          />
+          <InputField
+            label="Email"
+            onChange={onEmailChanged}
+            type="email"
+            placeholder="userName@gmail.com"
+            valdationRegex={emailRegex}
+            value={email}
+            errorEmailMessage={"It should be an e-mail"}
+            required={true}
+            isButtonClicked={isButtonClicked}
+          />
+          <InputField
+            label="Pasword"
+            onChange={onPasswordChanged}
+            type="password"
+            id="pasword"
+            placeholder="password"
+            value={password}
+            required={true}
+          />
+          <InputField
+            label="Confirm password"
+            onChange={onConfirmPasswordChanged}
+            type="password"
+            id="confirmPassword"
+            placeholder="confirmPassword"
+            value={confirmPassword}
+            errorPasswordMessage={"It should be match password"}
+            required={true}
+            checkConfirm={password}
+            isButtonClicked={isButtonClicked}
+          />
+          <div className={classes.actions}>
+            <button className={classes.signupButton}>Sign Up</button>
+          </div>
+        </form>
+      </section>
+    </>
   );
 };
 

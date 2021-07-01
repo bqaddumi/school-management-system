@@ -1,6 +1,5 @@
 import React from "react";
-import classNames from 'classnames';
-
+import classNames from "classnames";
 import classes from "./InputField.module.css";
 
 const InputField = (props) => {
@@ -16,16 +15,18 @@ const InputField = (props) => {
     required,
     id,
     checkConfirm,
+    isButtonClicked,
   } = props;
-  const isValid = !!value?.match(valdationRegex);
-  const isValidated = !isValid && value !== "";
-  const isConfirm = value === checkConfirm;
+  const isNotValidated = !value.match(valdationRegex) && !!value;
+  const showInvalidEmail = isNotValidated && isButtonClicked;
+  const isNotConfirm = !(value === checkConfirm) && !!value;
+  const showUnConfirmPassword = isNotConfirm && isButtonClicked;
 
-  let classEmailValid = classNames({
-    errorInput: isValidated,
-    input: !isValidated},
-  );
-  
+  const classEmailValid = classNames({
+    errorInput: showInvalidEmail,
+    input: !showInvalidEmail,
+  });
+
   return (
     <div>
       <label className={classes.label}>{label}</label>
@@ -39,10 +40,10 @@ const InputField = (props) => {
         id={id}
       />
       <p className={classes.errorMessage}>
-        {isValidated ? errorEmailMessage : ""}
+        {showInvalidEmail && errorEmailMessage}
       </p>
       <p className={classes.errorMessage}>
-        {!isConfirm && value !== "" ? errorPasswordMessage : ""}
+        {showUnConfirmPassword && errorPasswordMessage}
       </p>
     </div>
   );

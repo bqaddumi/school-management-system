@@ -1,23 +1,23 @@
-import schoolLogo from "../../images/educationSchoolLogo.jpg";
-import classes from "./mainNavbar.module.css";
-import Firebase from "../../database/config";
+import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
-import { authActions } from "../../store/Action";
+import { actions } from "../store/Action";
+import Firebase from "../database/config";
+import classes from "./mainNavbar.module.css";
+import schoolLogo from "../images/educationSchoolLogo.jpg";
 
 const MainNavbar = () => {
   const database = Firebase.firestore();
   const dispatch = useDispatch();
   const history = useHistory();
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
-  const [showResultWarning, setShowResultWarning] = useState(false);
-  const [showResultsSuccess, setShowResultsSuccess] = useState(true);
-  const [getInformation, setInformation] = useState('');
+  const [getInformation, setInformation] = useState("");
+  const [showMsg, setShowMsg] = useState(true);
 
   Firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      database.collection("users")
+      database
+        .collection("users")
         .doc(user.email)
         .get()
         .then((doc) => {
@@ -26,10 +26,13 @@ const MainNavbar = () => {
     }
   });
 
-  const logoutHandler = () => {
-    Firebase.auth().signOut();
-    dispatch(authActions.logout());
+  const logoutUser = () => {
+    dispatch(actions.logout());
     history.push("/home");
+  };
+
+  const logoutHandler = () => {
+    Firebase.auth().signOut().then(logoutUser());
   };
 
   const navItems = [
@@ -39,9 +42,10 @@ const MainNavbar = () => {
       Logout
     </button>,
   ];
+
   const navItemsLink = [
     <NavLink className={classes.link} to="/login">
-      Login
+      Signin
     </NavLink>,
     <NavLink className={classes.link} to="/signup">
       Signup
@@ -49,15 +53,9 @@ const MainNavbar = () => {
   ];
 
   useEffect(() => {
-    {
-      isAuth
-        ? setTimeout(function () {
-          setShowResultsSuccess(!showResultsSuccess);
-        }, 1000)
-        : setTimeout(function () {
-          setShowResultWarning(!showResultWarning);
-        }, 1000);
-    }
+    setTimeout(() => {
+      setShowMsg(!isAuth);
+    }, 1000);
   }, [isAuth]);
 
   return (
@@ -82,20 +80,10 @@ const MainNavbar = () => {
           )}
         </ul>
       </div>
-      {isAuth ? (
-        showResultsSuccess ? (
-          <div className={classes.success}>
-            <p>Success login</p>
-          </div>
-        ) : (
-          ""
-        )
-      ) : showResultWarning ? (
-        <div className={classes.warning}>
-          <p>failed login</p>
+      {isAuth && showMsg && (
+        <div className={classes.success}>
+          <p> Success Signin</p>
         </div>
-      ) : (
-        ""
       )}
     </>
   );
