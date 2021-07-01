@@ -1,20 +1,29 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { emailRegex } from "../../consts/RegEx";
+import { authActions } from "../../store/Action";
 import Firebase from "../../database/config";
 import InputField from "../../components/common/InputField";
 import classes from "./signupPageForm.module.css";
 
 const SignupPageForm = () => {
-  const database = Firebase.firestore();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const database = Firebase.firestore();
   const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const isError = useSelector((state) => state.error.isError);
+
+  const setError = (errorMsg) => {
+    return {
+      error: errorMsg,
+    };
+  };
 
   const informationDataAccount = {
     uid: email,
@@ -22,9 +31,9 @@ const SignupPageForm = () => {
   };
 
   const errorCreateAccount = (error) => {
-    setError(error.message);
+    dispatch(authActions.errorMsg(setError(error.message)));
     setTimeout(() => {
-      setError(false);
+      dispatch(authActions.errorMsg(setError(false)));
     }, 1000);
     setIsLoading(false);
   };
@@ -35,7 +44,7 @@ const SignupPageForm = () => {
   };
 
   const errorCreateAccountInformation = (error) => {
-    setError(error);
+    dispatch(authActions.errorMsg(setError(error.message)));
   };
 
   const successCreateAccount = () => {
@@ -77,9 +86,9 @@ const SignupPageForm = () => {
 
   return (
     <>
-      {!isLoading && error && (
+      {!isLoading && isError && (
         <div className={classes.warning}>
-          <p>{error}</p>
+          <p>{isError}</p>
         </div>
       )}
       <section className={classes.header}>

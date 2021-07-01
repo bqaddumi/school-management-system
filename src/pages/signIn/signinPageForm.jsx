@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { emailRegex } from "../../consts/RegEx";
 import { authActions } from "../../store/Action";
@@ -8,12 +8,19 @@ import InputField from "../../components/common/InputField";
 import classes from "./signinPageForm.module.css";
 
 const SigninForm = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const isError = useSelector((state) => state.error.isError);
+
+  const setError = (errorMsg) => {
+    return {
+      error: errorMsg,
+    };
+  };
 
   const onEmailChanged = (event) => {
     setEmail(event.target.value);
@@ -24,9 +31,9 @@ const SigninForm = () => {
   };
 
   const errorLogin = (error) => {
-    setError(error.message);
+    dispatch(authActions.errorMsg(setError(error.message)));
     setTimeout(() => {
-      setError(false);
+      dispatch(authActions.errorMsg(setError(false)));
     }, 1000);
     setIsLoading(false);
   };
@@ -40,6 +47,7 @@ const SigninForm = () => {
   const onSigninHandler = (event) => {
     event.preventDefault();
     setIsLoading(true);
+    setIsButtonClicked(true);
     Firebase.auth()
       .signInWithEmailAndPassword(email, password)
       .then(successLogin)
@@ -48,9 +56,9 @@ const SigninForm = () => {
 
   return (
     <>
-      {!isLoading && error && (
+      {!isLoading && isError && (
         <div className={classes.warning}>
-          <p>{error}</p>
+          <p>{isError}</p>
         </div>
       )}
       <section className={classes.header}>
@@ -64,6 +72,7 @@ const SigninForm = () => {
             value={email}
             errorEmailMessage={"It should be an e-mail"}
             required={true}
+            isButtonClicked={isButtonClicked}
           />
           <InputField
             label="Password"
