@@ -1,21 +1,53 @@
-import React, { useState } from "react";
-import InputField from "../../commonComponent/InputField";
-import { emailRegex } from "../../consts/RegEx";
+import React,{ useState } from "react";
 import { useHistory } from "react-router-dom";
+import { emailRegex } from "../../consts/RegEx";
+import InputField from "../../components/common/InputField";
 import classes from "./signupPageForm.module.css";
-import CreateAccount from "../../database/signupDatabase";
+import Firebase from "../../database/config";
 
 const SignupPageForm = () => {
-  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const history = useHistory();
+  const database = [Firebase].firestore();
+  const [error, setError] = useState("");
 
+  const informationDataAccount = {
+    uid: email,
+    userName: name,
+  };
+
+  const errorCreateAccount = (error) => {
+    setError(error.message);
+  };
+
+  const successCreateAccountInformation = () => {
+    history.push("/home");
+  };
+
+  const errorCreateAccountInformation = (error) => {
+    setError(error);
+  };
+
+  const successCreateAccount = () => {
+    database
+      .collection("users")
+      .doc(informationDataAccount.uid.toString())
+      .set(informationDataAccount)
+      .then(successCreateAccountInformation)
+      .catch(errorCreateAccountInformation);
+  };
+  
   const onSignupHandler = (event) => {
     event.preventDefault();
     if (password === confirmPassword) {
-      setIsButtonClicked(true);
+      Firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(successCreateAccount)
+      .catch(errorCreateAccount);
     }
   };
 
@@ -81,13 +113,6 @@ const SignupPageForm = () => {
           <button className={classes.signupButton}>Sign Up</button>
         </div>
       </form>
-      {isButtonClicked ? (
-        <>
-          <CreateAccount userName={name} email={email} password={password} />
-        </>
-      ) : (
-        ""
-      )}
     </section>
   );
 };

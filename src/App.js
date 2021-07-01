@@ -1,15 +1,15 @@
 import { Route, Switch, Redirect } from "react-router-dom";
-import Navbar from "./components/layout/navbar";
+import MainNavbar from "./components/mainNavbar";
 import HomePage from "./pages/home/homePage";
 import SignupPageForm from "./pages/signUp/signupPageForm";
 import SigninPageForm from "./pages/signIn/signinPageForm";
 import classes from "./App.module.css";
 require("dotenv").config();
 
-function App() {
+const App = () => {
   return (
     <main className={classes.mainContainer}>
-      <Navbar />
+      <MainNavbar />
       <Switch>
         <Route path="/home" exact>
           <HomePage />
@@ -26,6 +26,6 @@ function App() {
       </Switch>
     </main>
   );
-}
+};
 
 export default App;

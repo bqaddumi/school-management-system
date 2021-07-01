@@ -1,7 +1,8 @@
 import React from "react";
+import classNames from 'classnames';
+
 import classes from "./InputField.module.css";
 
-var classNames = require("classnames");
 const InputField = (props) => {
   const {
     label,
@@ -16,15 +17,14 @@ const InputField = (props) => {
     id,
     checkConfirm,
   } = props;
-  const isValid = !!value?.match(valdationRegex);
-  const isValidated = !isValid && value !== "";
+  const isValidated = !(!!value?.match(valdationRegex)) && (value!=='');
   const isConfirm = value === checkConfirm;
 
   let classEmailValid = classNames({
     errorInput: isValidated,
-    input: !isValidated,
-  });
-
+    input: !isValidated},
+  );
+  
   return (
     <div>
       <label className={classes.label}>{label}</label>
@@ -38,10 +38,10 @@ const InputField = (props) => {
         id={id}
       />
       <p className={classes.errorMessage}>
-        {isValidated ? errorEmailMessage : ""}
+        {isValidated && errorEmailMessage }
       </p>
       <p className={classes.errorMessage}>
-        {!isConfirm && value !== "" ? errorPasswordMessage : ""}
+        {(!isConfirm && value !== "") && errorPasswordMessage }
       </p>
     </div>
   );
