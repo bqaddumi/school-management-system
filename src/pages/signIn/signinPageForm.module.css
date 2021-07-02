@@ -7,7 +7,8 @@ body {
   align-items: center;
 }
 
-.header {
+.singInPageSection {
+  position: relative;
   margin: 5% 30%;
   max-width: 40%;
   border-radius: 6px;
@@ -15,13 +16,13 @@ body {
   box-shadow: 0 1px 4px #000000;
   padding: 24px;
   text-align: center;
-  color: black;
+  color: #000;
 }
 
 .signinButton {
   cursor: pointer;
   font: inherit;
-  color: black;
+  color: #000;
   background-color: #ebebeb;
   border: 1px solid #453e4a;
   border-radius: 4px;
@@ -31,4 +32,11 @@ body {
 .signinButton:hover {
   background-color: #37079f;
   border-color: #37079f;
+}
+
+.warning {
+  background-color: #FF0000;
+  color: #000;
+  text-align: center;
+  padding: 5px;
 }

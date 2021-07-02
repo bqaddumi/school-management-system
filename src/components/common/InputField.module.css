@@ -4,7 +4,7 @@ body {
 
 .label {
   display: block;
-  color: black;
+  color: #000;
   font-weight: bold;
   margin-top: 24px;
   margin-bottom: 8px;
@@ -13,9 +13,9 @@ body {
 .input {
   font: inherit;
   background-color: #ebebeb;
-  color: black;
+  color: #000;
   border-radius: 4px;
-  border: 1px solid black;
+  border: 1px solid #000;
   width: 40%;
   padding: 8px;
   align-content: center;
@@ -23,9 +23,9 @@ body {
 
 .errorInput {
   font: inherit;
-  color: black;
+  color: #000;
   border-radius: 4px;
-  border: 1px solid black;
+  border: 1px solid #000;
   width: 40%;
   text-align: center;
   padding: 8px;
@@ -33,5 +33,5 @@ body {
 }
 
 .errorMessage {
-  color: red;
+  color: #ff0000;
 }

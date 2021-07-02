@@ -15,13 +15,13 @@ body {
   box-shadow: 0 1px 4px #000000;
   padding: 24px;
   text-align: center;
-  color: black;
+  color: #000;
 }
 
 .signupButton {
   cursor: pointer;
   font: inherit;
-  color: black;
+  color: #000;
   background-color: #ebebeb;
   border: 1px solid #453e4a;
   border-radius: 4px;
@@ -31,4 +31,11 @@ body {
 .signupButton:hover {
   background-color: #37079f;
   border-color: #37079f;
+}
+
+.warning {
+  background-color: #FF0000;
+  color: #000;
+  text-align: center;
+  padding: 5px;
 }

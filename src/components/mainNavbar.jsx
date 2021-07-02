@@ -1,32 +1,51 @@
-import schoolLogo from "../../images/educationSchoolLogo.jpg";
-import classes from "./mainNavbar.module.css";
+import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { authActions } from "../../store/Action";
 import { useSelector, useDispatch } from "react-redux";
+import { actions } from "../store/Action";
+import Firebase from "../database/config";
+import classes from "./mainNavbar.module.css";
+import schoolLogo from "../images/educationSchoolLogo.jpg";
 
 const MainNavbar = () => {
+  const database = Firebase.firestore();
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.auth.isAuthenticated);
-  const [showResultWarning, setShowResultWarning] = useState(true);
-  const [showResultsSuccess, setShowResultsSuccess] = useState(true);
   const history = useHistory();
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const [getInformation, setInformation] = useState("");
+  const [showMsg, setShowMsg] = useState(true);
 
-  const logoutHandler = () => {
-    dispatch(authActions.logout());
+  Firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      database
+        .collection("users")
+        .doc(user.email)
+        .get()
+        .then((doc) => {
+          setInformation(doc.data().userName);
+        });
+    }
+  });
+
+  const logoutUser = () => {
+    dispatch(actions.logout());
     history.push("/home");
   };
 
+  const logoutHandler = () => {
+    Firebase.auth().signOut().then(logoutUser());
+  };
+
   const navItems = [
-    <div>userName</div>,
+    <div>{getInformation}</div>,
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
     <button className={classes.buttonLogout} onClick={logoutHandler}>
       Logout
     </button>,
   ];
+
   const navItemsLink = [
     <NavLink className={classes.link} to="/login">
-      Login
+      Signin
     </NavLink>,
     <NavLink className={classes.link} to="/signup">
       Signup
@@ -34,15 +53,9 @@ const MainNavbar = () => {
   ];
 
   useEffect(() => {
-    {
-      isAuth
-        ? setTimeout(function () {
-            setShowResultsSuccess(!showResultsSuccess);
-          }, 1000)
-        : setTimeout(function () {
-            setShowResultWarning(!showResultWarning);
-          }, 1000);
-    }
+    setTimeout(() => {
+      setShowMsg(!isAuth);
+    }, 1000);
   }, [isAuth]);
 
   return (
@@ -67,21 +80,10 @@ const MainNavbar = () => {
           )}
         </ul>
       </div>
-
-      {isAuth ? (
-        showResultsSuccess ? (
-          <div className={classes.success}>
-            <p>Success login</p>
-          </div>
-        ) : (
-          ""
-        )
-      ) : showResultWarning ? (
-        <div className={classes.warning}>
-          <p>failed login</p>
+      {isAuth && showMsg && (
+        <div className={classes.success}>
+          <p> Success Signin</p>
         </div>
-      ) : (
-        ""
       )}
     </>
   );
