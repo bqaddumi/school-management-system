@@ -67,14 +67,14 @@ const MainNavbar = () => {
         <ul className={classes.navContainerList}>
           {isAuth ? (
             <>
-              {navItems.map((item) => {
-                return <li className={classes.navList} key={item.id}>{item}</li>;
+              {navItems.map((item, index) => {
+                return <li className={classes.navList} key={index}>{item}</li>;
               })}
             </>
           ) : (
             <>
-              {navItemsLink.map((item) => {
-                return <li className={classes.navList} key={item.id}>{item}</li>;
+              {navItemsLink.map((item, index) => {
+                return <li className={classes.navList} key={index}>{item}</li>;
               })}
             </>
           )}

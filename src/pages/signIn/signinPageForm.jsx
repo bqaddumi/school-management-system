@@ -14,9 +14,9 @@ const SigninForm = () => {
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const isError = useSelector((state) => state.error.isError);
+  const isLoading = useSelector((state) => state.loader.isLoading);
 
   const onEmailChanged = (event) => {
     setEmail(event.target.value);
@@ -31,11 +31,10 @@ const SigninForm = () => {
     setTimeout(() => {
       dispatch(errorMessageActions.errorMsg(false));
     }, 1000);
-    setIsLoading(false);
+    dispatch(loadingActions.setIsLoading(false));
   };
 
   const successLogin = () => {
-    setIsLoading(false);
     dispatch(loadingActions.setIsLoading(false));
     dispatch(authActions.login());
     history.push("/home");
@@ -43,7 +42,6 @@ const SigninForm = () => {
 
   const onSigninHandler = (event) => {
     event.preventDefault();
-    setIsLoading(true);
     dispatch(loadingActions.setIsLoading(true));
     setIsButtonClicked(true);
     Firebase.auth()
@@ -79,7 +77,7 @@ const SigninForm = () => {
             placeholder="password"
             value={password}
             required={true}
-            autocomplete="on"
+            autoComplete="on"
           />
           <div className={classes.actions}>
             <button className={classes.signinButton}>Login</button>
