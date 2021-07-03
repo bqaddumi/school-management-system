@@ -116,6 +116,7 @@ const SignupPageForm = () => {
             placeholder="password"
             value={password}
             required={true}
+            autocomplete="on"
           />
           <InputField
             label="Confirm password"
@@ -128,6 +129,7 @@ const SignupPageForm = () => {
             required={true}
             checkConfirm={password}
             isButtonClicked={isButtonClicked}
+            autocomplete="on"
           />
           <div className={classes.actions}>
             <button className={classes.signupButton}>Sign Up</button>

@@ -79,6 +79,7 @@ const SigninForm = () => {
             placeholder="password"
             value={password}
             required={true}
+            autocomplete="on"
           />
           <div className={classes.actions}>
             <button className={classes.signinButton}>Login</button>
