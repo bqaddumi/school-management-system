@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { emailRegex } from "../../consts/RegEx";
-import { actions } from "../../store/Action";
+import { authActions } from "../../store/auth";
+import { loadingActions } from "../../store/loading";
+import { errorMessageActions } from "../../store/errorMessage";
 import Firebase from "../../database/config";
 import InputField from "../../components/common/InputField";
 import classes from "./signinPageForm.module.css";
@@ -12,15 +14,9 @@ const SigninForm = () => {
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const isError = useSelector((state) => state.error.isError);
-
-  const setError = (errorMsg) => {
-    return {
-      error: errorMsg,
-    };
-  };
+  const isLoading = useSelector((state) => state.loader.isLoading);
 
   const onEmailChanged = (event) => {
     setEmail(event.target.value);
@@ -31,24 +27,22 @@ const SigninForm = () => {
   };
 
   const errorLogin = (error) => {
-    dispatch(actions.errorMsg(setError(error.message)));
+    dispatch(errorMessageActions.errorMsg(error.message));
     setTimeout(() => {
-      dispatch(actions.errorMsg(setError(false)));
+      dispatch(errorMessageActions.errorMsg(false));
     }, 1000);
-    setIsLoading(false);
+    dispatch(loadingActions.setIsLoading(false));
   };
 
   const successLogin = () => {
-    setIsLoading(false);
-    dispatch(actions.setIsLoading({isLoading:false}));
-    dispatch(actions.login());
+    dispatch(loadingActions.setIsLoading(false));
+    dispatch(authActions.login());
     history.push("/home");
   };
 
   const onSigninHandler = (event) => {
     event.preventDefault();
-    setIsLoading(true);
-    dispatch(actions.setIsLoading({isLoading:true}));
+    dispatch(loadingActions.setIsLoading(true));
     setIsButtonClicked(true);
     Firebase.auth()
       .signInWithEmailAndPassword(email, password)
@@ -83,6 +77,7 @@ const SigninForm = () => {
             placeholder="password"
             value={password}
             required={true}
+            autoComplete="on"
           />
           <div className={classes.actions}>
             <button className={classes.signinButton}>Login</button>

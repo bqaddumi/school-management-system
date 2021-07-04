@@ -16,6 +16,7 @@ const InputField = (props) => {
     id,
     checkConfirm,
     isButtonClicked,
+    autoComplete,
   } = props;
   const isNotValidated = !value.match(valdationRegex) && !!value;
   const showInvalidEmail = isNotValidated && isButtonClicked;
@@ -38,6 +39,7 @@ const InputField = (props) => {
         value={value}
         required={required}
         id={id}
+        autoComplete={autoComplete}
       />
       <p className={classes.errorMessage}>
         {showInvalidEmail && errorEmailMessage}

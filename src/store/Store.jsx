@@ -1,8 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./Action";
+import authReducer from "./auth";
+import loadingReducer from './loading';
+import errorMessageReducer from './errorMessage';
 
 const store = configureStore({
-  reducer: { auth: reducer, error: reducer,  loader: reducer},
+  reducer: {
+    auth: authReducer,
+    error: errorMessageReducer,
+    loader: loadingReducer
+  },
 });
 
 export default store;

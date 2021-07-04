@@ -13,21 +13,25 @@ const App = () => {
     <main className={classes.mainContainer}>
       <MainNavbar />
       <div className={classes.routsContainer}>
-      {isLoading && <div className={classes.loaderContainer}><Loader /></div>}
-      <Switch>
-        <Route path="/home" exact>
-          <HomePage />
-        </Route>
-        <Route path="/login">
-          <SigninPageForm />
-        </Route>
-        <Route path="/signup">
-          <SignupPageForm />
-        </Route>
-        <Route path="*">
-          <Redirect to="/home" />
-        </Route>
-      </Switch>
+        {isLoading &&
+          <div className={classes.loaderContainer}>
+            <Loader />
+          </div>
+        }
+        <Switch>
+          <Route path="/home" exact>
+            <HomePage />
+          </Route>
+          <Route path="/login">
+            <SigninPageForm />
+          </Route>
+          <Route path="/signup">
+            <SignupPageForm />
+          </Route>
+          <Route path="*">
+            <Redirect to="/home" />
+          </Route>
+        </Switch>
       </div>
     </main>
   );

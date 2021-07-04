@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { emailRegex } from "../../consts/RegEx";
-import { actions } from "../../store/Action";
+import { loadingActions } from "../../store/loading";
+import { errorMessageActions } from "../../store/errorMessage";
 import Firebase from "../../database/config";
 import InputField from "../../components/common/InputField";
 import classes from "./signupPageForm.module.css";
@@ -25,14 +26,10 @@ const SignupPageForm = () => {
   };
 
   const errorCreateAccount = (error) => {
-    dispatch(actions.setIsLoading({ isLoading: false }));
-    dispatch(actions.errorMsg({
-      error: error.message,
-    }));
+    dispatch(loadingActions.setIsLoading(false));
+    dispatch(errorMessageActions.errorMsg(error.message));
     setTimeout(() => {
-      dispatch(actions.errorMsg({
-        error: '',
-      }));
+      dispatch(errorMessageActions.errorMsg(''));
     }, 1000);
   };
 
@@ -41,13 +38,11 @@ const SignupPageForm = () => {
   };
 
   const errorCreateAccountInformation = (error) => {
-    dispatch(actions.errorMsg({
-      error: error.message,
-    }));
+    dispatch(errorMessageActions.errorMsg(error.message));
   };
 
   const successCreateAccount = () => {
-    dispatch(actions.setIsLoading({ isLoading: false }));
+    dispatch(loadingActions.setIsLoading(false));
     database
       .collection("users")
       .doc(informationDataAccount.uid.toString())
@@ -60,7 +55,7 @@ const SignupPageForm = () => {
     event.preventDefault();
     setIsButtonClicked(true);
     if (password === confirmPassword) {
-      dispatch(actions.setIsLoading({ isLoading: true }));
+      dispatch(loadingActions.setIsLoading(true));
       Firebase.auth()
         .createUserWithEmailAndPassword(email, password)
         .then(successCreateAccount)
@@ -121,6 +116,7 @@ const SignupPageForm = () => {
             placeholder="password"
             value={password}
             required={true}
+            autoComplete="on"
           />
           <InputField
             label="Confirm password"
@@ -133,6 +129,7 @@ const SignupPageForm = () => {
             required={true}
             checkConfirm={password}
             isButtonClicked={isButtonClicked}
+            autoComplete="on"
           />
           <div className={classes.actions}>
             <button className={classes.signupButton}>Sign Up</button>
