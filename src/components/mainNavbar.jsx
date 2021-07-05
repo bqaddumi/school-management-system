@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
+import Loader from "../components/common/loader/loader"
 import Firebase from "../database/config";
 import classes from "./mainNavbar.module.css";
 import schoolLogo from "../images/educationSchoolLogo.jpg";
@@ -12,15 +13,18 @@ const MainNavbar = () => {
   const history = useHistory();
   const userToken = useSelector((state) => state.auth.userToken);
   const [getUserName, setUserName] = useState("");
+  const [loadingUserName, setLoadingUserName] = useState(false);
   
   Firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+      setLoadingUserName(true);
       database
         .collection("users")
         .doc(user.email)
         .get()
         .then((doc) => {
           setUserName(doc.data().userName);
+          setLoadingUserName(false);
         });
     }
   });
@@ -35,7 +39,7 @@ const MainNavbar = () => {
   };
 
   const navItems = [
-    <div>{getUserName}</div>,
+    (!loadingUserName ? <Loader type="loader-username"/> : <div>{getUserName}</div>),
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
     <button className={classes.buttonLogout} onClick={logoutHandler}>
       Logout

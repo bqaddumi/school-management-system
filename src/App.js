@@ -27,7 +27,7 @@ const App = () => {
       <div className={classes.routsContainer}>
         {isLoading && (
           <div className={classes.loaderContainer}>
-            <Loader />
+            <Loader type="loader"/>
           </div>
         )}
 
