@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { emailRegex } from "../../consts/RegEx";
 import { loadingActions } from "../../store/loading";
-import { errorMessageActions } from "../../store/errorMessage";
+import { toastActions } from "../../store/notification";
 import Firebase from "../../database/config";
 import InputField from "../../components/common/InputField";
 import classes from "./signupPageForm.module.css";
@@ -17,8 +17,6 @@ const SignupPageForm = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-  const isError = useSelector((state) => state.error.isError);
-  const isLoading = useSelector((state) => state.loader.isLoading);
 
   const informationDataAccount = {
     uid: email,
@@ -27,22 +25,38 @@ const SignupPageForm = () => {
 
   const errorCreateAccount = (error) => {
     dispatch(loadingActions.setIsLoading(false));
-    dispatch(errorMessageActions.errorMsg(error.message));
-    setTimeout(() => {
-      dispatch(errorMessageActions.errorMsg(''));
-    }, 1000);
+    dispatch(
+      toastActions.toast({
+        type: "failure",
+        message: error.message,
+        position: "top",
+      })
+    );
   };
 
   const successCreateAccountInformation = () => {
+    dispatch(loadingActions.setIsLoading(false));
+    dispatch(
+      toastActions.toast({
+        type: "success",
+        message: "Signup Successfully",
+        position: "top",
+      })
+    );
     history.push("/home");
   };
 
   const errorCreateAccountInformation = (error) => {
-    dispatch(errorMessageActions.errorMsg(error.message));
+    dispatch(
+      toastActions.toast({
+        type: "failure",
+        message: error.message,
+        position: "top",
+      })
+    );
   };
 
-  const successCreateAccount = () => {
-    dispatch(loadingActions.setIsLoading(false));
+  const createAccount = () => {
     database
       .collection("users")
       .doc(informationDataAccount.uid.toString())
@@ -58,7 +72,7 @@ const SignupPageForm = () => {
       dispatch(loadingActions.setIsLoading(true));
       Firebase.auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(successCreateAccount)
+        .then(createAccount)
         .catch(errorCreateAccount);
     }
   };
@@ -81,11 +95,6 @@ const SignupPageForm = () => {
 
   return (
     <>
-      {!isLoading && isError && (
-        <div className={classes.warning}>
-          <p>{isError}</p>
-        </div>
-      )}
       <section className={classes.header}>
         <form onSubmit={onSignupHandler}>
           <InputField
