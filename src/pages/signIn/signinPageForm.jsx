@@ -34,9 +34,9 @@ const SigninForm = () => {
     dispatch(loadingActions.setIsLoading(false));
   };
 
-  const successLogin = () => {
-    dispatch(loadingActions.setIsLoading(false));
-    dispatch(authActions.login());
+  const successLogin = (res) => {
+    dispatch(loadingActions.setIsLoading(false)); 
+    dispatch(authActions.login(res.user.uid));
     history.push("/home");
   };
 

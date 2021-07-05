@@ -1,5 +1,5 @@
 import { Route, Switch, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import MainNavbar from "./components/mainNavbar";
 import HomePage from "./pages/home/homePage";
 import SignupPageForm from "./pages/signUp/signupPageForm";
@@ -9,6 +9,7 @@ import classes from "./App.module.css";
 
 const App = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);
+  const userToken = useSelector((state) => state.auth.userToken);
   return (
     <main className={classes.mainContainer}>
       <MainNavbar />
@@ -23,10 +24,12 @@ const App = () => {
             <HomePage />
           </Route>
           <Route path="/login">
-            <SigninPageForm />
+            {userToken && <Redirect to="/home" />}
+            {!userToken && <SigninPageForm />}
           </Route>
           <Route path="/signup">
-            <SignupPageForm />
+            {userToken && <Redirect to="/home" />}
+            {!userToken && <SignupPageForm />}
           </Route>
           <Route path="*">
             <Redirect to="/home" />

@@ -10,8 +10,8 @@ const MainNavbar = () => {
   const database = Firebase.firestore();
   const dispatch = useDispatch();
   const history = useHistory();
-  const isAuth = useSelector((state) => state.auth.isAuthenticated);
-  const [getInformation, setInformation] = useState("");
+  const userToken = useSelector((state) => state.auth.userToken);
+  const [getInformation, setInformation] = useState();
   const [showMsg, setShowMsg] = useState(true);
 
   Firebase.auth().onAuthStateChanged((user) => {
@@ -25,9 +25,9 @@ const MainNavbar = () => {
         });
     }
   });
-
+  
   const logoutUser = () => {
-    dispatch(authActions.logout());
+    dispatch(authActions.logout('userToken'));
     history.push("/home");
   };
 
@@ -52,11 +52,11 @@ const MainNavbar = () => {
     </NavLink>,
   ];
 
-  useEffect(() => {
-    setTimeout(() => {
-      setShowMsg(!isAuth);
-    }, 1000);
-  }, [isAuth]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setShowMsg(!user);
+  //   }, 1000);
+  // }, [user]);
 
   return (
     <>
@@ -65,7 +65,7 @@ const MainNavbar = () => {
           <div className={classes.logo}>Home</div>
         </NavLink>
         <ul className={classes.navContainerList}>
-          {isAuth ? (
+          {userToken ? (
             <>
               {navItems.map((item, index) => {
                 return <li className={classes.navList} key={index}>{item}</li>;
@@ -80,7 +80,7 @@ const MainNavbar = () => {
           )}
         </ul>
       </div>
-      {isAuth && showMsg && (
+      {userToken && showMsg && (
         <div className={classes.success}>
           <p> Success Signin</p>
         </div>
