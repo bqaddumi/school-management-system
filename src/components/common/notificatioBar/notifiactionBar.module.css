@@ -1,0 +1,50 @@
+.success {
+  background-color: #dff0d8;
+  color: #3c763d;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.warning {
+  background-color: #f3bb6c;
+  color: #a27c48;
+  text-align: center;
+  padding: 5px;
+}
+
+.note {
+  background-color: #acc8e3;
+  color: #7181a0;
+  text-align: center;
+  padding: 5px;
+}
+
+.failure {
+  background-color: #de3029;
+  color: #43433f;
+  text-align: center;
+  padding: 5px;
+}
+
+.top-right {
+  margin-left: 70%;
+}
+
+.top-left {
+  margin-right: 70%;
+}
+
+.bottom {
+  margin-top: 17%;
+}
+
+.bottom-left {
+  margin-left: 70%;
+  margin-top: 17%;
+}
+
+.bottom-right {
+  margin-right: 70%;
+  margin-top: 17%;
+}
