@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import MainNavbar from "./components/mainNavbar";
 import HomePage from "./pages/home/homePage";
 import SignupPageForm from "./pages/signUp/signupPageForm";

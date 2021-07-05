@@ -11,7 +11,7 @@ const MainNavbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const userToken = useSelector((state) => state.auth.userToken);
-  const [getInformation, setInformation] = useState("");
+  const [getUserName, setUserName] = useState("");
   
   Firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -20,7 +20,7 @@ const MainNavbar = () => {
         .doc(user.email)
         .get()
         .then((doc) => {
-          setInformation(doc.data().userName);
+          setUserName(doc.data().userName);
         });
     }
   });
@@ -35,7 +35,7 @@ const MainNavbar = () => {
   };
 
   const navItems = [
-    <div>{getInformation}</div>,
+    <div>{getUserName}</div>,
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
     <button className={classes.buttonLogout} onClick={logoutHandler}>
       Logout
