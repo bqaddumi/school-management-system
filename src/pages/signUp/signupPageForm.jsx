@@ -25,10 +25,8 @@ const SignupPageForm = () => {
 
   const errorCreateAccount = (error) => {
     dispatch(loadingActions.setIsLoading(false));
-
     dispatch(
       toastActions.toast({
-        isToast: true,
         type: "failure",
         message: error.message,
         position: "top",
@@ -40,7 +38,6 @@ const SignupPageForm = () => {
     dispatch(loadingActions.setIsLoading(false));
     dispatch(
       toastActions.toast({
-        isToast: true,
         type: "success",
         message: "Signup Successfully",
         position: "top",

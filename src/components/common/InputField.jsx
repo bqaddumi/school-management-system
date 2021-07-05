@@ -18,10 +18,10 @@ const InputField = (props) => {
     isButtonClicked,
     autoComplete,
   } = props;
-  const isNotValidated = !value.match(valdationRegex) && !!value;
-  const showInvalidEmail = isNotValidated && isButtonClicked;
-  const isNotConfirm = !(value === checkConfirm) && !!value;
-  const showUnConfirmPassword = isNotConfirm && isButtonClicked;
+  const isValidated = !(!value.match(valdationRegex) && !!value);
+  const showInvalidEmail = !isValidated && isButtonClicked;
+  const isConfirm = (!(value === checkConfirm) && !!value);
+  const showUnConfirmPassword = !isConfirm && isButtonClicked;
 
   const classEmailValid = classNames({
     errorInput: showInvalidEmail,

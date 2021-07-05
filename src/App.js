@@ -11,7 +11,6 @@ import classes from "./App.module.css";
 
 const App = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);
-  const isToast = useSelector((state) => state.toast.isToast);
   const type = useSelector((state) => state.toast.type);
   const message = useSelector((state) => state.toast.message);
   const position = useSelector((state) => state.toast.position);
@@ -19,8 +18,8 @@ const App = () => {
   return (
     <main className={classes.mainContainer}>
       <MainNavbar />
-      {!isLoading && isToast && (
-        <div className={classes.toastContainer} id="toast">
+      {!isLoading && (
+        <div className={classes.toastContainer} >
           <NotifiactionBar type={type} message={message} position={position} />
         </div>
       )}

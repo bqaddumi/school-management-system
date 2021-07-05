@@ -27,20 +27,17 @@ const SigninForm = () => {
   const errorLogin = (error) => {
     dispatch(
       toastActions.toast({
-        isToast: true,
         type: "failure",
         message: error.message,
         position: "top",
       })
     );
-
     dispatch(loadingActions.setIsLoading(false));
   };
 
   const successLogin = () => {
     dispatch(
       toastActions.toast({
-        isToast: true,
         type: "success",
         message: "LogIn Successfully",
         position: "top",
