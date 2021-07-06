@@ -20,7 +20,7 @@ const InputField = (props) => {
   } = props;
   const isValidated = !(!value.match(valdationRegex) && !!value);
   const showInvalidEmail = !isValidated && isButtonClicked;
-  const isConfirm = (!(value === checkConfirm) && !!value);
+  const isConfirm = !(!(value === checkConfirm) && !!value);
   const showUnConfirmPassword = !isConfirm && isButtonClicked;
 
   const classEmailValid = classNames({

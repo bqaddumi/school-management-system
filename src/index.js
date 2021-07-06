@@ -8,11 +8,11 @@ import { Provider as ReduxProvider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
-  <ReduxProvider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ReduxProvider>,
+    <ReduxProvider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ReduxProvider>,
   document.getElementById("root")
 );
 

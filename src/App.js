@@ -11,6 +11,7 @@ import classes from "./App.module.css";
 
 const App = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);
+  const userToken = useSelector((state) => state.auth.userToken);
   const type = useSelector((state) => state.toast.type);
   const message = useSelector((state) => state.toast.message);
   const position = useSelector((state) => state.toast.position);
@@ -26,7 +27,7 @@ const App = () => {
       <div className={classes.routsContainer}>
         {isLoading && (
           <div className={classes.loaderContainer}>
-            <Loader />
+            <Loader type="loader"/>
           </div>
         )}
 
@@ -35,10 +36,12 @@ const App = () => {
             <HomePage />
           </Route>
           <Route path="/login">
-            <SigninPageForm />
+            {userToken && <Redirect to="/home" />}
+            {!userToken && <SigninPageForm />}
           </Route>
           <Route path="/signup">
-            <SignupPageForm />
+            {userToken && <Redirect to="/home" />}
+            {!userToken && <SignupPageForm />}
           </Route>
           <Route path="*">
             <Redirect to="/home" />

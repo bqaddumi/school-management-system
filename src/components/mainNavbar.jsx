@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
+import Loader from "../components/common/loader/loader"
 import Firebase from "../database/config";
 import classes from "./mainNavbar.module.css";
 import schoolLogo from "../images/educationSchoolLogo.jpg";
@@ -10,23 +11,28 @@ const MainNavbar = () => {
   const database = Firebase.firestore();
   const dispatch = useDispatch();
   const history = useHistory();
-  const isAuth = useSelector((state) => state.auth.isAuthenticated);
-  const [getInformation, setInformation] = useState("");
-  
-  Firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      database
-        .collection("users")
-        .doc(user.email)
-        .get()
-        .then((doc) => {
-          setInformation(doc.data().userName);
-        });
-    }
-  });
+  const userToken = useSelector((state) => state.auth.userToken);
+  const [getUserName, setUserName] = useState("");
+  const [loadingUserName, setLoadingUserName] = useState(false);
+
+  useEffect(() => {
+    Firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setLoadingUserName(true);
+        database
+          .collection("users")
+          .doc(user.email)
+          .get()
+          .then((doc) => {
+            setUserName(doc.data().userName);
+            setLoadingUserName(false);
+          });
+      }
+    });
+  }, [database])
 
   const logoutUser = () => {
-    dispatch(authActions.logout());
+    dispatch(authActions.logout('userToken'));
     history.push("/home");
   };
 
@@ -35,7 +41,7 @@ const MainNavbar = () => {
   };
 
   const navItems = [
-    <div>{getInformation}</div>,
+    (loadingUserName ? <Loader type="loader-username" /> : <div>{getUserName}</div>),
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
     <button className={classes.buttonLogout} onClick={logoutHandler}>
       Logout
@@ -57,7 +63,7 @@ const MainNavbar = () => {
         <div className={classes.logo}>Home</div>
       </NavLink>
       <ul className={classes.navContainerList}>
-        {isAuth ? (
+        {userToken ? (
           <>
             {navItems.map((item, index) => {
               return (

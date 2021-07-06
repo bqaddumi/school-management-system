@@ -35,7 +35,7 @@ const SigninForm = () => {
     dispatch(loadingActions.setIsLoading(false));
   };
 
-  const successLogin = () => {
+  const successLogin = (res) => {
     dispatch(
       toastActions.toast({
         type: "success",
@@ -44,7 +44,7 @@ const SigninForm = () => {
       })
     );
     dispatch(loadingActions.setIsLoading(false));
-    dispatch(authActions.login());
+    dispatch(authActions.login(res.user.uid));
     history.push("/home");
   };
 
