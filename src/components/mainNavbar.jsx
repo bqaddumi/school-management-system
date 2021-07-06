@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
@@ -14,21 +14,23 @@ const MainNavbar = () => {
   const userToken = useSelector((state) => state.auth.userToken);
   const [getUserName, setUserName] = useState("");
   const [loadingUserName, setLoadingUserName] = useState(false);
-  
-  Firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      setLoadingUserName(true);
-      database
-        .collection("users")
-        .doc(user.email)
-        .get()
-        .then((doc) => {
-          setUserName(doc.data().userName);
-          setLoadingUserName(false);
-        });
-    }
-  });
-  
+
+  useEffect(() => {
+    Firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setLoadingUserName(true);
+        database
+          .collection("users")
+          .doc(user.email)
+          .get()
+          .then((doc) => {
+            setUserName(doc.data().userName);
+            setLoadingUserName(false);
+          });
+      }
+    });
+  }, [database])
+
   const logoutUser = () => {
     dispatch(authActions.logout('userToken'));
     history.push("/home");
@@ -39,7 +41,7 @@ const MainNavbar = () => {
   };
 
   const navItems = [
-    (!loadingUserName ? <Loader type="loader-username"/> : <div>{getUserName}</div>),
+    (loadingUserName ? <Loader type="loader-username" /> : <div>{getUserName}</div>),
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
     <button className={classes.buttonLogout} onClick={logoutHandler}>
       Logout
