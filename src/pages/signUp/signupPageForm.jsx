@@ -21,6 +21,7 @@ const SignupPageForm = () => {
   const informationDataAccount = {
     uid: email,
     userName: name,
+    role: '',
   };
 
   const errorCreateAccount = (error) => {
@@ -56,10 +57,10 @@ const SignupPageForm = () => {
     );
   };
 
-  const createAccount = () => {
+  const createAccount = (res) => {
     database
       .collection("users")
-      .doc(informationDataAccount.uid.toString())
+      .doc(res.user.uid)
       .set(informationDataAccount)
       .then(successCreateAccountInformation)
       .catch(errorCreateAccountInformation);

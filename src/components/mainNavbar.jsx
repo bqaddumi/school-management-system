@@ -12,24 +12,26 @@ const MainNavbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const userToken = useSelector((state) => state.auth.userToken);
+  const userRole = useSelector((state) => state.auth.role);
   const [getUserName, setUserName] = useState("");
   const [loadingUserName, setLoadingUserName] = useState(false);
 
   useEffect(() => {
-    Firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setLoadingUserName(true);
-        database
-          .collection("users")
-          .doc(user.email)
-          .get()
-          .then((doc) => {
-            setUserName(doc.data().userName);
-            setLoadingUserName(false);
-          });
-      }
-    });
-  }, [database])
+    if (userToken) {
+      setLoadingUserName(true);
+      database
+        .collection("users")
+        .doc(userToken)
+        .get()
+        .then((doc) => {
+          setUserName(doc.data().userName);
+          dispatch(authActions.setRole(doc.data().role));
+          setLoadingUserName(false);
+        }).catch(() => {
+          setLoadingUserName(true);
+        });
+    } //eslint-disable-next-line
+  }, [database, userToken]);
 
   const logoutUser = () => {
     dispatch(authActions.logout('userToken'));
@@ -42,6 +44,13 @@ const MainNavbar = () => {
 
   const navItems = [
     (loadingUserName ? <Loader type="loader-username" /> : <div>{getUserName}</div>),
+    (
+      (userRole === 'Adminstration')
+      &&
+      <NavLink className={classes.link} to="/Users">
+        Adminstration
+      </NavLink>
+    ),
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
     <button className={classes.buttonLogout} onClick={logoutHandler}>
       Logout

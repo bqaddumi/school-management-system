@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 
 const initialAuthState = {
   userToken: Cookies.get('userToken'),
+  role: '',
 };
 
 const authSlice = createSlice({
@@ -16,6 +17,9 @@ const authSlice = createSlice({
     logout(state, action) {
       Cookies.remove(action.payload);
       state.userToken = Cookies.get('userToken');
+    },
+    setRole(state, action) {
+      state.role = action.payload;
     }
   },
 });
