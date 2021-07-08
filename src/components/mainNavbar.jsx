@@ -12,7 +12,7 @@ const MainNavbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const userToken = useSelector((state) => state.auth.userToken);
-  const userRole = useSelector((state) => state.auth.role);
+  const currentUserRole = useSelector((state) => state.auth.currentUserRole);
   const [getUserName, setUserName] = useState("");
   const [loadingUserName, setLoadingUserName] = useState(false);
 
@@ -25,13 +25,27 @@ const MainNavbar = () => {
         .get()
         .then((doc) => {
           setUserName(doc.data().userName);
-          dispatch(authActions.setRole(doc.data().role));
+          dispatch(authActions.setCurrentUserRole(doc.data().role));
           setLoadingUserName(false);
         }).catch(() => {
           setLoadingUserName(true);
         });
-    } //eslint-disable-next-line
+    }
   }, [database, userToken]);
+
+  useEffect(() => {
+    database
+      .collection("usersType")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          dispatch(authActions.setUserRole(doc.data()));
+        })
+      })
+      .catch((erorr) => {
+        console.log(erorr)
+      });
+  }, [dispatch])
 
   const logoutUser = () => {
     dispatch(authActions.logout('userToken'));
@@ -45,10 +59,10 @@ const MainNavbar = () => {
   const navItems = [
     (loadingUserName ? <Loader type="loader-username" /> : <div>{getUserName}</div>),
     (
-      (userRole === 'Adminstration')
+      (currentUserRole === 'Administration')
       &&
-      <NavLink className={classes.link} to="/users">
-        Adminstration
+      <NavLink className={classes.link} to="/admin">
+        Administration
       </NavLink>
     ),
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
@@ -68,7 +82,7 @@ const MainNavbar = () => {
 
   return (
     <div className={classes.header}>
-      <NavLink to="/home" className={classes.link}>
+      <NavLink to="#" className={classes.link}>
         <div className={classes.logo}>Home</div>
       </NavLink>
       <ul className={classes.navContainerList}>

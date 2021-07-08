@@ -8,19 +8,23 @@ import SignupPageForm from "./pages/signUp/signupPageForm";
 import SigninPageForm from "./pages/signIn/signinPageForm";
 import Loader from "./components/common/loader/loader";
 import NotifiactionBar from "./components/common/notificatioBar/notifiactionBar";
-import Users from "./pages/adminstration/users";
+import Users from "./pages/administration/users";
 import classes from "./App.module.css";
+import Teachers from "./pages/teachers/teachers";
+import Students from "./pages/students/students";
 
 const App = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);
   const userToken = useSelector((state) => state.auth.userToken);
-  const userRole = useSelector((state) => state.auth.role);
+  const currentUserRole = useSelector((state) => state.auth.currentUserRole);
+  const userRole = useSelector((state) => state.auth.userRole);
   const type = useSelector((state) => state.toast.type);
   const message = useSelector((state) => state.toast.message);
   const position = useSelector((state) => state.toast.position);
+  
 
   const isAbleToAccessRouteFunction = () => {
-    if (userToken && userRole === 'Adminstration') return true;
+    if (userToken && currentUserRole === userRole.admin) return true;
     return false;
   };
 
@@ -35,19 +39,22 @@ const App = () => {
       <div className={classes.routsContainer}>
         {isLoading && (
           <div className={classes.loaderContainer}>
-            <Loader type="loader"/>
+            <Loader type="loader" />
           </div>
         )}
 
         <Switch>
           <PrivateRoute
-            path={'/users'}
+            path={'/admin'}
             component={Users}
             isAbleToAccessRoute={isAbleToAccessRouteFunction}
-            redirectPath={'/home'}
+            redirectPath={'/admin'}
           />
-          <Route path="/users">
-            <Users />
+          <Route path="/teacher">
+            <Teachers />
+          </Route>
+          <Route path="/student">
+            <Students />
           </Route>
           <Route path="/home" exact>
             <HomePage />

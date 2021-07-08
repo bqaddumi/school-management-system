@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import Loader from "../../components/common/loader/loader";
 import classes from "./homePage.module.css";
-import educationSchoolLogo from "../../images/educationSchoolLogo.jpg";
-import teachers from "../../images/teacher.png";
+import Students from "../students/students";
+import Teachers from "../teachers/teachers";
 
 const HomePage = () => {
-  const userRole = useSelector((state) => state.auth.role);
-  const isTeacher = (userRole === "Teachers");
-  const isStudent = (userRole === "Students");
+  const currentUserRole = useSelector((state) => state.auth.currentUserRole);
+  const isTeacher = (currentUserRole === "Teachers");
+  const isStudent = (currentUserRole === "Students");
   const isLoading = useSelector((state) => state.loader.isLoading);
 
   return (
@@ -18,20 +18,10 @@ const HomePage = () => {
         </div>
       )}
       {isStudent &&
-        <div>
-          <h1>Hello Students</h1>
-          <div className={classes.homePageContainer}>
-            <img src={educationSchoolLogo} alt="Logo Home Page" className={classes.image} />
-          </div>
-        </div>
+        <Students />
       }
       {isTeacher &&
-        <div>
-          <h1>Hello Teachers</h1>
-          <div className={classes.homePageContainer}>
-            <img src={teachers} alt="Logo Teacher Page" className={classes.image} />
-          </div>
-        </div>
+        <Teachers />
       }
     </>
   );

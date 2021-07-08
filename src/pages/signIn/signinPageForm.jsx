@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { emailRegex } from "../../consts/RegEx";
 import { authActions } from "../../store/auth";
@@ -10,11 +10,13 @@ import InputField from "../../components/common/InputField";
 import classes from "./signinPageForm.module.css";
 
 const SigninForm = () => {
+  const database = Firebase.firestore();
   const history = useHistory();
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const userRole = useSelector((state) => state.auth.userRole);
 
   const onEmailChanged = (event) => {
     setEmail(event.target.value);
@@ -45,7 +47,27 @@ const SigninForm = () => {
     );
     dispatch(loadingActions.setIsLoading(false));
     dispatch(authActions.login(res.user.uid));
-    history.push("/home");
+    
+    database
+      .collection("users")
+      .doc(res.user.uid)
+      .get()
+      .then((doc) => {
+        switch (doc.data().role) {
+          case userRole.admin:
+            history.push('/admin')
+            break;
+          case userRole.teacher:
+            history.push('/teacher')
+            break;
+          case userRole.students:
+            history.push('/student')
+            break;
+          default:
+            history.push('/home')
+            break;
+        }
+      })
   };
 
   const onSigninHandler = (event) => {

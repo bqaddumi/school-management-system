@@ -56,7 +56,7 @@ const Users = () => {
             <option value="Students">Students</option>
             <option value="Teachers">Teachers</option>
             <option value="Owner">Owner</option>
-            <option value="Adminstration">Adminstration</option>
+            <option value="Administration">Administration</option>
           </select>
         )
       },
