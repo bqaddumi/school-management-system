@@ -41,12 +41,12 @@ const App = () => {
 
         <Switch>
           <PrivateRoute
-            path={'/Users'}
+            path={'/users'}
             component={Users}
             isAbleToAccessRoute={isAbleToAccessRouteFunction}
             redirectPath={'/home'}
           />
-          <Route path="/Users">
+          <Route path="/users">
             <Users />
           </Route>
           <Route path="/home" exact>

@@ -47,7 +47,7 @@ const MainNavbar = () => {
     (
       (userRole === 'Adminstration')
       &&
-      <NavLink className={classes.link} to="/Users">
+      <NavLink className={classes.link} to="/users">
         Adminstration
       </NavLink>
     ),
