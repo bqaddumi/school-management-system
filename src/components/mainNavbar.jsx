@@ -31,7 +31,7 @@ const MainNavbar = () => {
           setLoadingUserName(true);
         });
     }
-  }, [database, userToken]);
+  }, [database, userToken, dispatch]);
 
   useEffect(() => {
     database
@@ -45,7 +45,7 @@ const MainNavbar = () => {
       .catch((erorr) => {
         console.log(erorr)
       });
-  }, [dispatch])
+  }, [dispatch, database]);
 
   const logoutUser = () => {
     dispatch(authActions.logout('userToken'));

@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadingActions } from "../../../store/loading";
-import NotifiactionBar from "../../../components/common/notificatioBar/notifiactionBar";
 import Firebase from '../../../database/config';
 import Table from './tableContainer'
 import Loader from "../../../components/common/loader/loader";
@@ -12,9 +11,6 @@ const Users = () => {
   const [dataAuth, setDataAuth] = useState([]);
   const isLoadingAdmin = useSelector((state) => state.loader.isLoadingAdmin);
   const dispatch = useDispatch();
-  const type = useSelector((state) => state.toast.type);
-  const message = useSelector((state) => state.toast.message);
-  const position = useSelector((state) => state.toast.position);
 
   useEffect(() => {
     dispatch(loadingActions.setIsLoadingAdmin(true));
