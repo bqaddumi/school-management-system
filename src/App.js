@@ -8,10 +8,12 @@ import SignupPageForm from "./pages/signUp/signupPageForm";
 import SigninPageForm from "./pages/signIn/signinPageForm";
 import Loader from "./components/common/loader/loader";
 import NotifiactionBar from "./components/common/notificatioBar/notifiactionBar";
-import Users from "./pages/administration/users";
+import Users from "./pages/administration/userRole/users";
+import AddUsers from "./pages/administration/addUsers/addUsers";
 import classes from "./App.module.css";
 import Teachers from "./pages/teachers/teachers";
 import Students from "./pages/students/students";
+import SchedulingTeachers from "./pages/schedulerTeachers/schedulingTeachers";
 
 const App = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);
@@ -21,10 +23,19 @@ const App = () => {
   const type = useSelector((state) => state.toast.type);
   const message = useSelector((state) => state.toast.message);
   const position = useSelector((state) => state.toast.position);
-  
 
-  const isAbleToAccessRouteFunction = () => {
+  const isAbleToAccessRouteAdmin = () => {
     if (userToken && currentUserRole === userRole.admin) return true;
+    return false;
+  };
+
+  const isAbleToAccessRouteTeacher = () => {
+    if (userToken && currentUserRole === userRole.teacher) return true;
+    return false;
+  };
+
+  const isAbleToAccessRouteStudent = () => {
+    if (userToken && currentUserRole === userRole.students) return true;
     return false;
   };
 
@@ -47,18 +58,33 @@ const App = () => {
           <PrivateRoute
             path={'/admin'}
             component={Users}
-            isAbleToAccessRoute={isAbleToAccessRouteFunction}
-            redirectPath={'/admin'}
+            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
+            redirectPath={'/'}
           />
-          <Route path="/teacher">
-            <Teachers />
-          </Route>
-          <Route path="/student">
-            <Students />
-          </Route>
-          <Route path="/home" exact>
-            <HomePage />
-          </Route>
+          <PrivateRoute
+            path={'/schedulingTeachers'}
+            component={SchedulingTeachers}
+            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
+            redirectPath={'/'}
+          />
+          <PrivateRoute
+            path={'/addUser'}
+            component={AddUsers}
+            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
+            redirectPath={'/'}
+          />
+          <PrivateRoute
+            path={'/teacher'}
+            component={Teachers}
+            isAbleToAccessRoute={isAbleToAccessRouteTeacher}
+            redirectPath={'/teacher'}
+          />
+          <PrivateRoute
+            path={'/student'}
+            component={Students}
+            isAbleToAccessRoute={isAbleToAccessRouteStudent}
+            redirectPath={'/student'}
+          />
           <Route path="/login">
             {userToken && <Redirect to="/home" />}
             {!userToken && <SigninPageForm />}
@@ -66,6 +92,9 @@ const App = () => {
           <Route path="/signup">
             {userToken && <Redirect to="/home" />}
             {!userToken && <SignupPageForm />}
+          </Route>
+          <Route path="/home" exact>
+            <HomePage />
           </Route>
           <Route path="*">
             <Redirect to="/home" />

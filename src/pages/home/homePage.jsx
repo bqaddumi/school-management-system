@@ -17,12 +17,6 @@ const HomePage = () => {
           <Loader type="loader" />
         </div>
       )}
-      {isStudent &&
-        <Students />
-      }
-      {isTeacher &&
-        <Teachers />
-      }
     </>
   );
 };

@@ -57,13 +57,32 @@ const MainNavbar = () => {
   };
 
   const navItems = [
-    (loadingUserName ? <Loader type="loader-username" /> : <div>{getUserName}</div>),
-    (
-      (currentUserRole === 'Administration')
-      &&
-      <NavLink className={classes.link} to="/admin">
-        Administration
-      </NavLink>
+    (loadingUserName ?
+      <Loader type="loader-username" /> :
+      (
+        (currentUserRole === 'Administration')
+          ?
+          (
+            <div className={classes.dropdown}>
+              <div className={classes.link}>
+                {getUserName}
+              </div>
+              <div className={classes.dropdownContent}>
+                <NavLink className={classes.link} to="/addUser">Add Users</NavLink>
+                <NavLink className={classes.link} to="/admin">User Role</NavLink>
+                <NavLink className={classes.link} to="/schedulingTeachers">Scheduler Teacher</NavLink>
+                <NavLink className={classes.link} to="/about">About</NavLink>
+                <div className={classes.link}>Version 1.0</div>
+              </div>
+            </div >
+          )
+          :
+          (
+            <div className={classes.link}>
+              {getUserName}
+            </div>
+          )
+      )
     ),
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
     <button className={classes.buttonLogout} onClick={logoutHandler}>

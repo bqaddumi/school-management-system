@@ -34,3 +34,15 @@
 .select {
   width: 100%;
 }
+
+.toastContainer {
+  visibility: visible;
+  width: 100%;
+  position: absolute;
+  top: 59px;
+  right: 0;
+  z-index: 999;
+  -webkit-keyframes: hideAnimation 0s ease-in-out 0.5s;
+  animation: hideAnimation 0s ease-in-out 0.5s;
+  animation-fill-mode: forwards;
+}

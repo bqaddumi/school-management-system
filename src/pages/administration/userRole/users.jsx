@@ -1,24 +1,30 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadingActions } from "../../store/loading";
-import Firebase from '../../database/config';
+import { loadingActions } from "../../../store/loading";
+import NotifiactionBar from "../../../components/common/notificatioBar/notifiactionBar";
+import Firebase from '../../../database/config';
 import Table from './tableContainer'
-import Loader from "../../components/common/loader/loader";
+import Loader from "../../../components/common/loader/loader";
 import classes from './tableContainer.module.css';
+import { toastActions } from "../../../store/notification";
 
 const Users = () => {
   const [dataAuth, setDataAuth] = useState([]);
-  const isLoading = useSelector((state) => state.loader.isLoading);
+  const isLoadingAdmin = useSelector((state) => state.loader.isLoadingAdmin);
   const dispatch = useDispatch();
+  const type = useSelector((state) => state.toast.type);
+  const message = useSelector((state) => state.toast.message);
+  const position = useSelector((state) => state.toast.position);
+  const [state, setstate] = useState(false)
 
   useEffect(() => {
-    dispatch(loadingActions.setIsLoading(true));
+    dispatch(loadingActions.setIsLoadingAdmin(true));
     const db = Firebase.firestore();
     return db.collection('users').onSnapshot((snapshot) => {
       const postData = [];
       snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
       setDataAuth(postData);
-      dispatch(loadingActions.setIsLoading(false));
+      dispatch(loadingActions.setIsLoadingAdmin(false));
     });
   }, [dispatch]);
 
@@ -29,6 +35,16 @@ const Users = () => {
       .doc(rowIndex.row.original.id)
       .update({
         role: change.target.value,
+      }).then(() => {
+        setstate(true);
+        dispatch(
+          toastActions.toast({
+            type: "success",
+            message: "Successfully Modifying",
+            position: "top",
+          })
+        );
+        setstate(false);
       });
   }
 
@@ -55,7 +71,6 @@ const Users = () => {
             <option></option>
             <option value="Students">Students</option>
             <option value="Teachers">Teachers</option>
-            <option value="Owner">Owner</option>
             <option value="Administration">Administration</option>
           </select>
         )
@@ -66,7 +81,7 @@ const Users = () => {
 
   return (
     <div className={classes.App}>
-      {isLoading && (
+      {isLoadingAdmin && (
         <div className={classes.loaderContainer}>
           <Loader type="loader" />
         </div>
