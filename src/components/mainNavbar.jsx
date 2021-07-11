@@ -12,24 +12,40 @@ const MainNavbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const userToken = useSelector((state) => state.auth.userToken);
+  const currentUserRole = useSelector((state) => state.auth.currentUserRole);
   const [getUserName, setUserName] = useState("");
   const [loadingUserName, setLoadingUserName] = useState(false);
 
   useEffect(() => {
-    Firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setLoadingUserName(true);
-        database
-          .collection("users")
-          .doc(user.email)
-          .get()
-          .then((doc) => {
-            setUserName(doc.data().userName);
-            setLoadingUserName(false);
-          });
-      }
-    });
-  }, [database])
+    if (userToken) {
+      setLoadingUserName(true);
+      database
+        .collection("users")
+        .doc(userToken)
+        .get()
+        .then((doc) => {
+          setUserName(doc.data().userName);
+          dispatch(authActions.setCurrentUserRole(doc.data().role));
+          setLoadingUserName(false);
+        }).catch(() => {
+          setLoadingUserName(true);
+        });
+    }
+  }, [database, userToken]);
+
+  useEffect(() => {
+    database
+      .collection("usersType")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          dispatch(authActions.setUserRole(doc.data()));
+        })
+      })
+      .catch((erorr) => {
+        console.log(erorr)
+      });
+  }, [dispatch])
 
   const logoutUser = () => {
     dispatch(authActions.logout('userToken'));
@@ -41,7 +57,33 @@ const MainNavbar = () => {
   };
 
   const navItems = [
-    (loadingUserName ? <Loader type="loader-username" /> : <div>{getUserName}</div>),
+    (loadingUserName ?
+      <Loader type="loader-username" /> :
+      (
+        (currentUserRole === 'Administration')
+          ?
+          (
+            <div className={classes.dropdown}>
+              <div className={classes.link}>
+                {getUserName}
+              </div>
+              <div className={classes.dropdownContent}>
+                <NavLink className={classes.link} to="/addUser">Add Users</NavLink>
+                <NavLink className={classes.link} to="/admin">User Role</NavLink>
+                <NavLink className={classes.link} to="/schedulingTeachers">Scheduler Teacher</NavLink>
+                <NavLink className={classes.link} to="/about">About</NavLink>
+                <div className={classes.link}>Version 1.0</div>
+              </div>
+            </div >
+          )
+          :
+          (
+            <div className={classes.link}>
+              {getUserName}
+            </div>
+          )
+      )
+    ),
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
     <button className={classes.buttonLogout} onClick={logoutHandler}>
       Logout
@@ -59,7 +101,7 @@ const MainNavbar = () => {
 
   return (
     <div className={classes.header}>
-      <NavLink to="/home" className={classes.link}>
+      <NavLink to="#" className={classes.link}>
         <div className={classes.logo}>Home</div>
       </NavLink>
       <ul className={classes.navContainerList}>

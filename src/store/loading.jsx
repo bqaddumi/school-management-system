@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialLoadingState = {
-  isLoading: false
+  isLoading: false,
+  isLoadingAdmin: false,
 };
 
 const loadingSlice = createSlice({
@@ -10,6 +11,9 @@ const loadingSlice = createSlice({
   reducers: {
     setIsLoading(state, action) {
       state.isLoading = action.payload;
+    },
+    setIsLoadingAdmin(state, action) {
+      state.isLoadingAdmin = action.payload;
     },
   },
 });

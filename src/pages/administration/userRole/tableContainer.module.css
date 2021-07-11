@@ -1,0 +1,48 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  color: #00000094;
+}
+
+.loaderContainer {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table {
+  border-spacing: 0;
+  border: 1px solid #ededed;
+}
+
+.headerGroup {
+  margin: 0;
+  padding: 0.8rem;
+  border-bottom: 1px solid #ededed;
+  border-right: 1px solid #ededed;
+  position: relative;
+}
+
+.select {
+  width: 100%;
+}
+
+.toastContainer {
+  visibility: visible;
+  width: 100%;
+  position: absolute;
+  top: 59px;
+  right: 0;
+  z-index: 999;
+  -webkit-keyframes: hideAnimation 0s ease-in-out 0.5s;
+  animation: hideAnimation 0s ease-in-out 0.5s;
+  animation-fill-mode: forwards;
+}
