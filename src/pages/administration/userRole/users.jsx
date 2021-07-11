@@ -15,7 +15,6 @@ const Users = () => {
   const type = useSelector((state) => state.toast.type);
   const message = useSelector((state) => state.toast.message);
   const position = useSelector((state) => state.toast.position);
-  const [state, setstate] = useState(false)
 
   useEffect(() => {
     dispatch(loadingActions.setIsLoadingAdmin(true));
@@ -36,7 +35,6 @@ const Users = () => {
       .update({
         role: change.target.value,
       }).then(() => {
-        setstate(true);
         dispatch(
           toastActions.toast({
             type: "success",
@@ -44,7 +42,6 @@ const Users = () => {
             position: "top",
           })
         );
-        setstate(false);
       });
   }
 
