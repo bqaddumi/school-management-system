@@ -6,13 +6,13 @@ const HomePage = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);
 
   return (
-    <>
+    <div>
       {isLoading && (
         <div className={classes.loaderContainer}>
           <Loader type="loader" />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

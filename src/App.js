@@ -17,25 +17,25 @@ import SchedulingTeachers from "./pages/schedulerTeachers/schedulingTeachers";
 
 const App = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);
-  const userToken = useSelector((state) => state.auth.userToken);
-  const currentUserRole = useSelector((state) => state.auth.currentUserRole);
   const userRole = useSelector((state) => state.auth.userRole);
   const type = useSelector((state) => state.toast.type);
   const message = useSelector((state) => state.toast.message);
   const position = useSelector((state) => state.toast.position);
+  const usersObject = useSelector((state) => state.auth.userInformation);
+  const userInformation = JSON.parse(usersObject ? usersObject : false);
 
   const isAbleToAccessRouteAdmin = () => {
-    if (userToken && currentUserRole === userRole.admin) return true;
+    if (userInformation && userInformation.role === userRole.admin) return true;
     return false;
   };
 
   const isAbleToAccessRouteTeacher = () => {
-    if (userToken && currentUserRole === userRole.teacher) return true;
+    if (userInformation && userInformation.role === userRole.teacher) return true;
     return false;
   };
 
   const isAbleToAccessRouteStudent = () => {
-    if (userToken && currentUserRole === userRole.students) return true;
+    if (userInformation && userInformation.role === userRole.students) return true;
     return false;
   };
 
@@ -86,12 +86,12 @@ const App = () => {
             redirectPath={'/student'}
           />
           <Route path="/login">
-            {userToken && <Redirect to="/home" />}
-            {!userToken && <SigninPageForm />}
+            {userInformation && <Redirect to="/home" />}
+            {!userInformation && <SigninPageForm />}
           </Route>
           <Route path="/signup">
-            {userToken && <Redirect to="/home" />}
-            {!userToken && <SignupPageForm />}
+            {userInformation && <Redirect to="/home" />}
+            {!userInformation && <SignupPageForm />}
           </Route>
           <Route path="/home" exact>
             <HomePage />

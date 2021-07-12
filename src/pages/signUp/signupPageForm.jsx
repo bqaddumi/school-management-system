@@ -18,12 +18,6 @@ const SignupPageForm = () => {
   const [name, setName] = useState("");
   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
-  const informationDataAccount = {
-    uid: email,
-    userName: name,
-    role: '',
-  };
-
   const errorCreateAccount = (error) => {
     dispatch(loadingActions.setIsLoading(false));
     dispatch(
@@ -61,7 +55,12 @@ const SignupPageForm = () => {
     database
       .collection("users")
       .doc(res.user.uid)
-      .set(informationDataAccount)
+      .set({
+        uid: email,
+        userName: name,
+        role: '',
+        token: res.user.uid,
+      })
       .then(successCreateAccountInformation)
       .catch(errorCreateAccountInformation);
   };

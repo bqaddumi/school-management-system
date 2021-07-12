@@ -1,6 +1,6 @@
 import React from "react";
 import { useTable } from "react-table";
-import classes from './tableContainer.module.css';
+import classes from '../../../pages/administration/userRole/userTable.module.css';
 
 export default function Table({ columns, data }) {
   const {
@@ -15,7 +15,6 @@ export default function Table({ columns, data }) {
   })
 
   return (
-
     <table {...getTableProps()} className={classes.table}>
       <thead>
         {headerGroups.map(headerGroup => (
