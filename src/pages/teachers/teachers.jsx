@@ -7,7 +7,7 @@ const Teachers = () => {
         <div>
             <h1>Hello Teachers</h1>
             <div className={classes.teachersPageContainer}>
-                <img src={teachers} alt="Logo Teacher Page" className={classes.image} />
+                <img src={teachers} alt="Logo Teacher Page" className={classes.imageTeacher} />
             </div>
         </div>
     );

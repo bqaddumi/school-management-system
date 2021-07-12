@@ -6,7 +6,7 @@ import { authActions } from "../../store/auth";
 import { loadingActions } from "../../store/loading";
 import { toastActions } from "../../store/notification";
 import Firebase from "../../database/config";
-import InputField from "../../components/common/InputField";
+import InputField from "../../components/common/InputField/InputField";
 import classes from "./signinPageForm.module.css";
 
 const SigninForm = () => {

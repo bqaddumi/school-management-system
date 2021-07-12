@@ -1,4 +1,4 @@
-.App {
+.headerContainer {
   display: flex;
   flex-direction: column;
   padding: 50px;
@@ -30,6 +30,6 @@
   position: relative;
 }
 
-.userRole {
+.selectUsersRole {
   width: 100%;
 }

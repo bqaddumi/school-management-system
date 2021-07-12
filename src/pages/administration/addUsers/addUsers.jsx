@@ -5,7 +5,7 @@ import { emailRegex } from "../../../consts/RegEx";
 import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
 import Firebase from "../../../database/config";
-import InputField from "../../../components/common/InputField";
+import InputField from "../../../components/common/InputField/InputField";
 import classes from "./addUsers.module.css";
 
 const AddUsers = () => {
@@ -101,8 +101,8 @@ const AddUsers = () => {
 
     return (
         <>
-            <h1 className={classes.bodyHeader}>Add A New User With Role</h1>
-            <section className={classes.header}>
+            <h1 className={classes.titleHeaderContainer}>Add A New User With Role</h1>
+            <section className={classes.bodyHeaderContainer}>
                 <form onSubmit={onSignupHandler}>
                     <InputField
                         label="User name"
@@ -147,14 +147,14 @@ const AddUsers = () => {
                         isButtonClicked={isButtonClicked}
                         autoComplete="on"
                     />
-                    <label className={classes.label}>Role Of Users</label>
-                    <select required className={classes.select} onChange={usersRoleHandler}>
+                    <label className={classes.labelTitle}>Role Of Users</label>
+                    <select required className={classes.selectUsersRole} onChange={usersRoleHandler}>
                         <option></option>
                         <option value="Students">{userRole.students}</option>
                         <option value="Teachers">{userRole.teacher}</option>
                         <option value="Administration">{userRole.admin}</option>
                     </select>
-                    <div className={classes.actions}>
+                    <div className={classes.actionsContainerSignUp}>
                         <button className={classes.signupButton}>Sign Up</button>
                     </div>
                 </form>

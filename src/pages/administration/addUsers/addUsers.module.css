@@ -1,9 +1,8 @@
-.actions {
-  margin-top: 32px;
-  align-items: center;
+.titleHeaderContainer {
+  text-align: center;
 }
 
-.header {
+.bodyHeaderContainer {
   margin: 4% 30%;
   max-width: 40%;
   border-radius: 6px;
@@ -12,6 +11,11 @@
   padding: 24px;
   text-align: center;
   color: #000;
+}
+
+.actionsContainerSignUp {
+  margin-top: 32px;
+  align-items: center;
 }
 
 .signupButton {
@@ -29,11 +33,7 @@
   border-color: #37079f;
 }
 
-.bodyHeader {
-  text-align: center;
-}
-
-.select {
+.selectUsersRole {
   font: inherit;
   background-color: #ebebeb;
   color: #000;
@@ -44,7 +44,7 @@
   align-content: center;
 }
 
-.label {
+.labelTitle {
   display: block;
   color: #000;
   font-weight: bold;

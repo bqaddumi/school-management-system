@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import PrivateRoute from 'private-route-react';
-import MainNavbar from "./components/mainNavbar";
+import MainNavbar from "./components/mainNavbar/mainNavbar";
 import HomePage from "./pages/home/homePage";
 import SignupPageForm from "./pages/signUp/signupPageForm";
 import SigninPageForm from "./pages/signIn/signinPageForm";
@@ -13,7 +13,7 @@ import AddUsers from "./pages/administration/addUsers/addUsers";
 import classes from "./App.module.css";
 import Teachers from "./pages/teachers/teachers";
 import Students from "./pages/students/students";
-import SchedulingTeachers from "./pages/schedulerTeachers/schedulingTeachers";
+import TeacherSchedule from "./components/teacherSchedule/teacherSchedule";
 
 const App = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);
@@ -62,8 +62,8 @@ const App = () => {
             redirectPath={'/'}
           />
           <PrivateRoute
-            path={'/schedulingTeachers'}
-            component={SchedulingTeachers}
+            path={'/teacherSchedule'}
+            component={TeacherSchedule}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
             redirectPath={'/'}
           />

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "../store/auth";
-import Firebase from "../database/config";
+import { authActions } from "../../store/auth";
+import UsersSettings from "./usersSettings/usersSettings";
+import Firebase from "../../database/config";
 import classes from "./mainNavbar.module.css";
-import schoolLogo from "../images/educationSchoolLogo.jpg";
+import schoolLogo from "../../images/educationSchoolLogo.jpg";
 
 const MainNavbar = () => {
   const database = Firebase.firestore();
@@ -32,24 +33,6 @@ const MainNavbar = () => {
   const logoutHandler = () => {
     Firebase.auth().signOut().then(logoutUser());
   };
-
-
-  const UsersSettings = (props) => {
-    return (
-      <div className={classes.dropdown}>
-        <div className={classes.link}>
-          {props.userName}
-        </div>
-        <div className={classes.userSettingsDropDown}>
-          <NavLink className={classes.link} to="/addUser">Add Users</NavLink>
-          <NavLink className={classes.link} to="/admin">User Role</NavLink>
-          <NavLink className={classes.link} to="/schedulingTeachers">Scheduler Teacher</NavLink>
-          <NavLink className={classes.link} to="/about">About</NavLink>
-          <div className={classes.link}>Version 1.0</div>
-        </div>
-      </div>
-    );
-  }
 
   const navItems = [
     (

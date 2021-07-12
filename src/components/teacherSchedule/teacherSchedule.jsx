@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Table from '../../components/common/Tables/userTable'
-import classes from './schedulingTeachers.module.css';
+import Table from '../../components/common/Tables/table'
+import classes from './teacherSchedule.module.css';
 
-const SchedulingTeachers = () => {
+const TeacherSchedule = () => {
     const [changeSheetLevelHandler, setChangeSheetLevelHandler] = useState();
     const [changeSheetClassHandler, setChangeSheetClassHandler] = useState();
     const [changeSheetSectionHandler, setChangeSheetSectionHandler] = useState();
@@ -64,6 +64,7 @@ const SchedulingTeachers = () => {
     const onViewSheetHandler = (event) => {
         event.preventDefault();
         setViewSheet(!viewSheet);
+        console.log(changeSheetSectionHandler, changeSheetClassHandler,changeSheetLevelHandler)
     };
 
     const onChangeSheetLevelHandler = (event) => {
@@ -80,10 +81,10 @@ const SchedulingTeachers = () => {
 
     return (
         <form onSubmit={onViewSheetHandler}>
-            <div className={classes.header}>
+            <div className={classes.headerContainer}>
                 <h1>Tabulation Sheet Of School</h1>
                 <div className={classes.sectionTabulation}>
-                    <div className={classes.section}>Level</div>
+                    <div className={classes.sectionTitle}>Level</div>
                     <select required className={classes.selectOptionClassTabulation} onChange={onChangeSheetLevelHandler}>
                         <option></option>
                         <option value="A">A</option>
@@ -91,7 +92,7 @@ const SchedulingTeachers = () => {
                         <option value="C">C</option>
                         <option value="E">E</option>
                     </select>
-                    <div className={classes.section}>Class</div>
+                    <div className={classes.sectionTitle}>Class</div>
                     <select required className={classes.selectOptionClassTabulation} onChange={onChangeSheetClassHandler}>
                         <option></option>
                         <option value="1st">1st</option>
@@ -99,7 +100,7 @@ const SchedulingTeachers = () => {
                         <option value="3st">3st</option>
                         <option value="4st">4st</option>
                     </select>
-                    <div className={classes.section}>Section</div>
+                    <div className={classes.sectionTitle}>Section</div>
                     <select required className={classes.selectOptionClassTabulation} onChange={onChangeSheetSectionHandler}>
                         <option></option>
                         <option value="English">English</option>
@@ -107,7 +108,7 @@ const SchedulingTeachers = () => {
                         <option value="Math">Math</option>
                         <option value="Pieology">Pieology</option>
                     </select>
-                    <div className={classes.actions}>
+                    <div className={classes.actionsContainerViewSheet}>
                         <button className={classes.buttonViewSheet}>
                             {!viewSheet ? 'View Sheet' : 'Hide Sheet'}</button>
                     </div>
@@ -123,4 +124,4 @@ const SchedulingTeachers = () => {
     );
 };
 
-export default SchedulingTeachers;
+export default TeacherSchedule;

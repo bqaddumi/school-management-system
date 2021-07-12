@@ -3,7 +3,7 @@
   align-items: center;
 }
 
-.header {
+.headerContainer {
   margin: 5% 30%;
   max-width: 40%;
   border-radius: 6px;

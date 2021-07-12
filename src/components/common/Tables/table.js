@@ -2,7 +2,7 @@ import React from "react";
 import { useTable } from "react-table";
 import classes from '../../../pages/administration/userRole/userTable.module.css';
 
-export default function Table({ columns, data }) {
+const Table = ({ columns, data }) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -50,3 +50,5 @@ export default function Table({ columns, data }) {
     </table>
   )
 }
+
+export default Table;

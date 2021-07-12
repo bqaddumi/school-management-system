@@ -5,7 +5,7 @@ import { emailRegex } from "../../consts/RegEx";
 import { loadingActions } from "../../store/loading";
 import { toastActions } from "../../store/notification";
 import Firebase from "../../database/config";
-import InputField from "../../components/common/InputField";
+import InputField from "../../components/common/InputField/InputField";
 import classes from "./signupPageForm.module.css";
 
 const SignupPageForm = () => {
@@ -95,7 +95,7 @@ const SignupPageForm = () => {
 
   return (
     <>
-      <section className={classes.header}>
+      <section className={classes.headerContainer}>
         <form onSubmit={onSignupHandler}>
           <InputField
             label="User name"

@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
 import Firebase from '../../../database/config';
-import Table from '../../../components/common/Tables/userTable'
+import Table from '../../../components/common/Tables/table'
 import Loader from "../../../components/common/loader/loader";
 import classes from './userTable.module.css';
 
@@ -30,7 +30,7 @@ const Users = () => {
     });
   }, [dispatch]);
 
-  const handleClickEditRow = (rowIndex, change) => {
+  const handleClickEditRow = useCallback((rowIndex, change) => {
     const db = Firebase.firestore();
     db
       .collection("users")
@@ -46,7 +46,7 @@ const Users = () => {
           })
         );
       });
-  }
+  }, [dispatch]);
 
   const columns = useMemo(
     () => [
@@ -67,7 +67,7 @@ const Users = () => {
         Header: 'Add Role to Users',
         accessor: 'Editing',
         Cell: (cellObj) => (
-          <select required onChange={(change) => handleClickEditRow(cellObj, change)} className={classes.userRole}>
+          <select required onChange={(change) => handleClickEditRow(cellObj, change)} className={classes.selectUsersRole}>
             <option></option>
             <option value="Students">{userRole.students}</option>
             <option value="Teachers">{userRole.teacher}</option>
@@ -75,12 +75,12 @@ const Users = () => {
           </select>
         )
       },
-    ],// eslint-disable-next-line react-hooks/exhaustive-deps
-    [userRole.students, userRole.teacher, userRole.admin]
+    ],
+    [userRole.students, userRole.teacher, userRole.admin, handleClickEditRow]
   )
 
   return (
-    <div className={classes.App}>
+    <div className={classes.headerContainer}>
       {isLoadingAdmin && (
         <div className={classes.loaderContainer}>
           <Loader type="loader" />
