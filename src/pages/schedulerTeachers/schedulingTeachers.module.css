@@ -7,8 +7,11 @@
 }
 
 .headerTabulationSheets {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   margin: 50px;
-  padding: 5px;
+  padding: 50px;
   border: 3px solid rgb(13, 17, 24);
   border-radius: 10px;
   box-shadow: 1px 1px 4px #0f0191;
@@ -23,10 +26,6 @@
   display: inline-block;
   padding-left: 100px;
   padding-right: 10px;
-}
-
-.sectionInput {
-  margin-left: 200px;
 }
 
 .buttonViewSheet {
@@ -45,6 +44,6 @@
   border-color: #37079f;
 }
 
-.selectOptionClasses {
+.selectOptionClassTabulation {
   width: 15%;
 }
