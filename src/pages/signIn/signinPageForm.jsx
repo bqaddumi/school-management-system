@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { MdPerson } from "react-icons/md";
+import { MdLock } from "react-icons/md";
 import { emailRegex } from "../../consts/RegEx";
 import { authActions } from "../../store/auth";
 import { loadingActions } from "../../store/loading";
 import { toastActions } from "../../store/notification";
 import Firebase from "../../database/config";
 import InputField from "../../components/common/InputField";
+import BackgroundLogo from '../../components/common/backgroundLogo/backgroundLogo.jsx';
+import Footer from '../../components/common/footer/footer';
 import classes from "./signinPageForm.module.css";
 
 const SigninForm = () => {
@@ -47,7 +51,7 @@ const SigninForm = () => {
     );
     dispatch(loadingActions.setIsLoading(false));
     dispatch(authActions.login(res.user.uid));
-    
+
     database
       .collection("users")
       .doc(res.user.uid)
@@ -55,19 +59,19 @@ const SigninForm = () => {
       .then((doc) => {
         switch (doc.data().role) {
           case userRole.admin:
-            history.push('/admin')
+            history.push("/admin");
             break;
           case userRole.teacher:
-            history.push('/teacher')
+            history.push("/teacher");
             break;
           case userRole.students:
-            history.push('/student')
+            history.push("/student");
             break;
           default:
-            history.push('/home')
+            history.push("/home");
             break;
         }
-      })
+      });
   };
 
   const onSigninHandler = (event) => {
@@ -81,33 +85,48 @@ const SigninForm = () => {
   };
 
   return (
-    <section className={classes.singInPageSection}>
-      <form onSubmit={onSigninHandler}>
-        <InputField
-          label="Email"
-          onChange={onEmailChanged}
-          type="email"
-          placeholder="userName@gmail.com"
-          valdationRegex={emailRegex}
-          value={email}
-          errorEmailMessage={"It should be an e-mail"}
-          required={true}
-          isButtonClicked={isButtonClicked}
-        />
-        <InputField
-          label="Password"
-          onChange={onPasswordChanged}
-          type="password"
-          placeholder="password"
-          value={password}
-          required={true}
-          autoComplete="on"
-        />
-        <div className={classes.actions}>
-          <button className={classes.signinButton}>Login</button>
-        </div>
-      </form>
-    </section>
+    <>
+      <BackgroundLogo />
+      <section className={classes.singInPageSection}>
+        <p className={classes.instruction}>Log in using your email address</p>
+        <form onSubmit={onSigninHandler}>
+          <div className={classes.icons}>
+            <MdPerson />
+          </div>
+          <InputField
+            label="Email"
+            onChange={onEmailChanged}
+            type="email"
+            placeholder="UserName@gmail.com"
+            valdationRegex={emailRegex}
+            value={email}
+            errorEmailMessage={"It should be an e-mail"}
+            required={true}
+            isButtonClicked={isButtonClicked}
+            Icon={MdPerson}
+          />
+          <div className={classes.icons}>
+            <MdLock />
+          </div>
+          <InputField
+            label="Password"
+            onChange={onPasswordChanged}
+            type="password"
+            placeholder="Password"
+            value={password}
+            required={true}
+            autoComplete="on"
+          />
+          <div className={classes.actions}>
+            <button className={classes.signinButton}>Login</button>
+          </div>
+        </form>
+        <a className={classes.forgetPassword} href="/resetPassword">
+          Forgotten you password?
+        </a>
+      </section>
+      <Footer/>
+    </>
   );
 };
 

@@ -1,36 +1,99 @@
+@import url("https://fonts.googleapis.com/css?familly=Poppins:200,300,400,500,600,700,800,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+  min-height: 200vh;
+}
 .header {
-  width: 100%;
-  background-color: #ebebeb;
-  box-shadow: 1px 1px 4px #000000;
+  position: fixed;
   display: flex;
+  width: 100%;
+  top: 0;
+  left: 0;
   justify-content: space-between;
   align-items: center;
+  transition: 0.6s;
+  padding: 25px 40px;
+  margin: 34px 0;
+  min-height: 1px;
+  z-index: 9999;
+}
+
+.sticky {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  top: 0;
+  left: 0;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.6s;
+  padding: 5px 100px;
+  background-color: #f5f5f5;
+  margin-top: 0px;
+  z-index: 9999;
 }
 
 .logo {
+  position: relative;
   font-family: sans-serif;
   font-size: 32px;
-  padding-left: 10px;
+  font-weight: 700;
   text-transform: uppercase;
+  transition: 0.6s;
+  text-decoration: none;
 }
 
 .navContainerList {
-  list-style: none;
+  position: relative;
   display: flex;
-  padding-right: 10px;
   align-items: center;
+  justify-content: center;
 }
 
 .navList {
-  margin: 0 24px;
+  position: relative;
+  margin: 0 15px;
+  list-style: none;
   font-size: 24px;
 }
 
 .link {
-  display: flex;
+  position: relative;
+  color: #e6e6e6;
+  font-weight: 700;
   text-decoration: none;
-  color: #000000;
-  padding: 12px 16px;
+  letter-spacing: 2px;
+  transition: 0.5s;
+  font-weight: 500;
+}
+
+.stickyLink {
+  position: relative;
+  color: #7e6793;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: 0.5s;
+  font-weight: 500;
+}
+
+.stickyLink:hover {
+  color: #fa6c86;
+}
+
+.link:hover {
+  color: #ffa396;
+}
+.link:active {
+  color: #3e1c5d;
+  text-decoration: underline;
 }
 
 .dropdown {
@@ -69,10 +132,6 @@
   cursor: pointer;
 }
 
-.link:hover {
-  color: #243bbe;
-}
-
 .buttonLogout:hover {
   color: #243bbe;
 }
@@ -90,4 +149,18 @@
   text-align: center;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.schoolLogoContain {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  left:20%
+}
+.schoolLogo {
+  height: 80px;
+  top: 30%;
+  /* position: relative; */
+  z-index: 9999;
 }

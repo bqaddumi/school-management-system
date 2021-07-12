@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import classNames from "classnames";
+import { MdHome } from "react-icons/md";
 import { authActions } from "../store/auth";
-import Loader from "../components/common/loader/loader"
+import Loader from "../components/common/loader/loader";
 import Firebase from "../database/config";
+import schoolLogo from "../images/schoolLogo.jpg";
 import classes from "./mainNavbar.module.css";
-import schoolLogo from "../images/educationSchoolLogo.jpg";
 
 const MainNavbar = () => {
   const database = Firebase.firestore();
@@ -15,6 +17,7 @@ const MainNavbar = () => {
   const currentUserRole = useSelector((state) => state.auth.currentUserRole);
   const [getUserName, setUserName] = useState("");
   const [loadingUserName, setLoadingUserName] = useState(false);
+  const [navbar, setNavbar] = useState(false);
 
   useEffect(() => {
     if (userToken) {
@@ -27,7 +30,8 @@ const MainNavbar = () => {
           setUserName(doc.data().userName);
           dispatch(authActions.setCurrentUserRole(doc.data().role));
           setLoadingUserName(false);
-        }).catch(() => {
+        })
+        .catch(() => {
           setLoadingUserName(true);
         });
     }
@@ -40,15 +44,15 @@ const MainNavbar = () => {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           dispatch(authActions.setUserRole(doc.data()));
-        })
+        });
       })
       .catch((erorr) => {
-        console.log(erorr)
+        console.log(erorr);
       });
   }, [dispatch, database]);
 
   const logoutUser = () => {
-    dispatch(authActions.logout('userToken'));
+    dispatch(authActions.logout("userToken"));
     history.push("/home");
   };
 
@@ -56,33 +60,46 @@ const MainNavbar = () => {
     Firebase.auth().signOut().then(logoutUser());
   };
 
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 0) {
+      setNavbar(true);
+    } else setNavbar(false);
+  });
+
+  const headerNavbar = classNames({
+    sticky: navbar,
+    header: !navbar,
+  });
+
+  const navLink = classNames({
+    stickyLink: navbar,
+    link: !navbar,
+  });
+
   const navItems = [
-    (loadingUserName ?
-      <Loader type="loader-username" /> :
-      (
-        (currentUserRole === 'Administration')
-          ?
-          (
-            <div className={classes.dropdown}>
-              <div className={classes.link}>
-                {getUserName}
-              </div>
-              <div className={classes.dropdownContent}>
-                <NavLink className={classes.link} to="/addUser">Add Users</NavLink>
-                <NavLink className={classes.link} to="/admin">User Role</NavLink>
-                <NavLink className={classes.link} to="/schedulingTeachers">Scheduler Teacher</NavLink>
-                <NavLink className={classes.link} to="/about">About</NavLink>
-                <div className={classes.link}>Version 1.0</div>
-              </div>
-            </div >
-          )
-          :
-          (
-            <div className={classes.link}>
-              {getUserName}
-            </div>
-          )
-      )
+    loadingUserName ? (
+      <Loader type="loader-username" />
+    ) : currentUserRole === "Administration" ? (
+      <div className={classes.dropdown}>
+        <div className={classes[navLink]}>{getUserName}</div>
+        <div className={classes.dropdownContent}>
+          <NavLink className={classes[navLink]} to="/addUser">
+            Add Users
+          </NavLink>
+          <NavLink className={classes[navLink]} to="/admin">
+            User Role
+          </NavLink>
+          <NavLink className={classes[navLink]} to="/schedulingTeachers">
+            Scheduler Teacher
+          </NavLink>
+          <NavLink className={classes[navLink]} to="/about">
+            About
+          </NavLink>
+          <div className={classes[navLink]}>Version 1.0</div>
+        </div>
+      </div>
+    ) : (
+      <div className={classes[navLink]}>{getUserName}</div>
     ),
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
     <button className={classes.buttonLogout} onClick={logoutHandler}>
@@ -91,43 +108,48 @@ const MainNavbar = () => {
   ];
 
   const navItemsLink = [
-    <NavLink className={classes.link} to="/login">
+    <NavLink className={classes[navLink]} to="/login">
       Signin
     </NavLink>,
-    <NavLink className={classes.link} to="/signup">
+    <NavLink className={classes[navLink]} to="/signup">
       Signup
     </NavLink>,
   ];
 
   return (
-    <div className={classes.header}>
-      <NavLink to="#" className={classes.link}>
-        <div className={classes.logo}>Home</div>
-      </NavLink>
-      <ul className={classes.navContainerList}>
-        {userToken ? (
-          <>
-            {navItems.map((item, index) => {
-              return (
-                <li className={classes.navList} key={index}>
-                  {item}
-                </li>
-              );
-            })}
-          </>
-        ) : (
-          <>
-            {navItemsLink.map((item, index) => {
-              return (
-                <li className={classes.navList} key={index}>
-                  {item}
-                </li>
-              );
-            })}
-          </>
-        )}
-      </ul>
-    </div>
+    <>
+      <div className={classes[headerNavbar]}>
+        <NavLink to="/home" className={classes[navLink]}>
+          <MdHome className={classes.logo} />
+        </NavLink>
+        {/* <NavLink to="/home" className={classes[navLink]}>
+          <p className={classes.schoolLogoContain}> WIX SCHOOL</p>
+        </NavLink> */}
+        <ul className={classes.navContainerList}>
+          {userToken ? (
+            <>
+              {navItems.map((item, index) => {
+                return (
+                  <li className={classes.navList} key={index}>
+                    {item}
+                  </li>
+                );
+              })}
+            </>
+          ) : (
+            <>
+              {navItemsLink.map((item, index) => {
+                return (
+                  <li className={classes.navList} key={index}>
+                    {item}
+                  </li>
+                );
+              })}
+            </>
+          )}
+        </ul>
+      </div>
+    </>
   );
 };
 

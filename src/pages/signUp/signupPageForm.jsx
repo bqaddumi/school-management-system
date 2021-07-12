@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { MdPerson } from "react-icons/md";
+import { MdLock } from "react-icons/md";
 import { emailRegex } from "../../consts/RegEx";
 import { loadingActions } from "../../store/loading";
 import { toastActions } from "../../store/notification";
 import Firebase from "../../database/config";
 import InputField from "../../components/common/InputField";
+import BackgroundLogo from "../../components/common/backgroundLogo/backgroundLogo.jsx";
+import Footer from '../../components/common/footer/footer';
 import classes from "./signupPageForm.module.css";
 
 const SignupPageForm = () => {
@@ -21,7 +25,7 @@ const SignupPageForm = () => {
   const informationDataAccount = {
     uid: email,
     userName: name,
-    role: '',
+    role: "",
   };
 
   const errorCreateAccount = (error) => {
@@ -96,44 +100,58 @@ const SignupPageForm = () => {
 
   return (
     <>
-      <section className={classes.header}>
+      <BackgroundLogo />
+      <section className={classes.singupPageSection}>
+      <p className={classes.instruction}>Create an account by registering your information</p>
         <form onSubmit={onSignupHandler}>
+        <div className={classes.icons}>
+            <MdPerson />
+          </div>
           <InputField
             label="User name"
             onChange={onNameChanged}
             type="text"
             id="userName"
-            placeholder="userName"
+            placeholder="User name"
             value={name}
             required={true}
           />
+           <div className={classes.icons}>
+            <MdPerson />
+          </div>
           <InputField
             label="Email"
             onChange={onEmailChanged}
             type="email"
-            placeholder="userName@gmail.com"
+            placeholder="UserName@gmail.com"
             valdationRegex={emailRegex}
             value={email}
             errorEmailMessage={"It should be an e-mail"}
             required={true}
             isButtonClicked={isButtonClicked}
           />
+            <div className={classes.icons}>
+            <MdLock />
+          </div>
           <InputField
             label="Pasword"
             onChange={onPasswordChanged}
             type="password"
             id="pasword"
-            placeholder="password"
+            placeholder="Password"
             value={password}
             required={true}
             autoComplete="on"
           />
+            <div className={classes.icons}>
+            <MdLock />
+          </div>
           <InputField
             label="Confirm password"
             onChange={onConfirmPasswordChanged}
             type="password"
             id="confirmPassword"
-            placeholder="confirmPassword"
+            placeholder="ConfirmPassword"
             value={confirmPassword}
             errorPasswordMessage={"It should be match password"}
             required={true}
@@ -145,7 +163,11 @@ const SignupPageForm = () => {
             <button className={classes.signupButton}>Sign Up</button>
           </div>
         </form>
+        <a className={classes.loginForward} href="/signin">
+          Have an account?
+        </a>
       </section>
+      <Footer/>
     </>
   );
 };

@@ -12,6 +12,7 @@ const HomePage = () => {
           <Loader type="loader" />
         </div>
       )}
+      <section className={classes.banner}></section>
     </>
   );
 };

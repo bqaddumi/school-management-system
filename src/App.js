@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import PrivateRoute from 'private-route-react';
+import PrivateRoute from "private-route-react";
 import MainNavbar from "./components/mainNavbar";
 import HomePage from "./pages/home/homePage";
 import SignupPageForm from "./pages/signUp/signupPageForm";
@@ -20,9 +20,9 @@ const App = () => {
   const userToken = useSelector((state) => state.auth.userToken);
   const currentUserRole = useSelector((state) => state.auth.currentUserRole);
   const userRole = useSelector((state) => state.auth.userRole);
-  const type = useSelector((state) => state.toast.type);
-  const message = useSelector((state) => state.toast.message);
-  const position = useSelector((state) => state.toast.position);
+  const toastType = useSelector((state) => state.toast.type);
+  const toastMessage = useSelector((state) => state.toast.message);
+  const toastPosition = useSelector((state) => state.toast.position);
 
   const isAbleToAccessRouteAdmin = () => {
     if (userToken && currentUserRole === userRole.admin) return true;
@@ -43,8 +43,12 @@ const App = () => {
     <main className={classes.mainContainer}>
       <MainNavbar />
       {!isLoading && (
-        <div className={classes.toastContainer} >
-          <NotifiactionBar type={type} message={message} position={position} />
+        <div className={classes.toastContainer}>
+          <NotifiactionBar
+            type={toastType}
+            message={toastMessage}
+            position={toastPosition}
+          />
         </div>
       )}
       <div className={classes.routsContainer}>
@@ -56,34 +60,34 @@ const App = () => {
 
         <Switch>
           <PrivateRoute
-            path={'/admin'}
+            path={"/admin"}
             component={Users}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
-            redirectPath={'/'}
+            redirectPath={"/"}
           />
           <PrivateRoute
-            path={'/schedulingTeachers'}
+            path={"/schedulingTeachers"}
             component={SchedulingTeachers}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
-            redirectPath={'/'}
+            redirectPath={"/"}
           />
           <PrivateRoute
-            path={'/addUser'}
+            path={"/addUser"}
             component={AddUsers}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
-            redirectPath={'/'}
+            redirectPath={"/"}
           />
           <PrivateRoute
-            path={'/teacher'}
+            path={"/teacher"}
             component={Teachers}
             isAbleToAccessRoute={isAbleToAccessRouteTeacher}
-            redirectPath={'/teacher'}
+            redirectPath={"/teacher"}
           />
           <PrivateRoute
-            path={'/student'}
+            path={"/student"}
             component={Students}
             isAbleToAccessRoute={isAbleToAccessRouteStudent}
-            redirectPath={'/student'}
+            redirectPath={"/student"}
           />
           <Route path="/login">
             {userToken && <Redirect to="/home" />}

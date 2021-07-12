@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import { Icon } from "react-icons/md";
 import classes from "./InputField.module.css";
 
 const InputField = (props) => {
@@ -17,10 +18,11 @@ const InputField = (props) => {
     checkConfirm,
     isButtonClicked,
     autoComplete,
+    Icon,
   } = props;
   const isValidated = !!(value.match(valdationRegex) && value);
   const showInvalidEmail = !isValidated && isButtonClicked;
-  const isConfirm = !!((value === checkConfirm) && value);
+  const isConfirm = !!(value === checkConfirm && value);
   const showUnConfirmPassword = !isConfirm && isButtonClicked;
 
   const classEmailValid = classNames({
@@ -30,7 +32,7 @@ const InputField = (props) => {
 
   return (
     <div>
-      <label className={classes.label}>{label}</label>
+      {/* <label className={classes.label}>{label}</label> */}
       <input
         type={type}
         placeholder={placeholder}
