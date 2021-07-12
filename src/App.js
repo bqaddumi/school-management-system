@@ -9,6 +9,7 @@ import SigninPageForm from "./pages/signIn/signinPageForm";
 import Loader from "./components/common/loader/loader";
 import NotifiactionBar from "./components/common/notificatioBar/notifiactionBar";
 import Users from "./pages/administration/userRole/users";
+import About from "./pages/about/about";
 import AddUsers from "./pages/administration/addUsers/addUsers";
 import classes from "./App.module.css";
 import Teachers from "./pages/teachers/teachers";
@@ -95,6 +96,9 @@ const App = () => {
           </Route>
           <Route path="/home" exact>
             <HomePage />
+          </Route>
+          <Route path="/about" exact>
+            <About />
           </Route>
           <Route path="*">
             <Redirect to="/home" />
