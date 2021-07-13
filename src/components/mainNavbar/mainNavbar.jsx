@@ -6,6 +6,7 @@ import UsersSettings from "./usersSettings/usersSettings";
 import Firebase from "../../database/config";
 import classes from "./mainNavbar.module.css";
 import schoolLogo from "../../images/educationSchoolLogo.jpg";
+import TeachersSettings from "./teachersSettings/teachersSettings";
 
 const MainNavbar = () => {
   const database = Firebase.firestore();
@@ -40,9 +41,13 @@ const MainNavbar = () => {
         ?
         <UsersSettings userName={userInformation.userName} />
         :
-        <div className={classes.link}>
-          {userInformation.userName}
-        </div>
+        (userInformation.role === 'Teachers')
+          ?
+          <TeachersSettings userName={userInformation.userName} />
+          :
+          <div className={classes.link}>
+            {userInformation.userName}
+          </div>
     ),
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
     <button className={classes.buttonLogout} onClick={logoutHandler}>

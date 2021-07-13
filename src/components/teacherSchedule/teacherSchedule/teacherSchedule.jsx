@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Table from '../../components/common/Tables/table'
+import Table from '../../common/Tables/table'
 import classes from './teacherSchedule.module.css';
 
 const TeacherSchedule = () => {

@@ -16,6 +16,7 @@ const AddUsers = () => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
+    const [major, setMajor] = useState("");
     const [usersRole, setUsersRole] = useState("");
     const [isButtonClicked, setIsButtonClicked] = useState(false);
     const userRole = useSelector((state) => state.auth.userRole);
@@ -62,6 +63,7 @@ const AddUsers = () => {
                 userName: name,
                 role: usersRole,
                 token: res.user.uid,
+                major: major,
             })
             .then(successCreateAccountInformation)
             .catch(errorCreateAccountInformation);
@@ -93,6 +95,10 @@ const AddUsers = () => {
 
     const onNameChanged = (event) => {
         setName(event.target.value);
+    };
+
+    const onMajorChanged = (event) => {
+        setMajor(event.target.value);
     };
 
     const usersRoleHandler = (event) => {
@@ -154,6 +160,17 @@ const AddUsers = () => {
                         <option value="Teachers">{userRole.teacher}</option>
                         <option value="Administration">{userRole.admin}</option>
                     </select>
+                    {(usersRole == 'Teachers') &&
+                        <InputField
+                            label="Major"
+                            onChange={onMajorChanged}
+                            type="text"
+                            id="major"
+                            placeholder="major"
+                            value={major}
+                            required={true}
+                        />
+                    }
                     <div className={classes.actionsContainerSignUp}>
                         <button className={classes.signupButton}>Sign Up</button>
                     </div>
