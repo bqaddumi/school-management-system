@@ -49,6 +49,10 @@
   width: 100%;
 }
 
+.imageProfile {
+  width: inherit;
+}
+
 .buttonContact:hover {
   background-color: #555;
 }
@@ -58,4 +62,6 @@
   text-align: center;
   color: white;
   background-color: #474e5d;
+  bottom: 0;
+  width: 100%;
 }

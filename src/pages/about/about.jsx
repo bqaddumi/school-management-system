@@ -13,7 +13,7 @@ const About = () => {
             <div className={classes.cardsContainer}>
                 <div className={classes.cardContainer}>
                     <div className={classes.cardDescription}>
-                        <img src="#" alt="Ibrahem" />
+                        <img className={classes.imageProfile} src="https://image.shutterstock.com/image-vector/people-icon-isolated-flat-design-260nw-401277397.jpg" alt="Ibrahem" />
                         <div className={classes.container}>
                             <h2>Ibrahem Zablah</h2>
                             <p className={classes.title}>Wix Trainee</p>
@@ -25,7 +25,7 @@ const About = () => {
                 </div>
                 <div className={classes.cardContainer}>
                     <div className={classes.cardDescription}>
-                        <img src="#" alt="Taima" />
+                        <img className={classes.imageProfile} src="https://image.shutterstock.com/image-vector/people-icon-isolated-flat-design-260nw-401277397.jpg" alt="Taima" />
                         <div className={classes.container}>
                             <h2>Taima Awaad</h2>
                             <p className={classes.title}>Wix Trainee</p>
@@ -37,7 +37,7 @@ const About = () => {
                 </div>
                 <div className={classes.cardContainer}>
                     <div className={classes.cardDescription}>
-                        <img src="#" alt="Bashar" />
+                        <img className={classes.imageProfile} src="https://image.shutterstock.com/image-vector/people-icon-isolated-flat-design-260nw-401277397.jpg" alt="Bashar" />
                         <div className={classes.container}>
                             <h2>Bashar Qadomi</h2>
                             <p className={classes.title}>Software Engineer</p>
