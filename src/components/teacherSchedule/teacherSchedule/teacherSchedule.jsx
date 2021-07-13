@@ -28,7 +28,7 @@ const TeacherSchedule = () => {
             setTabulationSheets(teacherDataSchedule);
             dispatch(loadingActions.setIsLoadingAdmin(false));
         });
-    }, [changeSheetteacherHandler]);
+    }, [changeSheetteacherHandler, dispatch]);
 
     const searchByTeacherName = tabulationSheets.filter((res) => {
         return (res.userName === changeSheetteacherHandler);
