@@ -14,24 +14,18 @@
 }
 
 .signupButton {  
-  cursor: pointer;
   background: #8baa64;
   color: #fff;
   padding: 10px;
-  border: none;
-  border-radius: 3px;
-  font-size: 1rem;
+  border-radius: 5px;
+  font-size: 16px;
   line-height: 1;
-  -moz-box-shadow: inset 0px 1px 0px 0px #fff;
-  -webkit-box-shadow: inset 0px 1px 0px 0px #fff;
-  box-shadow: inset 0px 1px 1px -1px #fff;
   border: 0;
-  outline: none;
-  -webkit-appearance: none;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
+  margin-bottom: 40px;
 }
 .signupButton:hover {
   background-color: #474f3d;
@@ -59,6 +53,7 @@
   float: right;
   color: #9c9c9c;
   text-decoration: none;
+  margin-top: -15px;
 }
 
 .loginForward:hover{

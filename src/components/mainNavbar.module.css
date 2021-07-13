@@ -76,7 +76,7 @@ body {
 
 .stickyLink {
   position: relative;
-  color: #7e6793;
+  color: #FC898E;
   font-weight: 700;
   text-decoration: none;
   letter-spacing: 2px;
@@ -85,15 +85,11 @@ body {
 }
 
 .stickyLink:hover {
-  color: #fa6c86;
+  color: #e6e6e6;
 }
 
 .link:hover {
   color: #ffa396;
-}
-.link:active {
-  color: #3e1c5d;
-  text-decoration: underline;
 }
 
 .dropdown {

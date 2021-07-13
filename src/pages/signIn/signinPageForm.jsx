@@ -122,7 +122,7 @@ const SigninForm = () => {
           </div>
         </form>
         <a className={classes.forgetPassword} href="/resetPassword">
-          Forgotten you password?
+          Forgotten your password?
         </a>
       </section>
       <Footer/>

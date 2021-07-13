@@ -6,7 +6,7 @@ import { MdHome } from "react-icons/md";
 import { authActions } from "../store/auth";
 import Loader from "../components/common/loader/loader";
 import Firebase from "../database/config";
-import schoolLogo from "../images/schoolLogo.jpg";
+import schoolLogo from "../images/educationSchoolLogo.jpg";
 import classes from "./mainNavbar.module.css";
 
 const MainNavbar = () => {
@@ -122,9 +122,6 @@ const MainNavbar = () => {
         <NavLink to="/home" className={classes[navLink]}>
           <MdHome className={classes.logo} />
         </NavLink>
-        {/* <NavLink to="/home" className={classes[navLink]}>
-          <p className={classes.schoolLogoContain}> WIX SCHOOL</p>
-        </NavLink> */}
         <ul className={classes.navContainerList}>
           {userToken ? (
             <>

@@ -4,18 +4,19 @@
   }
   
   .schoolLogo {
-    height: 100px;
-    top: 30%;
+    height: 140px;
+    top: 15%;
     position: relative;
   }
   
-  .sitename {text-align: left;
+  .sitename {
+    text-align: left;
     position: relative;
     border-radius: 7px 7px 0 0;
     top: -60px;
     height: 60px;
     line-height: 60px;
-    background: #ffa396;
+    background: #FC898E;
     color: #fff;
     padding-left: 20px;
     max-width: 40%;
