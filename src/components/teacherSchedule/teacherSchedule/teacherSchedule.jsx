@@ -1,61 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import Firebase from '../../../database/config';
+import { loadingActions } from '../../../store/loading';
+import Loader from "../../common/loader/loader";
 import Table from '../../common/Tables/table'
 import classes from './teacherSchedule.module.css';
 
 const TeacherSchedule = () => {
-    const [changeSheetLevelHandler, setChangeSheetLevelHandler] = useState();
-    const [changeSheetClassHandler, setChangeSheetClassHandler] = useState();
-    const [changeSheetSectionHandler, setChangeSheetSectionHandler] = useState();
+    const [changeSheetteacherHandler, setChangeSheetTeacherHandler] = useState();
+    const isLoadingAdmin = useSelector((state) => state.loader.isLoadingAdmin);
     const [viewSheet, setViewSheet] = useState();
+    const dispatch = useDispatch();
+    const [tabulationSheets, setTabulationSheets] = useState([]);
 
-    const data = React.useMemo(
-        () => [
-            {
-                col1: 'Hello',
-                col2: 'World',
-                col3: 'World',
-                col4: 'World',
-                col5: 'World',
-            },
-            {
-                col1: 'react-table',
-                col2: 'rocks',
-                col3: 'World',
-                col4: 'World',
-                col5: 'World',
-            },
-            {
-                col1: 'whatever',
-                col2: 'you want',
-                col3: 'World',
-                col4: 'World',
-                col5: 'World',
-            },
-        ],
-        []
-    )
+    useEffect(() => {
+        dispatch(loadingActions.setIsLoadingAdmin(true));
+        const db = Firebase.firestore();
+        return db.collection('teachers').onSnapshot((snapshot) => {
+            const teacherDataSchedule = [];
+            snapshot.forEach((doc) => {
+                db.collection('users').doc(doc.data().token).get().then((res) => {
+                    if (doc.data().token === res.data().token) {
+                        teacherDataSchedule.push({ ...doc.data(), ...res.data() })
+                    }
+                })
+            });
+            setTabulationSheets(teacherDataSchedule);
+            dispatch(loadingActions.setIsLoadingAdmin(false));
+        });
+    }, [changeSheetteacherHandler]);
+
+    const searchByTeacherName = tabulationSheets.filter((res) => {
+        return (res.userName === changeSheetteacherHandler);
+    });
 
     const columns = React.useMemo(
         () => [
             {
-                Header: 'Sunday',
-                accessor: 'col1',
+                Header: 'ClassRoom',
+                accessor: 'class',
+                Cell: ({ cell: { value } }) => value || "-"
             },
             {
-                Header: 'Monday',
-                accessor: 'col2',
+                Header: 'Days',
+                accessor: 'day',
+                Cell: ({ cell: { value } }) => value || "-"
             },
             {
-                Header: 'Tuesday',
-                accessor: 'col3',
+                Header: 'Start it time',
+                accessor: 'timeFrom',
+                Cell: ({ cell: { value } }) => value || "-"
             },
             {
-                Header: 'Wednesday',
-                accessor: 'col4',
+                Header: 'End it time',
+                accessor: 'timeTo',
+                Cell: ({ cell: { value } }) => value || "-"
             },
             {
-                Header: 'Thursday',
-                accessor: 'col5',
+                Header: 'E-mail Teacher',
+                accessor: 'uid',
+                Cell: ({ cell: { value } }) => value || "-"
+            },
+            {
+                Header: 'Major Teacher',
+                accessor: 'major',
+                Cell: ({ cell: { value } }) => value || "-"
             },
         ],
         []
@@ -66,33 +75,29 @@ const TeacherSchedule = () => {
         setViewSheet(!viewSheet);
     };
 
-    const onChangeSheetLevelHandler = (event) => {
-        setChangeSheetLevelHandler(event.target.value)
-    };
-
-    const onChangeSheetClassHandler = (event) => {
-        setChangeSheetClassHandler(event.target.value)
-    };
-
-    const onChangeSheetSectionHandler = (event) => {
-        setChangeSheetSectionHandler(event.target.value)
+    const onChangeSheetTeacherHandler = (event) => {
+        setChangeSheetTeacherHandler(event.target.value)
+        setViewSheet(!viewSheet)
     };
 
     return (
-        <form onSubmit={onViewSheetHandler}>
-            <div className={classes.headerContainer}>
+        <div className={classes.headerContainer}>
+            {isLoadingAdmin && (
+                <div className={classes.loaderContainer}>
+                    <Loader type="loader" />
+                </div>
+            )}
+            <form onSubmit={onViewSheetHandler}>
                 <h1>Tabulation Sheet Of School</h1>
                 <div className={classes.sectionTabulation}>
-                    <div className={classes.sectionTitle}>Level</div>
-                    <select required className={classes.selectOptionClassTabulation} onChange={onChangeSheetLevelHandler}>
+                    <div className={classes.sectionTitle}>Teacher Name</div>
+                    <select required className={classes.selectOptionClassTabulation} onChange={onChangeSheetTeacherHandler}>
                         <option></option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="E">E</option>
+                        <option value="leen">leen</option>
+                        <option value="Lolo">Lolo</option>
                     </select>
                     <div className={classes.sectionTitle}>Class</div>
-                    <select required className={classes.selectOptionClassTabulation} onChange={onChangeSheetClassHandler}>
+                    <select required className={classes.selectOptionClassTabulation} disabled>
                         <option></option>
                         <option value="1st">1st</option>
                         <option value="2st">2st</option>
@@ -100,7 +105,7 @@ const TeacherSchedule = () => {
                         <option value="4st">4st</option>
                     </select>
                     <div className={classes.sectionTitle}>Section</div>
-                    <select required className={classes.selectOptionClassTabulation} onChange={onChangeSheetSectionHandler}>
+                    <select required className={classes.selectOptionClassTabulation} disabled>
                         <option></option>
                         <option value="English">English</option>
                         <option value="Arabic">Arabic</option>
@@ -112,14 +117,14 @@ const TeacherSchedule = () => {
                             {!viewSheet ? 'View Sheet' : 'Hide Sheet'}</button>
                     </div>
                 </div>
-            </div>
-            {viewSheet &&
-                <div className={classes.headerTabulationSheets}>
-                    <h1>Tabulation Sheets</h1>
-                    <Table columns={columns} data={data} />
-                </div>
-            }
-        </form>
+                {viewSheet &&
+                    <div className={classes.headerTabulationSheets}>
+                        <h1>Tabulation Sheets</h1>
+                        <Table columns={columns} data={searchByTeacherName} />
+                    </div>
+                }
+            </form>
+        </div>
     );
 };
 

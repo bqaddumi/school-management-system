@@ -160,7 +160,7 @@ const AddUsers = () => {
                         <option value="Teachers">{userRole.teacher}</option>
                         <option value="Administration">{userRole.admin}</option>
                     </select>
-                    {(usersRole == 'Teachers') &&
+                    {(usersRole === 'Teachers') &&
                         <InputField
                             label="Major"
                             onChange={onMajorChanged}
