@@ -64,7 +64,6 @@ const TeacherSchedule = () => {
     const onViewSheetHandler = (event) => {
         event.preventDefault();
         setViewSheet(!viewSheet);
-        console.log(changeSheetSectionHandler, changeSheetClassHandler,changeSheetLevelHandler)
     };
 
     const onChangeSheetLevelHandler = (event) => {
