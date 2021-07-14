@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { emailRegex } from "../../../consts/RegEx";
 import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
 import Firebase from "../../../database/config";
-import InputField from "../../../components/common/InputField";
+import InputField from "../../common/InputField/InputField";
 import classes from "./addUsers.module.css";
 
 const AddUsers = () => {
@@ -16,13 +16,10 @@ const AddUsers = () => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
+    const [major, setMajor] = useState("");
+    const [usersRole, setUsersRole] = useState("");
     const [isButtonClicked, setIsButtonClicked] = useState(false);
-
-    const informationDataAccount = {
-        uid: email,
-        userName: name,
-        role: '',
-    };
+    const userRole = useSelector((state) => state.auth.userRole);
 
     const errorCreateAccount = (error) => {
         dispatch(loadingActions.setIsLoading(false));
@@ -61,7 +58,13 @@ const AddUsers = () => {
         database
             .collection("users")
             .doc(res.user.uid)
-            .set(informationDataAccount)
+            .set({
+                uid: email,
+                userName: name,
+                role: usersRole,
+                token: res.user.uid,
+                major: major,
+            })
             .then(successCreateAccountInformation)
             .catch(errorCreateAccountInformation);
     };
@@ -94,10 +97,18 @@ const AddUsers = () => {
         setName(event.target.value);
     };
 
+    const onMajorChanged = (event) => {
+        setMajor(event.target.value);
+    };
+
+    const usersRoleHandler = (event) => {
+        setUsersRole(event.target.value);
+    };
+
     return (
         <>
-            <h1 className={classes.bodyHeader}>Add A New User With Role</h1>
-            <section className={classes.header}>
+            <h1 className={classes.titleHeaderContainer}>Add A New User With Role</h1>
+            <section className={classes.bodyHeaderContainer}>
                 <form onSubmit={onSignupHandler}>
                     <InputField
                         label="User name"
@@ -142,14 +153,25 @@ const AddUsers = () => {
                         isButtonClicked={isButtonClicked}
                         autoComplete="on"
                     />
-                    <label className={classes.label}>Role Of Users</label>
-                    <select required className={classes.select}>
+                    <label className={classes.labelTitle}>Role Of Users</label>
+                    <select required className={classes.selectUsersRole} onChange={usersRoleHandler}>
                         <option></option>
-                        <option value="Students">Students</option>
-                        <option value="Teachers">Teachers</option>
-                        <option value="Administration">Administration</option>
+                        <option value="Students">{userRole.students}</option>
+                        <option value="Teachers">{userRole.teacher}</option>
+                        <option value="Administration">{userRole.admin}</option>
                     </select>
-                    <div className={classes.actions}>
+                    {(usersRole === 'Teachers') &&
+                        <InputField
+                            label="Major"
+                            onChange={onMajorChanged}
+                            type="text"
+                            id="major"
+                            placeholder="major"
+                            value={major}
+                            required={true}
+                        />
+                    }
+                    <div className={classes.actionsContainerSignUp}>
                         <button className={classes.signupButton}>Sign Up</button>
                     </div>
                 </form>

@@ -6,7 +6,7 @@ import { authActions } from "../../store/auth";
 import { loadingActions } from "../../store/loading";
 import { toastActions } from "../../store/notification";
 import Firebase from "../../database/config";
-import InputField from "../../components/common/InputField";
+import InputField from "../../components/common/InputField/InputField";
 import classes from "./signinPageForm.module.css";
 
 const SigninForm = () => {
@@ -46,13 +46,12 @@ const SigninForm = () => {
       })
     );
     dispatch(loadingActions.setIsLoading(false));
-    dispatch(authActions.login(res.user.uid));
-    
     database
       .collection("users")
       .doc(res.user.uid)
       .get()
       .then((doc) => {
+        dispatch(authActions.login(doc.data()));
         switch (doc.data().role) {
           case userRole.admin:
             history.push('/admin')

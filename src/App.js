@@ -2,40 +2,43 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import PrivateRoute from 'private-route-react';
-import MainNavbar from "./components/mainNavbar";
+import MainNavbar from "./components/mainNavbar/mainNavbar";
 import HomePage from "./pages/home/homePage";
 import SignupPageForm from "./pages/signUp/signupPageForm";
 import SigninPageForm from "./pages/signIn/signinPageForm";
 import Loader from "./components/common/loader/loader";
 import NotifiactionBar from "./components/common/notificatioBar/notifiactionBar";
-import Users from "./pages/administration/userRole/users";
-import AddUsers from "./pages/administration/addUsers/addUsers";
+import Users from "./components/administration/userRole/users";
+import About from "./pages/about/about";
+import AddUsers from "./components/administration/addUsers/addUsers";
 import classes from "./App.module.css";
 import Teachers from "./pages/teachers/teachers";
 import Students from "./pages/students/students";
-import SchedulingTeachers from "./pages/schedulerTeachers/schedulingTeachers";
+import TeacherSchedule from "./components/administration/teacherSchedule/teacherSchedule";
+import ManageSchedule from "./components/teacherSchedule/manageSchedule/manageSchedule";
+import ClassSchedule from "./components/teacherSchedule/classSchedule/classSchedule";
 
 const App = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);
-  const userToken = useSelector((state) => state.auth.userToken);
-  const currentUserRole = useSelector((state) => state.auth.currentUserRole);
   const userRole = useSelector((state) => state.auth.userRole);
   const type = useSelector((state) => state.toast.type);
   const message = useSelector((state) => state.toast.message);
   const position = useSelector((state) => state.toast.position);
+  const usersObject = useSelector((state) => state.auth.userInformation);
+  const userInformation = JSON.parse(usersObject ? usersObject : false);
 
   const isAbleToAccessRouteAdmin = () => {
-    if (userToken && currentUserRole === userRole.admin) return true;
+    if (userInformation && userInformation.role === userRole.admin) return true;
     return false;
   };
 
   const isAbleToAccessRouteTeacher = () => {
-    if (userToken && currentUserRole === userRole.teacher) return true;
+    if (userInformation && userInformation.role === userRole.teacher) return true;
     return false;
   };
 
   const isAbleToAccessRouteStudent = () => {
-    if (userToken && currentUserRole === userRole.students) return true;
+    if (userInformation && userInformation.role === userRole.students) return true;
     return false;
   };
 
@@ -62,9 +65,21 @@ const App = () => {
             redirectPath={'/'}
           />
           <PrivateRoute
-            path={'/schedulingTeachers'}
-            component={SchedulingTeachers}
+            path={'/teacherSchedule'}
+            component={TeacherSchedule}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
+            redirectPath={'/'}
+          />
+          <PrivateRoute
+            path={'/manageSchedule'}
+            component={ManageSchedule}
+            isAbleToAccessRoute={isAbleToAccessRouteTeacher}
+            redirectPath={'/'}
+          />
+          <PrivateRoute
+            path={'/classSchedule'}
+            component={ClassSchedule}
+            isAbleToAccessRoute={isAbleToAccessRouteTeacher}
             redirectPath={'/'}
           />
           <PrivateRoute
@@ -86,15 +101,18 @@ const App = () => {
             redirectPath={'/student'}
           />
           <Route path="/login">
-            {userToken && <Redirect to="/home" />}
-            {!userToken && <SigninPageForm />}
+            {userInformation && <Redirect to="/home" />}
+            {!userInformation && <SigninPageForm />}
           </Route>
           <Route path="/signup">
-            {userToken && <Redirect to="/home" />}
-            {!userToken && <SignupPageForm />}
+            {userInformation && <Redirect to="/home" />}
+            {!userInformation && <SignupPageForm />}
           </Route>
           <Route path="/home" exact>
             <HomePage />
+          </Route>
+          <Route path="/about" exact>
+            <About />
           </Route>
           <Route path="*">
             <Redirect to="/home" />
