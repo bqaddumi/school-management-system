@@ -13,13 +13,12 @@ const UsersSettings = ({ navLink, userName }) => {
         <NavLink className={classes[navLink]} to="/admin">
           User Role
         </NavLink>
-        <NavLink className={classes[navLink]} to="/teacherSchedule">
+        {/* <NavLink className={classes[navLink]} to="/teacherSchedule">
           Scheduler Teacher
         </NavLink>
         <NavLink className={classes[navLink]} to="/about">
           About
-        </NavLink>
-        <div className={classes[navLink]}>Version 1.0</div>
+        </NavLink> */}
       </div>
     </div>
   );

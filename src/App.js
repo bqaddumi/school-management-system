@@ -8,7 +8,7 @@ import SignupPageForm from "./pages/signUp/signupPageForm";
 import SigninPageForm from "./pages/signIn/signinPageForm";
 import Loader from "./components/common/loader/loader";
 import NotifiactionBar from "./components/common/notificatioBar/notifiactionBar";
-import Users from "./components/administration/userRole/users";
+import Users from "./components/administration/usersTable/usersTable";
 import About from "./pages/about/about";
 import AddUsers from "./components/administration/addUsers/addUsers";
 import classes from "./App.module.css";

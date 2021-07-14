@@ -7,7 +7,7 @@ const TeachersSettings = ({ navLink, userName }) => {
     <div className={classes.dropdown}>
       <div className={classes[navLink]}>{userName}</div>
       <div className={classes.userSettingsDropDown}>
-        <NavLink className={classes[navLink]} to="/manageSchedule">
+        {/* <NavLink className={classes[navLink]} to="/manageSchedule">
           Manage Schedule
         </NavLink>
         <NavLink className={classes[navLink]} to="/classSchedule">
@@ -15,8 +15,8 @@ const TeachersSettings = ({ navLink, userName }) => {
         </NavLink>
         <NavLink className={classes[navLink]} to="/about">
           About
-        </NavLink>
-        <div className={classes[navLink]}>Version 1.0</div>
+        </NavLink> */}
+        
       </div>
     </div>
   );

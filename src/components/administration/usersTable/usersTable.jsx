@@ -4,10 +4,10 @@ import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
 import Firebase from "../../../database/config";
 import Table from "../../common/Tables/table";
-import Loader from "../../../components/common/loader/loader";
-import BackgroundLogo from "../../../components/common/backgroundLogo/backgroundLogo.jsx";
-import Footer from "../../../components/common/footer/footer";
-import classes from "./userTable.module.css";
+import Loader from "../../common/loader/loader";
+import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo.jsx";
+import Footer from "../../common/footer/footer";
+import classes from "./usersTable.module.css";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
