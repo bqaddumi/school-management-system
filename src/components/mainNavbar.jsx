@@ -89,13 +89,13 @@ const MainNavbar = () => {
         <div className={classes[navLink]}>{getUserName}</div>
         <div className={classes.dropdownContent}>
           <NavLink className={classes[navLink]} to="/addUser">
-            Add Users
+            Add Users {"  "}
           </NavLink>
           <NavLink className={classes[navLink]} to="/admin">
-            User Role
+            {"  "}User Role{"  "}
           </NavLink>
           <NavLink className={classes[navLink]} to="/schedulingTeachers">
-            Scheduler Teacher
+            Schedule Teacher{' '}
           </NavLink>
           <NavLink className={classes[navLink]} to="/about">
             About
