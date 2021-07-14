@@ -9,7 +9,7 @@ import { toastActions } from "../../store/notification";
 import Firebase from "../../database/config";
 import InputField from "../../components/common/InputField";
 import BackgroundLogo from "../../components/common/backgroundLogo/backgroundLogo.jsx";
-import Footer from '../../components/common/footer/footer';
+import Footer from "../../components/common/footer/footer";
 import classes from "./signupPageForm.module.css";
 
 const SignupPageForm = () => {
@@ -100,11 +100,13 @@ const SignupPageForm = () => {
 
   return (
     <>
-      <BackgroundLogo />
+      <BackgroundLogo title="WIX School " />
       <section className={classes.singupPageSection}>
-      <p className={classes.instruction}>Create an account by registering your information</p>
+        <p className={classes.instruction}>
+          Create an account by registering your information
+        </p>
         <form onSubmit={onSignupHandler}>
-        <div className={classes.icons}>
+          <div className={classes.icons}>
             <MdPerson />
           </div>
           <InputField
@@ -116,7 +118,7 @@ const SignupPageForm = () => {
             value={name}
             required={true}
           />
-           <div className={classes.icons}>
+          <div className={classes.icons}>
             <MdPerson />
           </div>
           <InputField
@@ -130,7 +132,7 @@ const SignupPageForm = () => {
             required={true}
             isButtonClicked={isButtonClicked}
           />
-            <div className={classes.icons}>
+          <div className={classes.icons}>
             <MdLock />
           </div>
           <InputField
@@ -143,7 +145,7 @@ const SignupPageForm = () => {
             required={true}
             autoComplete="on"
           />
-            <div className={classes.icons}>
+          <div className={classes.icons}>
             <MdLock />
           </div>
           <InputField
@@ -167,7 +169,7 @@ const SignupPageForm = () => {
           Have an account?
         </a>
       </section>
-      <Footer/>
+      <Footer />
     </>
   );
 };

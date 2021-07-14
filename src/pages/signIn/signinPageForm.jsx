@@ -9,8 +9,8 @@ import { loadingActions } from "../../store/loading";
 import { toastActions } from "../../store/notification";
 import Firebase from "../../database/config";
 import InputField from "../../components/common/InputField";
-import BackgroundLogo from '../../components/common/backgroundLogo/backgroundLogo.jsx';
-import Footer from '../../components/common/footer/footer';
+import BackgroundLogo from "../../components/common/backgroundLogo/backgroundLogo.jsx";
+import Footer from "../../components/common/footer/footer";
 import classes from "./signinPageForm.module.css";
 
 const SigninForm = () => {
@@ -86,7 +86,7 @@ const SigninForm = () => {
 
   return (
     <>
-      <BackgroundLogo />
+      <BackgroundLogo title="WIX School" />
       <section className={classes.singInPageSection}>
         <p className={classes.instruction}>Log in using your email address</p>
         <form onSubmit={onSigninHandler}>
@@ -125,7 +125,7 @@ const SigninForm = () => {
           Forgotten your password?
         </a>
       </section>
-      <Footer/>
+      <Footer />
     </>
   );
 };

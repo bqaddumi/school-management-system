@@ -76,6 +76,11 @@ const MainNavbar = () => {
     link: !navbar,
   });
 
+  const logoutButton = classNames({
+    stickyLogout: navbar,
+    logout: !navbar,
+  });
+
   const navItems = [
     loadingUserName ? (
       <Loader type="loader-username" />
@@ -102,7 +107,7 @@ const MainNavbar = () => {
       <div className={classes[navLink]}>{getUserName}</div>
     ),
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
-    <button className={classes.buttonLogout} onClick={logoutHandler}>
+    <button className={classes[logoutButton]} onClick={logoutHandler}>
       Logout
     </button>,
   ];

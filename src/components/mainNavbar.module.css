@@ -76,7 +76,7 @@ body {
 
 .stickyLink {
   position: relative;
-  color: #FC898E;
+  color: #fc898e;
   font-weight: 700;
   text-decoration: none;
   letter-spacing: 2px;
@@ -119,17 +119,32 @@ body {
   display: block;
 }
 
-.buttonLogout {
+.logout {
   font: inherit;
   background-color: transparent;
-  color: #000;
+  color: #e6e6e6;
   padding: 8px;
   border-radius: 6px;
   cursor: pointer;
+  border: 0;
 }
 
-.buttonLogout:hover {
-  color: #243bbe;
+.logout:hover {
+  color: #ffa396;
+}
+
+.stickyLogout {
+  font: inherit;
+  background-color: transparent;
+  color: #ffa396;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 0;
+}
+
+.stickyLogout:hover {
+  color: #e6e6e6;
 }
 
 .image {
@@ -152,7 +167,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  left:20%
+  left: 20%;
 }
 .schoolLogo {
   height: 80px;
