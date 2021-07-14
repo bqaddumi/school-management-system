@@ -8,7 +8,7 @@ import SignupPageForm from "./pages/signUp/signupPageForm";
 import SigninPageForm from "./pages/signIn/signinPageForm";
 import Loader from "./components/common/loader/loader";
 import NotifiactionBar from "./components/common/notificatioBar/notifiactionBar";
-import Users from "./components/administration/userRole/users";
+import Users from "./components/administration/usersTable/usersTable";
 import About from "./pages/about/about";
 import AddUsers from "./components/administration/addUsers/addUsers";
 import classes from "./App.module.css";
@@ -21,9 +21,9 @@ import ClassSchedule from "./components/teacherSchedule/classSchedule/classSched
 const App = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);
   const userRole = useSelector((state) => state.auth.userRole);
-  const type = useSelector((state) => state.toast.type);
-  const message = useSelector((state) => state.toast.message);
-  const position = useSelector((state) => state.toast.position);
+  const toastType = useSelector((state) => state.toast.type);
+  const toastMessage = useSelector((state) => state.toast.message);
+  const toastPosition = useSelector((state) => state.toast.position);
   const usersObject = useSelector((state) => state.auth.userInformation);
   const userInformation = JSON.parse(usersObject ? usersObject : false);
 
@@ -46,8 +46,12 @@ const App = () => {
     <main className={classes.mainContainer}>
       <MainNavbar />
       {!isLoading && (
-        <div className={classes.toastContainer} >
-          <NotifiactionBar type={type} message={message} position={position} />
+        <div className={classes.toastContainer}>
+          <NotifiactionBar
+            type={toastType}
+            message={toastMessage}
+            position={toastPosition}
+          />
         </div>
       )}
       <div className={classes.routsContainer}>
@@ -59,16 +63,16 @@ const App = () => {
 
         <Switch>
           <PrivateRoute
-            path={'/admin'}
+            path={"/admin"}
             component={Users}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
-            redirectPath={'/'}
+            redirectPath={"/"}
           />
           <PrivateRoute
             path={'/teacherSchedule'}
             component={TeacherSchedule}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
-            redirectPath={'/'}
+            redirectPath={"/"}
           />
           <PrivateRoute
             path={'/manageSchedule'}
@@ -86,19 +90,19 @@ const App = () => {
             path={'/addUser'}
             component={AddUsers}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
-            redirectPath={'/'}
+            redirectPath={"/"}
           />
           <PrivateRoute
-            path={'/teacher'}
+            path={"/teacher"}
             component={Teachers}
             isAbleToAccessRoute={isAbleToAccessRouteTeacher}
-            redirectPath={'/teacher'}
+            redirectPath={"/teacher"}
           />
           <PrivateRoute
-            path={'/student'}
+            path={"/student"}
             component={Students}
             isAbleToAccessRoute={isAbleToAccessRouteStudent}
-            redirectPath={'/student'}
+            redirectPath={"/student"}
           />
           <Route path="/login">
             {userInformation && <Redirect to="/home" />}

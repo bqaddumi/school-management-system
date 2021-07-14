@@ -11,27 +11,39 @@ body {
 }
 
 .input {
-  font: inherit;
-  background-color: #ebebeb;
-  color: #000;
-  border-radius: 4px;
-  border: 1px solid #000;
-  width: 40%;
-  padding: 8px;
-  align-content: center;
+  display: block;
+  padding: 10px 0;
+  border: 0;
+  background: #eee;
+  border-radius: 3px;
+  padding-left: 40px;
+  font-size: 14px;
+  outline: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  margin:10px 5px
 }
 
 .errorInput {
-  font: inherit;
-  color: #000;
-  border-radius: 4px;
-  border: 1px solid #000;
-  width: 40%;
-  text-align: center;
-  padding: 8px;
+  display: block;
+  padding: 10px 0;
+  border: 0;
+  border-radius: 3px;
+  padding-left: 40px;
+  font-size: 14px;
+  outline: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  margin:10px 5px;
   background-color: rgba(333, 0, 0, 0.5);
 }
 
 .errorMessage {
   color: #ff0000;
 }
+
+

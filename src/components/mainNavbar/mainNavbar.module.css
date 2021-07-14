@@ -1,36 +1,97 @@
+@import url("https://fonts.googleapis.com/css?familly=Poppins:200,300,400,500,600,700,800,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+  min-height: 200vh;
+}
+
 .header {
-  width: 100%;
-  background-color: #ebebeb;
-  box-shadow: 1px 1px 4px #000000;
+  position: fixed;
   display: flex;
+  width: 100%;
+  top: 0;
+  left: 0;
   justify-content: space-between;
   align-items: center;
+  transition: 0.6s;
+  padding: 25px 40px;
+  margin: 34px 0;
+  min-height: 1px;
+  z-index: 9999;
+}
+
+.sticky {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  top: 0;
+  left: 0;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.6s;
+  padding: 5px 100px;
+  background-color: #f5f5f5;
+  margin-top: 0px;
+  z-index: 9999;
 }
 
 .logo {
+  position: relative;
   font-family: sans-serif;
   font-size: 32px;
-  padding-left: 10px;
-  text-transform: uppercase;
+  font-weight: 700;
+  transition: 0.6s;
+  text-decoration: none;
 }
 
 .navContainerList {
-  list-style: none;
+  position: relative;
   display: flex;
-  padding-right: 10px;
   align-items: center;
+  justify-content: center;
 }
 
 .navList {
-  margin: 0 24px;
+  position: relative;
+  margin: 0 20px;
+  list-style: none;
   font-size: 24px;
 }
 
 .link {
-  display: flex;
+  position: relative;
+  color: #c6c6c6;
+  font-weight: 700;
   text-decoration: none;
-  color: #000000;
-  padding: 12px 16px;
+  letter-spacing: 2px;
+  transition: 0.5s;
+  font-weight: 500;
+  padding :12px 16px;
+}
+
+.stickyLink {
+  position: relative;
+  color: #fc898e;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: 0.5s;
+  font-weight: 500;
+}
+
+.stickyLink:hover {
+  color: #e6e6e6;
+}
+
+.link:hover {
+  color: #ffa396;
 }
 
 .dropdown {
@@ -44,12 +105,14 @@
 
 .userSettingsDropDown {
   display: none;
+  flex-direction: column;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 250px;
+  min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(105, 100, 100, 0.9);
   z-index: 1;
   text-align: center;
+  background-color: #fff;
 }
 
 .userSettingsDropDown:hover {
@@ -57,24 +120,35 @@
 }
 
 .dropdown:hover .userSettingsDropDown {
-  display: block;
+  display: flex;
 }
 
-.buttonLogout {
+.logout {
   font: inherit;
   background-color: transparent;
-  color: #000;
+  color: #c6c6c6;
   padding: 8px;
   border-radius: 6px;
   cursor: pointer;
+  border: 0;
 }
 
-.link:hover {
-  color: #243bbe;
+.logout:hover {
+  color: #ffa396;
 }
 
-.buttonLogout:hover {
-  color: #243bbe;
+.stickyLogout {
+  font: inherit;
+  background-color: transparent;
+  color: #ffa396;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 0;
+}
+
+.stickyLogout:hover {
+  color: #e6e6e6;
 }
 
 .image {
@@ -90,4 +164,18 @@
   text-align: center;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.schoolLogoContain {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  left: 20%;
+}
+
+.schoolLogo {
+  height: 80px;
+  top: 30%;
+  z-index: 9999;
 }

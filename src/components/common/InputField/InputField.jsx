@@ -4,7 +4,6 @@ import classes from "./InputField.module.css";
 
 const InputField = (props) => {
   const {
-    label,
     onChange,
     type,
     placeholder,
@@ -20,7 +19,7 @@ const InputField = (props) => {
   } = props;
   const isValidated = !!(value.match(valdationRegex) && value);
   const showInvalidEmail = !isValidated && isButtonClicked;
-  const isConfirm = !!((value === checkConfirm) && value);
+  const isConfirm = !!(value === checkConfirm && value);
   const showUnConfirmPassword = !isConfirm && isButtonClicked;
 
   const classEmailValid = classNames({
@@ -30,7 +29,6 @@ const InputField = (props) => {
 
   return (
     <div>
-      <label className={classes.label}>{label}</label>
       <input
         type={type}
         placeholder={placeholder}

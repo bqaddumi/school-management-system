@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import classNames from "classnames";
+import { MdHome } from "react-icons/md";
 import { authActions } from "../../store/auth";
 import UsersSettings from "./usersSettings/usersSettings";
 import Firebase from "../../database/config";
-import classes from "./mainNavbar.module.css";
 import schoolLogo from "../../images/educationSchoolLogo.jpg";
 import TeachersSettings from "./teachersSettings/teachersSettings";
+import classes from "./mainNavbar.module.css";
 
 const MainNavbar = () => {
   const database = Firebase.firestore();
   const dispatch = useDispatch();
   const history = useHistory();
+  const [navbar, setNavbar] = useState(false);
   const usersObject = useSelector((state) => state.auth.userInformation);
   const userInformation = JSON.parse(usersObject ? usersObject : false);
 
@@ -22,12 +25,12 @@ const MainNavbar = () => {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           dispatch(authActions.setUserRole(doc.data()));
-        })
+        });
       });
   }, [dispatch, database]);
 
   const logoutUser = () => {
-    dispatch(authActions.logout('userInformation'));
+    dispatch(authActions.logout("userInformation"));
     history.push("/home");
   };
 
@@ -35,39 +38,54 @@ const MainNavbar = () => {
     Firebase.auth().signOut().then(logoutUser());
   };
 
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 0) {
+      setNavbar(true);
+    } else setNavbar(false);
+  });
+
+  const headerNavbar = classNames({
+    sticky: navbar,
+    header: !navbar,
+  });
+
+  const navLink = classNames({
+    stickyLink: navbar,
+    link: !navbar,
+  });
+
+  const logoutButton = classNames({
+    stickyLogout: navbar,
+    logout: !navbar,
+  });
+
   const navItems = [
-    (
-      (userInformation.role === 'Administration')
-        ?
-        <UsersSettings userName={userInformation.userName} />
-        :
-        (userInformation.role === 'Teachers')
-          ?
-          <TeachersSettings userName={userInformation.userName} />
-          :
-          <div className={classes.link}>
-            {userInformation.userName}
-          </div>
+    userInformation.role === "Administration" ? (
+      <UsersSettings userName={userInformation.userName} navLink={navLink} />
+    ) : userInformation.role === "Teachers" ? (
+      <TeachersSettings userName={userInformation.userName} navLink={navLink} />
+    ) : (
+      <div className={classes[navLink]}>{userInformation.userName}</div>
     ),
     <img src={schoolLogo} alt="Logo" className={classes.image} />,
-    <button className={classes.buttonLogout} onClick={logoutHandler}>
+    <button className={classes[logoutButton]} onClick={logoutHandler}>
       Logout
     </button>,
   ];
 
   const navItemsLink = [
-    <NavLink className={classes.link} to="/login">
+    <NavLink className={classes[navLink]} to="/login">
       Signin
     </NavLink>,
-    <NavLink className={classes.link} to="/signup">
+    <NavLink className={classes[navLink]} to="/signup">
       Signup
     </NavLink>,
   ];
 
   return (
-    <div className={classes.header}>
-      <NavLink to="/home" className={classes.link}>
-        <div className={classes.logo}>Home</div>
+    <div className={classes[headerNavbar]}>
+      <NavLink to="/home" className={classes[navLink]}>
+        <MdHome className={classes.logo} />
       </NavLink>
       <ul className={classes.navContainerList}>
         {userInformation ? (
@@ -80,7 +98,7 @@ const MainNavbar = () => {
               );
             })}
           </>
-        ) :
+        ) : (
           <>
             {navItemsLink.map((item, index) => {
               return (
@@ -90,7 +108,7 @@ const MainNavbar = () => {
               );
             })}
           </>
-        }
+        )}
       </ul>
     </div>
   );
