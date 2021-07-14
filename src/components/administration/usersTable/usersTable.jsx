@@ -53,14 +53,13 @@ const Users = () => {
     },
     [dispatch]
   );
- let i = 1;
+
   const options =
     [
       { value: userRole.students, label: userRole.students },
       { value: userRole.teacher, label: userRole.teacher },
       { value: userRole.admin, label: userRole.admin },
-    ]
-    ;
+    ];
 
   const columns = useMemo(
     () => [
@@ -73,14 +72,14 @@ const Users = () => {
         accessor: "uid",
       },
       {
-        Header: "Users Role",
-        accessor: "eEditing",
+        Header: "Role",
+        accessor: "Editing",
         Cell: (cellObj) => (
-            <Select
-              onChange={(change) => handleClickEditRow(cellObj, change)}
-              options={options}
-              placeholder={cellObj.row.original.role}
-            />
+          <Select
+            onChange={(change) => handleClickEditRow(cellObj, change)}
+            options={options}
+            placeholder={cellObj.row.original.role}
+          />
         )
       }
     ],
