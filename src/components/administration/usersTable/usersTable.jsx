@@ -8,6 +8,7 @@ import Loader from "../../common/loader/loader";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo.jsx";
 import Footer from "../../common/footer/footer";
 import classes from "./usersTable.module.css";
+import Select from "react-select";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -38,7 +39,7 @@ const Users = () => {
       db.collection("users")
         .doc(rowIndex.row.original.id)
         .update({
-          role: change.target.value,
+          role: change.value,
         })
         .then(() => {
           dispatch(
@@ -52,6 +53,14 @@ const Users = () => {
     },
     [dispatch]
   );
+ let i = 1;
+  const options =
+    [
+      { value: userRole.students, label: userRole.students },
+      { value: userRole.teacher, label: userRole.teacher },
+      { value: userRole.admin, label: userRole.admin },
+    ]
+    ;
 
   const columns = useMemo(
     () => [
@@ -65,20 +74,15 @@ const Users = () => {
       },
       {
         Header: "Users Role",
-        accessor: "Editing",
+        accessor: "eEditing",
         Cell: (cellObj) => (
-          <select
-            required
-            onChange={(change) => handleClickEditRow(cellObj, change)}
-            className={classes.selectUsersRole}
-          >
-            <option></option>
-            <option value="Students">{userRole.students}</option>
-            <option value="Teachers">{userRole.teacher}</option>
-            <option value="Administration">{userRole.admin}</option>
-          </select>
-        ),
-      },
+            <Select
+              onChange={(change) => handleClickEditRow(cellObj, change)}
+              options={options}
+              placeholder={cellObj.row.original.role}
+            />
+        )
+      }
     ],
     [userRole.students, userRole.teacher, userRole.admin, handleClickEditRow]
   );
