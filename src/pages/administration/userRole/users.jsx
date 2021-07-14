@@ -69,11 +69,6 @@ const Users = () => {
           </select>
         ),
       },
-      // {
-      //   Header: "Role",
-      //   accessor: "role",
-      //   Cell: ({ cell: { value } }) => value || "-",
-      // },
     ],
     []
   );

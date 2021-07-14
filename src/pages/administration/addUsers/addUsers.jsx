@@ -108,7 +108,6 @@ const AddUsers = () => {
             <MdPerson />
           </div>
           <InputField
-            label="User name"
             onChange={onNameChanged}
             type="text"
             id="userName"
@@ -120,7 +119,6 @@ const AddUsers = () => {
             <MdPerson />
           </div>
           <InputField
-            label="Email"
             onChange={onEmailChanged}
             type="email"
             placeholder="userName@gmail.com"
@@ -134,7 +132,6 @@ const AddUsers = () => {
             <MdLock />
           </div>
           <InputField
-            label="Pasword"
             onChange={onPasswordChanged}
             type="password"
             id="pasword"
@@ -147,7 +144,6 @@ const AddUsers = () => {
             <MdLock />
           </div>
           <InputField
-            label="Confirm password"
             onChange={onConfirmPasswordChanged}
             type="password"
             id="confirmPassword"

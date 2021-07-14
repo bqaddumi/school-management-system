@@ -94,7 +94,6 @@ const SigninForm = () => {
             <MdPerson />
           </div>
           <InputField
-            label="Email"
             onChange={onEmailChanged}
             type="email"
             placeholder="UserName@gmail.com"
@@ -103,13 +102,11 @@ const SigninForm = () => {
             errorEmailMessage={"It should be an e-mail"}
             required={true}
             isButtonClicked={isButtonClicked}
-            Icon={MdPerson}
           />
           <div className={classes.icons}>
             <MdLock />
           </div>
           <InputField
-            label="Password"
             onChange={onPasswordChanged}
             type="password"
             placeholder="Password"

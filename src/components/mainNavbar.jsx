@@ -46,8 +46,7 @@ const MainNavbar = () => {
           dispatch(authActions.setUserRole(doc.data()));
         });
       })
-      .catch((erorr) => {
-        console.log(erorr);
+      .catch(() => {
       });
   }, [dispatch, database]);
 

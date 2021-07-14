@@ -1,11 +1,9 @@
 import React from "react";
 import classNames from "classnames";
-import { Icon } from "react-icons/md";
 import classes from "./InputField.module.css";
 
 const InputField = (props) => {
   const {
-    label,
     onChange,
     type,
     placeholder,
@@ -18,7 +16,6 @@ const InputField = (props) => {
     checkConfirm,
     isButtonClicked,
     autoComplete,
-    Icon,
   } = props;
   const isValidated = !!(value.match(valdationRegex) && value);
   const showInvalidEmail = !isValidated && isButtonClicked;
@@ -32,7 +29,6 @@ const InputField = (props) => {
 
   return (
     <div>
-      {/* <label className={classes.label}>{label}</label> */}
       <input
         type={type}
         placeholder={placeholder}
