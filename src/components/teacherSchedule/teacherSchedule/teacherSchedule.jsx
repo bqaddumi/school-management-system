@@ -7,7 +7,7 @@ import Table from '../../common/Tables/table'
 import classes from './teacherSchedule.module.css';
 
 const TeacherSchedule = () => {
-    const [changeSheetteacherHandler, setChangeSheetTeacherHandler] = useState();
+    const [changeSheetTeacherHandler, setChangeSheetTeacherHandler] = useState();
     const isLoadingAdmin = useSelector((state) => state.loader.isLoadingAdmin);
     const [viewSheet, setViewSheet] = useState();
     const dispatch = useDispatch();
@@ -28,10 +28,10 @@ const TeacherSchedule = () => {
             setTabulationSheets(teacherDataSchedule);
             dispatch(loadingActions.setIsLoadingAdmin(false));
         });
-    }, [changeSheetteacherHandler, dispatch]);
+    }, [changeSheetTeacherHandler, dispatch]);
 
     const searchByTeacherName = tabulationSheets.filter((res) => {
-        return (res.userName === changeSheetteacherHandler);
+        return (res.userName === changeSheetTeacherHandler);
     });
 
     const columns = React.useMemo(
