@@ -5,7 +5,7 @@ import { emailRegex } from "../../../consts/RegEx";
 import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
 import Firebase from "../../../database/config";
-import InputField from "../../../components/common/InputField/InputField";
+import InputField from "../../common/InputField/InputField";
 import classes from "./addUsers.module.css";
 
 const AddUsers = () => {

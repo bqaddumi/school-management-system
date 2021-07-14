@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
 import Firebase from '../../../database/config';
-import Table from '../../../components/common/Tables/table'
-import Loader from "../../../components/common/loader/loader";
+import Table from '../../common/Tables/table'
+import Loader from "../../common/loader/loader";
 import classes from './userTable.module.css';
 
 const Users = () => {

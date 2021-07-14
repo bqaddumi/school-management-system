@@ -8,13 +8,13 @@ import SignupPageForm from "./pages/signUp/signupPageForm";
 import SigninPageForm from "./pages/signIn/signinPageForm";
 import Loader from "./components/common/loader/loader";
 import NotifiactionBar from "./components/common/notificatioBar/notifiactionBar";
-import Users from "./pages/administration/userRole/users";
+import Users from "./components/administration/userRole/users";
 import About from "./pages/about/about";
-import AddUsers from "./pages/administration/addUsers/addUsers";
+import AddUsers from "./components/administration/addUsers/addUsers";
 import classes from "./App.module.css";
 import Teachers from "./pages/teachers/teachers";
 import Students from "./pages/students/students";
-import TeacherSchedule from "./components/teacherSchedule/teacherSchedule/teacherSchedule";
+import TeacherSchedule from "./components/administration/teacherSchedule/teacherSchedule";
 import ManageSchedule from "./components/teacherSchedule/manageSchedule/manageSchedule";
 
 const App = () => {
