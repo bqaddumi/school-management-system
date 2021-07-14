@@ -7,6 +7,7 @@ import Table from '../../common/Tables/table'
 import classes from './teacherSchedule.module.css';
 
 const TeacherSchedule = () => {
+    const [users, setUsers] = useState([]);
     const [changeSheetTeacherHandler, setChangeSheetTeacherHandler] = useState();
     const isLoadingAdmin = useSelector((state) => state.loader.isLoadingAdmin);
     const [viewSheet, setViewSheet] = useState();
@@ -28,7 +29,20 @@ const TeacherSchedule = () => {
             setTabulationSheets(teacherDataSchedule);
             dispatch(loadingActions.setIsLoadingAdmin(false));
         });
-    }, [changeSheetTeacherHandler, dispatch]);
+    }, [dispatch]);
+
+    useEffect(() => {
+        const db = Firebase.firestore();
+        return db.collection('users').onSnapshot((snapshot) => {
+            const postData = [];
+            snapshot.forEach((doc) => {
+                if (doc.data().role === 'Teachers') {
+                    postData.push({ ...doc.data() })
+                }
+            });
+            setUsers(postData);
+        });
+    }, []);
 
     const searchByTeacherName = tabulationSheets.filter((res) => {
         return (res.userName === changeSheetTeacherHandler);
@@ -93,8 +107,15 @@ const TeacherSchedule = () => {
                     <div className={classes.sectionTitle}>Teacher Name</div>
                     <select required className={classes.selectOptionClassTabulation} onChange={onChangeSheetTeacherHandler}>
                         <option></option>
-                        <option value="leen">leen</option>
-                        <option value="Lolo">Lolo</option>
+                        {
+                            users.map((user, index) => {
+                                return (
+                                    <option value={user.userName} key={index}>
+                                        {user.userName}
+                                    </option>
+                                );
+                            })
+                        }
                     </select>
                     <div className={classes.sectionTitle}>Class</div>
                     <select required className={classes.selectOptionClassTabulation} disabled>

@@ -16,6 +16,7 @@ import Teachers from "./pages/teachers/teachers";
 import Students from "./pages/students/students";
 import TeacherSchedule from "./components/administration/teacherSchedule/teacherSchedule";
 import ManageSchedule from "./components/teacherSchedule/manageSchedule/manageSchedule";
+import ClassSchedule from "./components/teacherSchedule/classSchedule/classSchedule";
 
 const App = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);
@@ -72,6 +73,12 @@ const App = () => {
           <PrivateRoute
             path={'/manageSchedule'}
             component={ManageSchedule}
+            isAbleToAccessRoute={isAbleToAccessRouteTeacher}
+            redirectPath={'/'}
+          />
+          <PrivateRoute
+            path={'/classSchedule'}
+            component={ClassSchedule}
             isAbleToAccessRoute={isAbleToAccessRouteTeacher}
             redirectPath={'/'}
           />

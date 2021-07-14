@@ -10,6 +10,7 @@ const TeachersSettings = (props) => {
             </div>
             <div className={classes.userSettingsDropDown}>
                 <NavLink className={classes.link} to="/manageSchedule">Manage Schedule</NavLink>
+                <NavLink className={classes.link} to="/classSchedule">Class Schedule</NavLink>
                 <NavLink className={classes.link} to="/about">About</NavLink>
                 <div className={classes.link}>Version 1.0</div>
             </div>
