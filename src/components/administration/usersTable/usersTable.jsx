@@ -83,7 +83,7 @@ const Users = () => {
     [userRole.students, userRole.teacher, userRole.admin, handleClickEditRow]
   );
 
-  const saveButtonHanler = () => {};
+  const saveButtonHanler = () => { };
 
   return (
     <>
