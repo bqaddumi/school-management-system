@@ -66,7 +66,7 @@ const MainNavbar = () => {
 
   return (
     <div className={classes.header}>
-      <NavLink to="#" className={classes.link}>
+      <NavLink to="/home" className={classes.link}>
         <div className={classes.logo}>Home</div>
       </NavLink>
       <ul className={classes.navContainerList}>
