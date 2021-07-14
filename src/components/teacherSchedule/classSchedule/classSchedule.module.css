@@ -1,3 +1,9 @@
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+}
+
 .loaderContainer {
   width: 100vw;
   height: 100vh;
@@ -9,12 +15,4 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.banner {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background: url(https://www.putneyhigh.gdst.net/wp-content/uploads/2021/05/IMG_2416-scaled-e1620134818555-2000x975.jpg);
-  background-size: cover;
 }

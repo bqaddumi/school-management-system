@@ -1,18 +1,25 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
 import Firebase from "../../../database/config";
-import Table from "./tableContainer";
+import Table from "../../common/Tables/table";
 import Loader from "../../../components/common/loader/loader";
 import BackgroundLogo from "../../../components/common/backgroundLogo/backgroundLogo.jsx";
 import Footer from "../../../components/common/footer/footer";
-import classes from "./tableContainer.module.css";
+import classes from "./userTable.module.css";
 
 const Users = () => {
-  const [dataAuth, setDataAuth] = useState([]);
+  const [users, setUsers] = useState([]);
   const isLoadingAdmin = useSelector((state) => state.loader.isLoadingAdmin);
+  const userRole = useSelector((state) => state.auth.userRole);
   const dispatch = useDispatch();
+  const currentUserRole = useSelector((state) => state.auth.userInformation);
+  const userInformation = JSON.parse(currentUserRole ? currentUserRole : false);
+
+  const usersExceptCurrent = users.filter((user) => {
+    return user.id !== userInformation.token;
+  });
 
   useEffect(() => {
     dispatch(loadingActions.setIsLoadingAdmin(true));
@@ -20,28 +27,31 @@ const Users = () => {
     return db.collection("users").onSnapshot((snapshot) => {
       const postData = [];
       snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
-      setDataAuth(postData);
+      setUsers(postData);
       dispatch(loadingActions.setIsLoadingAdmin(false));
     });
   }, [dispatch]);
 
-  const handleClickEditRow = (rowIndex, change) => {
-    const db = Firebase.firestore();
-    db.collection("users")
-      .doc(rowIndex.row.original.id)
-      .update({
-        role: change.target.value,
-      })
-      .then(() => {
-        dispatch(
-          toastActions.toast({
-            type: "success",
-            message: "Successfully Modifying",
-            position: "top",
-          })
-        );
-      });
-  };
+  const handleClickEditRow = useCallback(
+    (rowIndex, change) => {
+      const db = Firebase.firestore();
+      db.collection("users")
+        .doc(rowIndex.row.original.id)
+        .update({
+          role: change.target.value,
+        })
+        .then(() => {
+          dispatch(
+            toastActions.toast({
+              type: "success",
+              message: "Successfully Modifying",
+              position: "top",
+            })
+          );
+        });
+    },
+    [dispatch]
+  );
 
   const columns = useMemo(
     () => [
@@ -60,17 +70,17 @@ const Users = () => {
           <select
             required
             onChange={(change) => handleClickEditRow(cellObj, change)}
-            className={classes.select}
+            className={classes.selectUsersRole}
           >
             <option></option>
-            <option value="Students">Students</option>
-            <option value="Teachers">Teachers</option>
-            <option value="Administration">Administration</option>
+            <option value="Students">{userRole.students}</option>
+            <option value="Teachers">{userRole.teacher}</option>
+            <option value="Administration">{userRole.admin}</option>
           </select>
         ),
       },
     ],
-    []
+    [userRole.students, userRole.teacher, userRole.admin, handleClickEditRow]
   );
 
   const saveButtonHanler = () => {};
@@ -79,7 +89,7 @@ const Users = () => {
     <>
       <BackgroundLogo title="Users Table" />
       <section className={classes.usersSection}>
-        <div className={classes.App}>
+        <div className={classes.headerContainer}>
           {isLoadingAdmin && (
             <div className={classes.loaderContainer}>
               <Loader type="loader" />
@@ -90,7 +100,7 @@ const Users = () => {
               Save
             </button>
           </div>
-          <Table columns={columns} data={dataAuth} />
+          <Table columns={columns} data={usersExceptCurrent} />
         </div>
       </section>
       <Footer />

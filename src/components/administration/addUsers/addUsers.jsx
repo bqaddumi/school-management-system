@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { MdPerson } from "react-icons/md";
 import { MdLock } from "react-icons/md";
@@ -7,7 +7,7 @@ import { emailRegex } from "../../../consts/RegEx";
 import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
 import Firebase from "../../../database/config";
-import InputField from "../../../components/common/InputField";
+import InputField from "../../../components/common/InputField/InputField";
 import BackgroundLogo from "../../../components/common/backgroundLogo/backgroundLogo";
 import Footer from "../../../components/common/footer/footer";
 import classes from "./addUsers.module.css";
@@ -20,13 +20,10 @@ const AddUsers = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [major, setMajor] = useState("");
+  const [usersRole, setUsersRole] = useState("");
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-
-  const informationDataAccount = {
-    uid: email,
-    userName: name,
-    role: "",
-  };
+  const userRole = useSelector((state) => state.auth.userRole);
 
   const errorCreateAccount = (error) => {
     dispatch(loadingActions.setIsLoading(false));
@@ -65,7 +62,13 @@ const AddUsers = () => {
     database
       .collection("users")
       .doc(res.user.uid)
-      .set(informationDataAccount)
+      .set({
+        uid: email,
+        userName: name,
+        role: usersRole,
+        token: res.user.uid,
+        major: major,
+      })
       .then(successCreateAccountInformation)
       .catch(errorCreateAccountInformation);
   };
@@ -96,6 +99,14 @@ const AddUsers = () => {
 
   const onNameChanged = (event) => {
     setName(event.target.value);
+  };
+
+  const onMajorChanged = (event) => {
+    setMajor(event.target.value);
+  };
+
+  const usersRoleHandler = (event) => {
+    setUsersRole(event.target.value);
   };
 
   return (
@@ -155,13 +166,28 @@ const AddUsers = () => {
             isButtonClicked={isButtonClicked}
             autoComplete="on"
           />
-          <label className={classes.label}> User Role</label>
-          <select required className={classes.select} placeholder>
+          <label className={classes.labelTitle}>Role Of Users</label>
+          <select
+            required
+            className={classes.selectUsersRole}
+            onChange={usersRoleHandler}
+          >
             <option></option>
-            <option value="Students">Students</option>
-            <option value="Teachers">Teachers</option>
-            <option value="Administration">Administration</option>
+            <option value="Students">{userRole.students}</option>
+            <option value="Teachers">{userRole.teacher}</option>
+            <option value="Administration">{userRole.admin}</option>
           </select>
+          {usersRole === "Teachers" && (
+            <InputField
+              label="Major"
+              onChange={onMajorChanged}
+              type="text"
+              id="major"
+              placeholder="major"
+              value={major}
+              required={true}
+            />
+          )}
           <div className={classes.actions}>
             <button className={classes.signupButton}>Sign Up</button>
           </div>

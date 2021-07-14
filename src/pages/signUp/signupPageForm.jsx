@@ -7,7 +7,7 @@ import { emailRegex } from "../../consts/RegEx";
 import { loadingActions } from "../../store/loading";
 import { toastActions } from "../../store/notification";
 import Firebase from "../../database/config";
-import InputField from "../../components/common/InputField";
+import InputField from "../../components/common/InputField/InputField";
 import BackgroundLogo from "../../components/common/backgroundLogo/backgroundLogo.jsx";
 import Footer from "../../components/common/footer/footer";
 import classes from "./signupPageForm.module.css";
@@ -21,12 +21,6 @@ const SignupPageForm = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-
-  const informationDataAccount = {
-    uid: email,
-    userName: name,
-    role: "",
-  };
 
   const errorCreateAccount = (error) => {
     dispatch(loadingActions.setIsLoading(false));
@@ -65,7 +59,12 @@ const SignupPageForm = () => {
     database
       .collection("users")
       .doc(res.user.uid)
-      .set(informationDataAccount)
+      .set({
+        uid: email,
+        userName: name,
+        role: '',
+        token: res.user.uid,
+      })
       .then(successCreateAccountInformation)
       .catch(errorCreateAccountInformation);
   };

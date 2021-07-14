@@ -1,4 +1,4 @@
-.App {
+.headerContainer {
   display: flex;
   flex-direction: column;
   color: #00000094;
@@ -24,13 +24,13 @@
 
 .headerGroup {
   margin: 0;
-  padding: 0.8rem;
+  padding: 12px;
   border-bottom: 1px solid #ededed;
   border-right: 1px solid #ededed;
   position: relative;
 }
 
-.select {
+.selectUsersRole {
   width: 100%;
 }
 
