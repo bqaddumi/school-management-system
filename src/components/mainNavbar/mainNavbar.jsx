@@ -8,7 +8,7 @@ import UsersSettings from "./usersSettings/usersSettings";
 import Firebase from "../../database/config";
 import schoolLogo from "../../images/educationSchoolLogo.jpg";
 import TeachersSettings from "./teachersSettings/teachersSettings";
-import classes from "./mainNavbar.module.css";
+import classes from "./mainNavbar.module.scss";
 
 const MainNavbar = () => {
   const database = Firebase.firestore();

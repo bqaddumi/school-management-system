@@ -1,3 +1,5 @@
+@import '../../../styles/palettes.scss';
+
 .headerContainer {
   display: flex;
   flex-direction: column;
@@ -7,7 +9,7 @@
 .loaderContainer {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color:  map-get($black, base);
   position: absolute;
   top: 0;
   right: 0;

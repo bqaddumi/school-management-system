@@ -1,3 +1,5 @@
+@import "../../../styles/palettes.scss";
+
 .titleHeaderContainer {
   text-align: center;
 }
@@ -7,9 +9,9 @@
   top: -60px;
   margin: 0 30%;
   max-width: 40%;
-  background-color: #fff;
+  background-color: map-get($white, lighter);
   padding: 5px 40px 20px 40px;
-  color: #4a4a4a;
+  color: map-get($black, light);
 }
 
 .actionsContainerSignUp {
@@ -18,8 +20,8 @@
 }
 
 .signupButton {
-  background: #8baa64;
-  color: #fff;
+  background: map-get($green, base);
+  color: map-get($white, lighter);
   padding: 10px;
   border-radius: 5px;
   font-size: 16px;
@@ -30,10 +32,10 @@
   box-sizing: border-box;
   width: 100%;
   margin-bottom: 40px;
-}
 
-.signupButton:hover {
-  background-color: #474f3d;
+  &:hover {
+    background-color: map-get($green, dark);
+  }
 }
 
 .bodyHeader {
@@ -44,7 +46,7 @@
   display: block;
   padding: 10px 30px;
   border: 0;
-  background: #eee;
+  background: map-get($white, darker);
   border-radius: 3px;
   padding-left: 40px;
   font-size: 14px;
@@ -59,9 +61,9 @@
 .labelTitle {
   display: none;
   position: relative;
-  color: #9c9c9c;
-  font-weight:lighter;
-  top:35px;
+  color: map-get($grey, dark);
+  font-weight: lighter;
+  top: 35px;
   float: right;
   margin-right: 50px;
 }
@@ -81,5 +83,5 @@
   height: 16px;
   font-size: 19px;
   line-height: 1;
-  color: #ccc;
+  color: map-get($grey, light);
 }

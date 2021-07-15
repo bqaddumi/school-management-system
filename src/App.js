@@ -11,12 +11,12 @@ import NotifiactionBar from "./components/common/notificatioBar/notifiactionBar"
 import Users from "./components/administration/usersTable/usersTable";
 import About from "./pages/about/about";
 import AddUsers from "./components/administration/addUsers/addUsers";
-import classes from "./App.module.css";
 import Teachers from "./pages/teachers/teachers";
 import Students from "./pages/students/students";
 import TeacherSchedule from "./components/administration/teacherSchedule/teacherSchedule";
 import ManageSchedule from "./components/teacherSchedule/manageSchedule/manageSchedule";
 import ClassSchedule from "./components/teacherSchedule/classSchedule/classSchedule";
+import classes from "./App.scss";
 
 const App = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);

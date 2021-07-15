@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./notifiactionBar.module.css";
+import classes from "./notifiactionBar.module.scss";
 
 const NotifiactionBar = ({ type, message, position }) => {
   return (

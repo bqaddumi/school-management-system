@@ -11,7 +11,7 @@ import Firebase from "../../database/config";
 import InputField from "../../components/common/InputField/InputField";
 import BackgroundLogo from "../../components/common/backgroundLogo/backgroundLogo.jsx";
 import Footer from "../../components/common/footer/footer";
-import classes from "./signinPageForm.module.css";
+import classes from "./signinPageForm.module.scss";
 
 const SigninForm = () => {
   const database = Firebase.firestore();
@@ -58,19 +58,19 @@ const SigninForm = () => {
         dispatch(authActions.login(doc.data()));
         switch (doc.data().role) {
           case userRole.admin:
-            history.push("/admin");
+            history.push('/admin')
             break;
           case userRole.teacher:
-            history.push("/teacher");
+            history.push('/teacher')
             break;
           case userRole.students:
-            history.push("/student");
+            history.push('/student')
             break;
           default:
-            history.push("/home");
+            history.push('/home')
             break;
         }
-      });
+      })
   };
 
   const onSigninHandler = (event) => {

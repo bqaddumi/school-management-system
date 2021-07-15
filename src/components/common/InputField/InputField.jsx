@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import classes from "./InputField.module.css";
+import classes from "./InputField.module.scss";
 
 const InputField = (props) => {
   const {

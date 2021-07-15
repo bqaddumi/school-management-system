@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState, useCallback } from "react";
+import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
@@ -7,8 +8,7 @@ import Table from "../../common/Tables/table";
 import Loader from "../../common/loader/loader";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo.jsx";
 import Footer from "../../common/footer/footer";
-import classes from "./usersTable.module.css";
-import Select from "react-select";
+import classes from "./usersTable.module.scss";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -54,12 +54,11 @@ const Users = () => {
     [dispatch]
   );
 
-  const options =
-    [
-      { value: userRole.students, label: userRole.students },
-      { value: userRole.teacher, label: userRole.teacher },
-      { value: userRole.admin, label: userRole.admin },
-    ];
+  const options = [
+    { value: userRole.students, label: userRole.students },
+    { value: userRole.teacher, label: userRole.teacher },
+    { value: userRole.admin, label: userRole.admin },
+  ];
 
   const columns = useMemo(
     () => [
@@ -72,7 +71,7 @@ const Users = () => {
         accessor: "uid",
       },
       {
-        Header: "Role",
+        Header: "Users Role",
         accessor: "Editing",
         Cell: (cellObj) => (
           <Select
@@ -80,13 +79,13 @@ const Users = () => {
             options={options}
             placeholder={cellObj.row.original.role}
           />
-        )
-      }
+        ),
+      },
     ],
     [handleClickEditRow]
   );
 
-  const saveButtonHanler = () => { };
+  const saveButtonHanler = () => {};
 
   return (
     <>

@@ -1,13 +1,15 @@
+@import "../../../styles/palettes.scss";
+
 .headerContainer {
   display: flex;
   flex-direction: column;
-  color: #00000094;
+  color: map-get($black, dark);
 }
 
 .loaderContainer {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: map-get($black, base);
   position: absolute;
   top: 0;
   right: 0;
@@ -19,14 +21,14 @@
 
 .table {
   border-spacing: 0;
-  border: 1px solid #ededed;
+  border: 1px solid map-get($grey, lighter);
 }
 
 .headerGroup {
   margin: 0;
   padding: 12px;
-  border-bottom: 1px solid #ededed;
-  border-right: 1px solid #ededed;
+  border-bottom: 1px solid map-get($grey, lighter);
+  border-right: 1px solid map-get($grey, lighter);
   position: relative;
 }
 
@@ -52,8 +54,8 @@
   margin: 0 30%;
   max-height: 60%;
   min-height: 30%;
-  background-color: #fff;
-  color: #4a4a4a;
+  background-color: map-get($white, lighter);
+  color: map-get($black, light);
   overflow: auto;
 }
 
@@ -63,8 +65,8 @@
 }
 
 .saveButton {
-  background: #8baa64;
-  color: #fff;
+  background: map-get($green, base);
+  color: map-get($white, lighter);
   padding: 10px;
   border-radius: 5px;
   font-size: 16px;
@@ -75,9 +77,8 @@
   box-sizing: border-box;
   width: 100%;
   margin-bottom: 40px;
-}
 
-.saveButton:hover {
-  background-color: #474f3d;
+  &:hover {
+    background-color:map-get($green, dark) ;
+  }
 }
-

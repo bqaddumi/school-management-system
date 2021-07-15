@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Select from "react-select";
 import { MdPerson } from "react-icons/md";
 import { MdLock } from "react-icons/md";
 import { emailRegex } from "../../../consts/RegEx";
@@ -10,8 +11,8 @@ import Firebase from "../../../database/config";
 import InputField from "../../../components/common/InputField/InputField";
 import BackgroundLogo from "../../../components/common/backgroundLogo/backgroundLogo";
 import Footer from "../../../components/common/footer/footer";
-import Select from "react-select";
-import classes from "./addUsers.module.css";
+import classes from "./addUsers.module.scss";
+
 
 const AddUsers = () => {
   const history = useHistory();

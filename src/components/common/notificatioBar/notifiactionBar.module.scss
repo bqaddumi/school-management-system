@@ -1,27 +1,29 @@
+@import "../../../styles/palettes.scss";
+
 .success {
   background-color: #dff0d8;
-  color: #3c763d;
+  color: map-get($green, dark);
   text-align: center;
   padding: 5px;
 }
 
 .warning {
-  background-color: #f3bb6c;
-  color: #a27c48;
+  background-color: map-get($orange, light);
+  color: map-get($orange, dark);
   text-align: center;
   padding: 5px;
 }
 
 .note {
-  background-color: #acc8e3;
-  color: #7181a0;
+  background-color: map-get($blue, light);
+  color: map-get($blue, dark);
   text-align: center;
   padding: 5px;
 }
 
 .failure {
-  background-color: #de3029;
-  color: #43433f;
+  background-color: map-get($red, lighter);
+  color: map-get($red, dark);
   text-align: center;
   padding: 5px;
 }
