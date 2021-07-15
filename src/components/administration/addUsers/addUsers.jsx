@@ -13,7 +13,6 @@ import BackgroundLogo from "../../../components/common/backgroundLogo/background
 import Footer from "../../../components/common/footer/footer";
 import classes from "./addUsers.module.scss";
 
-
 const AddUsers = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -111,17 +110,16 @@ const AddUsers = () => {
     setUsersRole(event.target.value);
   };
 
-  const options =
-    [
-      { value: userRole.students, label: userRole.students },
-      { value: userRole.teacher, label: userRole.teacher },
-      { value: userRole.admin, label: userRole.admin },
-    ];
+  const options = [
+    { value: userRole.students, label: userRole.students },
+    { value: userRole.teacher, label: userRole.teacher },
+    { value: userRole.admin, label: userRole.admin },
+  ];
 
   return (
     <>
       <BackgroundLogo title="Add Users" />
-      <section className={classes.header}>
+      <section className={classes.tableSection}>
         <p className={classes.instruction}>Add A New User With Role</p>
         <form onSubmit={onSignupHandler}>
           <div className={classes.icons}>
@@ -175,7 +173,6 @@ const AddUsers = () => {
             isButtonClicked={isButtonClicked}
             autoComplete="on"
           />
-          <label className={classes.labelTitle}>Role Of Users</label>
           <Select
             onChange={usersRoleHandler}
             className={classes.selectUsersRole}

@@ -1,0 +1,172 @@
+@import "./palettes.scss";
+
+@mixin shared-body {
+  background-color: map-get($grey, lighter);
+  text-align: center;
+}
+
+@mixin action {
+  margin-top: 35px;
+  align-items: center;
+}
+
+@mixin section {
+  position: relative;
+  top: -60px;
+  margin: 0 30%;
+  max-width: 40%;
+  background-color: map-get($white, lighter);
+  color: map-get($black, light);
+}
+
+@mixin section-padding {
+  padding: 5px 40px 20px 40px;
+}
+
+@mixin button {
+  background: map-get($green, base);
+  color: map-get($white, lighter);
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 40px;
+
+  &:hover {
+    background-color: map-get($green, dark);
+  }
+}
+
+@mixin instruction {
+  font-size: 20px;
+  display: block;
+  margin-block-start: 16px;
+  margin-block-end: 16px;
+}
+
+@mixin icon {
+  position: relative;
+  top: 35px;
+  left: 12px;
+  width: 16px;
+  height: 16px;
+  font-size: 19px;
+  line-height: 1;
+  color: map-get($grey, light);
+}
+
+@mixin forward-link {
+  position: relative;
+  float: right;
+  color: map-get($grey, dark);
+  text-decoration: none;
+  top: -15px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@mixin select {
+  display: block;
+  padding: 10px 30px;
+  border: 0;
+  background: map-get($white, darker);
+  border-radius: 3px;
+  padding-left: 40px;
+  font-size: 14px;
+  outline: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 35px 5px;
+}
+
+@mixin header-container {
+  display: flex;
+  flex-direction: column;
+  color: map-get($black, dark);
+}
+
+@mixin loader-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: map-get($black, base);
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin toast-container {
+  visibility: visible;
+  width: 100%;
+  position: absolute;
+  top: 59px;
+  right: 0;
+  z-index: 999;
+  -webkit-keyframes: hideAnimation 0s ease-in-out 0.5s;
+  animation: hideAnimation 0s ease-in-out 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@mixin title {
+  position: relative;
+  border-radius: 7px 7px 0 0;
+  top: -60px;
+  height: 60px;
+  line-height: 60px;
+  background: map-get($pink, dark);
+  color: map-get($white, lighter);
+  padding-left: 20px;
+  max-width: 40%;
+  margin: 0 30%;
+}
+
+@mixin input($color:$white,$key:darker){
+  display: block;
+  padding: 10px 0;
+  border: 0;
+  background: map-get($color, $key);
+  border-radius: 3px;
+  padding-left: 40px;
+  font-size: 14px;
+  outline: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 10px 5px;
+}
+
+@mixin notification($color:$red,$key1:lighter,$key2:dark){
+    
+  background-color: map-get($color, $key1);
+  color: map-get($color, $key2);
+  text-align: center;
+  padding: 5px;
+}
+
+@mixin link($color1:$grey,$key1:darker,$color2:$pink,$key2:base){
+    position: relative;
+    color: map-get($color1, $key1);
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: 0.5s;
+    font-weight: 500;
+    padding: 12px 16px;
+  
+    &:hover {
+      color: map-get($color2, $key2);
+    }
+}

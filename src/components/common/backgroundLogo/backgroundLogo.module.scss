@@ -1,0 +1,18 @@
+@import "../../../styles//palettes.scss";
+@import "../../../styles//commonStyle.scss";
+
+.banner {
+    background: map-get($white, lighter );
+    height: 250px;
+  }
+  
+  .schoolLogo {
+    height: 140px;
+    top: 15%;
+    position: relative;
+  }
+  
+  .sitename {
+    text-align: left;
+    @include title;
+  }

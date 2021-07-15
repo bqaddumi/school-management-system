@@ -1,70 +1,31 @@
 @import "../../styles/palettes.scss";
+@import "../../styles//commonStyle.scss";
 
 body {
-  background-color: map-get($grey, lighter);
-  text-align: center;
+  @include shared-body;
 }
 
 .actions {
-  margin-top: 32px;
-  align-items: center;
+  @include action;
 }
 
 .singInPageSection {
-  position: relative;
-  top: -60px;
-  margin: 0 30%;
-  max-width: 40%;
-  background-color: map-get($white, lighter);
+  @include section;
   padding: 5px 40px 20px 40px;
-  color: map-get($black, light);
 }
 
 .signinButton {
-  background: map-get($green, base);
-  color: map-get($white, lighter);
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
-  line-height: 1;
-  border: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 100%;
-  margin-bottom: 40px;
-
-  &:hover {
-    background-color:  map-get($green, dark);;
-  }
+  @include button;
 }
 
 .instruction {
-  font-size: 20px;
-  display: block;
-  margin-block-start: 16px;
-  margin-block-end: 16px;
+  @include instruction;
 }
 
 .icons {
-  position: relative;
-  top: 35px;
-  left: 12px;
-  width: 16px;
-  height: 16px;
-  font-size: 19px;
-  line-height: 1;
-  color: map-get($grey, light);
+  @include icon;
 }
 
 .forgetPassword {
-  position: relative;
-  float: right;
-  color:  map-get($grey, dark);;
-  text-decoration: none;
-  top: -15px;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  @include forward-link;
 }

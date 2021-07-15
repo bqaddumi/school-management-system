@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css?familly=Poppins:200,300,400,500,600,700,800,900&display=swap");
 @import "../../styles/palettes.scss";
+@import "../../styles//commonStyle.scss";
+
 * {
   margin: 0;
   padding: 0;
@@ -61,31 +63,11 @@
 }
 
 .link {
-  position: relative;
-  color: map-get($grey, darker);
-  font-weight: 700;
-  text-decoration: none;
-  letter-spacing: 2px;
-  transition: 0.5s;
-  font-weight: 500;
-  padding: 12px 16px;
-
-  &:hover {
-    color: map-get($pink, dark);
-  }
+  @include link;
 }
 
 .stickyLink {
-  position: relative;
-  color: map-get($pink, dark);
-  font-weight: 700;
-  text-decoration: none;
-  letter-spacing: 2px;
-  transition: 0.5s;
-
-  &:hover {
-    color: map-get($grey, lighter);
-  }
+  @include link($color1: $pink, $key1: base, $color2: $grey, $key2: lighter);
 }
 
 .dropdown {
@@ -118,17 +100,7 @@
 }
 
 .logout {
-  font: inherit;
-  background-color: transparent;
-  color: map-get($grey, darker);
-  padding: 8px;
-  border-radius: 6px;
-  cursor: pointer;
-  border: 0;
-
-  &:hover {
-    color: map-get($pink, base);
-  }
+  @include link;
 }
 
 .stickyLogout {
@@ -139,25 +111,14 @@
   border-radius: 6px;
   cursor: pointer;
   border: 0;
-}
-
-.stickyLogout:hover {
-  color: #e6e6e6;
+  &:hover {
+    color: #e6e6e6;
+  }
 }
 
 .image {
   border-radius: 50%;
   width: 50px;
-}
-
-.success {
-  visibility: visible;
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
-  color: map-get($green, dark);
-  text-align: center;
-  padding-top: 5px;
-  padding-bottom: 5px;
 }
 
 .schoolLogoContain {
