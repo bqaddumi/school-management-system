@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import classes from "../mainNavbar.module.css";
 
 const TeachersSettings = ({ navLink, userName }) => {
