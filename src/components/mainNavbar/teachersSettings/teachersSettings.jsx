@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import classes from "../mainNavbar.module.css";
+import classes from "../mainNavbar.module.scss";
 
 const TeachersSettings = ({ navLink, userName }) => {
   return (

@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState, useCallback } from "react";
+import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
@@ -38,7 +39,7 @@ const Users = () => {
       db.collection("users")
         .doc(rowIndex.row.original.id)
         .update({
-          role: change.target.value,
+          role: change.value,
         })
         .then(() => {
           dispatch(
@@ -52,6 +53,12 @@ const Users = () => {
     },
     [dispatch]
   );
+
+  const options = [
+    { value: userRole.students, label: userRole.students },
+    { value: userRole.teacher, label: userRole.teacher },
+    { value: userRole.admin, label: userRole.admin },
+  ];
 
   const columns = useMemo(
     () => [
@@ -67,16 +74,11 @@ const Users = () => {
         Header: "Users Role",
         accessor: "Editing",
         Cell: (cellObj) => (
-          <select
-            required
+          <Select
             onChange={(change) => handleClickEditRow(cellObj, change)}
-            className={classes.selectUsersRole}
-          >
-            <option></option>
-            <option value="Students">{userRole.students}</option>
-            <option value="Teachers">{userRole.teacher}</option>
-            <option value="Administration">{userRole.admin}</option>
-          </select>
+            options={options}
+            placeholder={cellObj.row.original.role}
+          />
         ),
       },
     ],

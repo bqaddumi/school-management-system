@@ -4,7 +4,7 @@ import { loadingActions } from "../../../store/loading";
 import Firebase from '../../../database/config';
 import Table from '../../common/Tables/table'
 import Loader from "../../common/loader/loader";
-import classes from './classSchedule.module.css';
+import classes from './classSchedule.module.scss';
 
 const ClassSchedule = () => {
     const [users, setUsers] = useState([]);

@@ -16,7 +16,7 @@ body {
   display: block;
   padding: 10px 0;
   border: 0;
-  background: map-get($grey, lighter);
+  background: map-get($white, darker);
   border-radius: 3px;
   padding-left: 40px;
   font-size: 14px;
@@ -41,7 +41,7 @@ body {
   box-sizing: border-box;
   width: 100%;
   margin: 10px 5px;
-  background-color: rgba(333, 0, 0, 0.5);
+  background-color: map-get($red, light);
 }
 
 .errorMessage {

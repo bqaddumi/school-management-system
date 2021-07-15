@@ -1,12 +1,14 @@
+@import "../../../styles/palettes.scss";
+
 .headerContainer {
   margin: 5% 30%;
   max-width: 40%;
   border-radius: 6px;
   background-color: #ebebeb;
-  box-shadow: 0 1px 4px #000000;
+  box-shadow: 0 1px 4px map-get($black, darker);
   padding: 24px;
   text-align: center;
-  color: #000;
+  color: map-get($black, darker);
 }
 
 .actionsContainerAddingLecture {

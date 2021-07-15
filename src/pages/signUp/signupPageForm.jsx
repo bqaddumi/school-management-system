@@ -10,7 +10,7 @@ import Firebase from "../../database/config";
 import InputField from "../../components/common/InputField/InputField";
 import BackgroundLogo from "../../components/common/backgroundLogo/backgroundLogo.jsx";
 import Footer from "../../components/common/footer/footer";
-import classes from "./signupPageForm.module.css";
+import classes from "./signupPageForm.module.scss";
 
 const SignupPageForm = () => {
   const history = useHistory();

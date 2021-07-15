@@ -1,7 +1,7 @@
 @import "../../styles/palettes.scss";
 
 body {
-  background-color: map-get($grey, light);
+  background-color: map-get($grey, lighter);
   text-align: center;
 }
 
@@ -15,7 +15,7 @@ body {
   top: -60px;
   margin: 0 30%;
   max-width: 40%;
-  background-color: #fff;
+  background-color: map-get($white, lighter);
   padding: 5px 40px 20px 40px;
   color: map-get($black, light);
 }
@@ -54,13 +54,13 @@ body {
   height: 16px;
   font-size: 19px;
   line-height: 1;
-  color: map-get($grey, base);
+  color: map-get($grey, light);
 }
 
 .forgetPassword {
   position: relative;
   float: right;
-  color:  map-get($grey, darker);;
+  color:  map-get($grey, dark);;
   text-decoration: none;
   top: -15px;
 

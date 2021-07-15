@@ -16,14 +16,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: map-get($black, base);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: map-get($white, lighter);
 }
 
 .App-link {
@@ -52,7 +52,7 @@
 .loaderContainer {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: map-get($black, base);
   position: absolute;
   top: 0;
   right: 0;
