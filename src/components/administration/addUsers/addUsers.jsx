@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Select from "react-select";
 import { MdPerson } from "react-icons/md";
 import { MdLock } from "react-icons/md";
 import { emailRegex } from "../../../consts/RegEx";
@@ -11,6 +12,7 @@ import InputField from "../../../components/common/InputField/InputField";
 import BackgroundLogo from "../../../components/common/backgroundLogo/backgroundLogo";
 import Footer from "../../../components/common/footer/footer";
 import classes from "./addUsers.module.scss";
+
 
 const AddUsers = () => {
   const history = useHistory();
@@ -109,6 +111,13 @@ const AddUsers = () => {
     setUsersRole(event.target.value);
   };
 
+  const options =
+    [
+      { value: userRole.students, label: userRole.students },
+      { value: userRole.teacher, label: userRole.teacher },
+      { value: userRole.admin, label: userRole.admin },
+    ];
+
   return (
     <>
       <BackgroundLogo title="Add Users" />
@@ -167,16 +176,13 @@ const AddUsers = () => {
             autoComplete="on"
           />
           <label className={classes.labelTitle}>Role Of Users</label>
-          <select
-            required
-            className={classes.selectUsersRole}
+          <Select
             onChange={usersRoleHandler}
-          >
-            <option></option>
-            <option value="Students">{userRole.students}</option>
-            <option value="Teachers">{userRole.teacher}</option>
-            <option value="Administration">{userRole.admin}</option>
-          </select>
+            className={classes.selectUsersRole}
+            options={options}
+            placeholder={userRole.students}
+          />
+
           {usersRole === "Teachers" && (
             <InputField
               label="Major"

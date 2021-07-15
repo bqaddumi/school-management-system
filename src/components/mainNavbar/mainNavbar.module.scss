@@ -82,7 +82,7 @@
   text-decoration: none;
   letter-spacing: 2px;
   transition: 0.5s;
-  font-weight: 500;
+
   &:hover {
     color: map-get($grey, lighter);
   }
@@ -130,8 +130,6 @@
     color: map-get($pink, base);
   }
 }
-
-
 
 .stickyLogout {
   font: inherit;
