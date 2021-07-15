@@ -10,7 +10,7 @@ import Firebase from "../../../database/config";
 import InputField from "../../../components/common/InputField/InputField";
 import BackgroundLogo from "../../../components/common/backgroundLogo/backgroundLogo";
 import Footer from "../../../components/common/footer/footer";
-import classes from "./addUsers.module.css";
+import classes from "./addUsers.module.scss";
 
 const AddUsers = () => {
   const history = useHistory();

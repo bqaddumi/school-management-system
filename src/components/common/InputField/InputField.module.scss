@@ -1,10 +1,12 @@
+@import "../../../styles/palettes.scss";
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .label {
   display: block;
-  color: #000;
+  color: map-get($black, darker);
   font-weight: bold;
   margin-top: 24px;
   margin-bottom: 8px;
@@ -14,7 +16,7 @@ body {
   display: block;
   padding: 10px 0;
   border: 0;
-  background: #eee;
+  background: map-get($grey, lighter);
   border-radius: 3px;
   padding-left: 40px;
   font-size: 14px;
@@ -23,7 +25,7 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
-  margin:10px 5px
+  margin: 10px 5px;
 }
 
 .errorInput {
@@ -38,12 +40,10 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
-  margin:10px 5px;
+  margin: 10px 5px;
   background-color: rgba(333, 0, 0, 0.5);
 }
 
 .errorMessage {
-  color: #ff0000;
+  color: map-get($red, base);
 }
-
-

@@ -1,0 +1,35 @@
+$black: (
+  darker:#000,
+  dark:#000009,
+  // base: #000,
+  light: #4a4a4a,
+);
+$white: (
+  dark:#F5F5F5,
+  lighter: #fff,
+);
+$grey: (
+  darker:#9c9c9c,
+  dark: #cbc8c8,
+  //links
+  base: #ccc,
+  //icons
+  light: #e9e9e9,
+  lighter: #eee//input,
+);
+$red: (
+  base: #ff0000,
+);
+$green: (
+  dark: #474f3d,
+  base: #8baa64,
+  //button
+);
+$blue: (
+  darker: hsl(201, 61%, 34%),
+  dark: hsl(198, 57%, 39%),
+  base: hsl(196, 59%, 42%),
+  light: hsl(194, 56%, 51%),
+  lighter: hsl(192, 61%, 53%),
+);
+$pink: ();

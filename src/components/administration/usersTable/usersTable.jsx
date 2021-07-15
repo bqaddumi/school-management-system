@@ -7,7 +7,7 @@ import Table from "../../common/Tables/table";
 import Loader from "../../common/loader/loader";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo.jsx";
 import Footer from "../../common/footer/footer";
-import classes from "./usersTable.module.css";
+import classes from "./usersTable.module.scss";
 
 const Users = () => {
   const [users, setUsers] = useState([]);

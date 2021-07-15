@@ -1,6 +1,6 @@
 import React from "react";
 import { useTable } from "react-table";
-import classes from '../../administration/usersTable/usersTable.module.css';
+import classes from '../../administration/usersTable/usersTable.module.scss';
 
 const Table = ({ columns, data }) => {
   const {
