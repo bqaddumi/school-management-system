@@ -1,5 +1,5 @@
 import React from "react";
-// import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import classes from "../mainNavbar.module.scss";
 
 const TeachersSettings = ({ navLink, userName }) => {
@@ -7,7 +7,7 @@ const TeachersSettings = ({ navLink, userName }) => {
     <div className={classes.dropdown}>
       <div className={classes[navLink]}>{userName}</div>
       <div className={classes.userSettingsDropDown}>
-        {/* <NavLink className={classes[navLink]} to="/manageSchedule">
+        <NavLink className={classes[navLink]} to="/manageSchedule">
           Manage Schedule
         </NavLink>
         <NavLink className={classes[navLink]} to="/classSchedule">
@@ -15,7 +15,7 @@ const TeachersSettings = ({ navLink, userName }) => {
         </NavLink>
         <NavLink className={classes[navLink]} to="/about">
           About
-        </NavLink> */}
+        </NavLink>
         
       </div>
     </div>

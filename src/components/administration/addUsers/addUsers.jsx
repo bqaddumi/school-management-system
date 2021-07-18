@@ -107,7 +107,7 @@ const AddUsers = () => {
   };
 
   const usersRoleHandler = (event) => {
-    setUsersRole(event.target.value);
+    setUsersRole(event.value);
   };
 
   const options = [

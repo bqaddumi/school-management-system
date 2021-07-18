@@ -1,6 +1,6 @@
 import React from 'react';
 import educationSchoolLogo from "../../images/educationSchoolLogo.jpg";
-import classes from "./studentsPage.module.css";
+import classes from "./studentsPage.module.scss";
 
 const Students = () => {
     return (

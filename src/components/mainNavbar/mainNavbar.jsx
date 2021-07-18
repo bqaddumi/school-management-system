@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
 import { MdHome } from "react-icons/md";
 import { authActions } from "../../store/auth";
-import UsersSettings from "./usersSettings/usersSettings";
+import AdminSetting from "./adminSetting/adminSetting";
 import Firebase from "../../database/config";
 import schoolLogo from "../../images/educationSchoolLogo.jpg";
 import TeachersSettings from "./teachersSettings/teachersSettings";
@@ -61,7 +61,7 @@ const MainNavbar = () => {
 
   const navItems = [
     userInformation.role === "Administration" ? (
-      <UsersSettings userName={userInformation.userName} navLink={navLink} />
+      <AdminSetting userName={userInformation.userName} navLink={navLink} />
     ) : userInformation.role === "Teachers" ? (
       <TeachersSettings userName={userInformation.userName} navLink={navLink} />
     ) : (

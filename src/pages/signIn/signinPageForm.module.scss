@@ -1,31 +1,31 @@
 @import "../../styles/palettes.scss";
-@import "../../styles//commonStyle.scss";
+@import "../../styles/styles.scss";
 
 body {
   @include shared-body;
-}
 
-.actions {
-  @include action;
-}
+  .singInPageSection {
+    @include section();
+    padding: 5px 40px 20px 40px;
 
-.singInPageSection {
-  @include section;
-  padding: 5px 40px 20px 40px;
-}
+    .instruction {
+      @include instruction;
+    }
 
-.signinButton {
-  @include button;
-}
+    .icons {
+      @include icon;
+    }
 
-.instruction {
-  @include instruction;
-}
+    .actions {
+      @include action;
 
-.icons {
-  @include icon;
-}
+      .signinButton {
+        @include button;
+      }
+    }
 
-.forgetPassword {
-  @include forward-link;
+    .forgetPassword {
+      @include forward-link;
+    }
+  }
 }

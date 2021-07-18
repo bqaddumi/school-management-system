@@ -1,4 +1,5 @@
 @import "./styles/palettes.scss";
+@import "./styles//styles.scss";
 
 .App {
   text-align: center;
@@ -42,44 +43,35 @@
 .mainContainer {
   width: 100vw;
   height: 100vh;
-}
 
-.routsContainer {
-  position: relative;
-  height: 100vh;
-}
+  .toastContainer {
+    visibility: visible;
+    width: 100vw;
+    position: absolute;
+    right: 0;
+    z-index: 999;
+    -webkit-keyframes: hideAnimation 0s ease-in-out 0.5s;
+    animation: hideAnimation 0s ease-in-out 0.5s;
+    animation-fill-mode: forwards;
 
-.loaderContainer {
-  width: 100vw;
-  height: 100vh;
-  background-color: map-get($black, base);
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.toastContainer {
-  visibility: visible;
-  width: 100vw;
-  position: absolute;
-  right: 0;
-  z-index: 999;
-  -webkit-keyframes: hideAnimation 0s ease-in-out 0.5s;
-  animation: hideAnimation 0s ease-in-out 0.5s;
-  animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes hideAnimation {
-  to {
-    visibility: hidden;
+    @-webkit-keyframes hideAnimation {
+      to {
+        visibility: hidden;
+      }
+    }
+    @keyframes hideAnimation {
+      to {
+        visibility: hidden;
+      }
+    }
   }
-}
-@keyframes hideAnimation {
-  to {
-    visibility: hidden;
+
+  .routsContainer {
+    position: relative;
+    height: 100vh;
+
+    .loaderContainer {
+      @include loader-container;
+    }
   }
 }

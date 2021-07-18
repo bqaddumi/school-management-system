@@ -1,5 +1,5 @@
 @import "../../../styles/palettes.scss";
-@import "../../../styles//commonStyle.scss";
+@import "../../../styles//styles.scss";
 
 .success {
   @include notification($color: $green, $key1: light);

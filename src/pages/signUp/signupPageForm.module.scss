@@ -1,27 +1,27 @@
 @import "../../styles/palettes.scss";
-@import "../../styles/commonStyle.scss";
-
-.actions {
-  @include action;
-}
+@import "../../styles/styles.scss";
 
 .singupPageSection {
   @include section;
   padding: 5px 40px 20px 40px;
-}
 
-.signupButton {
-  @include button;
-}
+  .instruction {
+    @include instruction;
+  }
 
-.instruction {
-  @include instruction;
-}
+  .icons {
+    @include icon;
+  }
 
-.icons {
-  @include icon;
-}
+  .actions {
+    @include action;
 
-.loginForward {
-  @include forward-link;
+    .signupButton {
+      @include button;
+    }
+  }
+
+  .loginForward {
+    @include forward-link;
+  }
 }

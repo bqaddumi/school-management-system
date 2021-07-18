@@ -1,0 +1,37 @@
+@import "../../../styles/styles.scss";
+
+.seactionConatainer {
+  @include section;
+  overflow: auto;
+
+  .classesTime {
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+
+    .teachers {
+      display: flex;
+      align-items: center;
+
+      .labelName {
+        display: inline-block;
+        padding: 10px;
+      }
+
+      .selectTeachersName {
+        @include input($width: 50%);
+      }
+    }
+
+    .viewClasses {
+      @include button($width: 25%, $margin: 10px 5px);
+    }
+  }
+
+  .headerClassesTime {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 10px;
+  }
+}

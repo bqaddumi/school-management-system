@@ -1,27 +1,26 @@
-@import "../../../styles/palettes.scss";
-@import "../../../styles/commonStyle.scss";
+@import "../../../styles/styles.scss";
 
 .tableSection {
   @include section;
   @include section-padding;
-}
 
-.actions {
-  @include action;
-}
+  .instruction {
+    @include instruction;
+  }
 
-.signupButton {
-  @include button;
-}
+  .icons {
+    @include icon;
+  }
 
-.selectUsersRole {
-  @include select;
-}
+  .selectUsersRole {
+    @include select;
+  }
 
-.instruction {
-  @include instruction;
-}
+  .actions {
+    @include action;
 
-.icons {
-  @include icon;
+    .signupButton {
+      @include button;
+    }
+  }
 }

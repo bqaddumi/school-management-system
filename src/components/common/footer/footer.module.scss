@@ -1,12 +1,10 @@
-@import "../../../styles//commonStyle.scss";
+@import "../../../styles/palettes.scss";
+@import "../../../styles/styles.scss";
+
 .loginFooter {
-    position: relative;
-    clear: both;
-    height: 35px;
-    background: #d9d5d2;
-    text-align: right;
-    border-radius: 0 0 7px 7px;
-    max-width: 40%;
-    margin: 0 30%;
-    top: -60px;
+     clear: both;
+     height: 35px;
+     text-align: right;
+     border-radius: 0 0 7px 7px;
+    @include modal-style($background:map-get($grey,base),)
   }

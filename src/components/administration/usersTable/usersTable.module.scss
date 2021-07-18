@@ -1,8 +1,26 @@
 @import "../../../styles/palettes.scss";
-@import "../../../styles/commonStyle.scss";
+@import "../../../styles/styles.scss";
 
-.headerContainer {
-  @include header-container;
+.usersSection {
+  @include section;
+  max-height: 60%;
+  min-height: 30%;
+  overflow: auto;
+
+  .headerContainer {
+    display: flex;
+    flex-direction: column;
+    color: map-get($black, dark);
+    
+    .actions {
+      @include action;
+      margin: 10px 24px;
+
+      .saveButton {
+        @include button;
+      }
+    }
+  }
 }
 
 .loaderContainer {
@@ -12,36 +30,11 @@
 .table {
   border-spacing: 0;
   border: 1px solid map-get($grey, lighter);
-}
 
-.headerGroup {
-  // margin: 0;
-  padding: 12px;
-  border-bottom: 1px solid map-get($grey, lighter);
-  border-right: 1px solid map-get($grey, lighter);
-  position: relative;
-}
-
-.selectUsersRole {
-  @include select;
-}
-
-.toastContainer {
-  @include toast-container;
-}
-
-.usersSection {
-  @include section;
-  max-height: 60%;
-  min-height: 30%;
-  overflow: auto;
-}
-
-.actions {
-  @include action;
-  margin: 10px 24px;
-}
-
-.saveButton {
-  @include button;
+  .headerGroup {
+    padding: 12px;
+    border-bottom: 1px solid map-get($grey, lighter);
+    border-right: 1px solid map-get($grey, lighter);
+    position: relative;
+  }
 }

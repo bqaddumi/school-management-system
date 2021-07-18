@@ -1,5 +1,5 @@
 @import "../../../styles//palettes.scss";
-@import "../../../styles//commonStyle.scss";
+@import "../../../styles//styles.scss";
 
 .banner {
     background: map-get($white, lighter );
@@ -14,5 +14,9 @@
   
   .sitename {
     text-align: left;
-    @include title;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 20px;
+    border-radius: 7px 7px 0 0;
+    @include modal-style;
   }
