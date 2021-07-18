@@ -1,6 +1,4 @@
-.imageStudent {
-  width: 30%;
-}
+
 
 .studentsPageContainer {
   width: 100%;
@@ -8,4 +6,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .imageStudent {
+    width: 30%;
+  }
 }

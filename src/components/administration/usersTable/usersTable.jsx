@@ -92,11 +92,6 @@ const Users = () => {
       <BackgroundLogo title="Users Table" />
       <section className={classes.usersSection}>
         <div className={classes.headerContainer}>
-          {isLoadingAdmin && (
-            <div className={classes.loaderContainer}>
-              <Loader type="loader" />
-            </div>
-          )}
           <div className={classes.actions}>
             <button className={classes.saveButton} onClick={saveButtonHanler}>
               Save
@@ -105,6 +100,11 @@ const Users = () => {
           <Table columns={columns} data={usersExceptCurrent} />
         </div>
       </section>
+      {isLoadingAdmin && (
+        <div className={classes.loaderContainer}>
+          <Loader type="loader" />
+        </div>
+      )}
       <Footer />
     </>
   );

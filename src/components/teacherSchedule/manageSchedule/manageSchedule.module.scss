@@ -1,71 +1,28 @@
 @import "../../../styles/palettes.scss";
+@import "../../../styles/styles.scss";
 
-.headerContainer {
-  margin: 5% 30%;
-  max-width: 40%;
-  border-radius: 6px;
-  background-color: #ebebeb;
-  box-shadow: 0 1px 4px map-get($black, darker);
-  padding: 24px;
-  text-align: center;
-  color: map-get($black, darker);
-}
+.sectionContainer {
+  @include section;
+  @include section-padding($padding: 5px 80px 20px 40px);
 
-.actionsContainerAddingLecture {
-  margin-top: 32px;
-  align-items: center;
-}
+  .instruction {
+    @include instruction;
+  }
 
-.addingLectureButton {
-  cursor: pointer;
-  font: inherit;
-  color: #000;
-  background-color: #ebebeb;
-  border: 1px solid #453e4a;
-  border-radius: 4px;
-  padding: 8px 40px;
-}
+  .selectDaysLectures {
+    @include input;
+  }
 
-.addingLectureButton:hover {
-  background-color: #37079f;
-  border-color: #37079f;
-}
+  .selectClassLectures {
+    @include input;
+  }
 
-.selectDaysLectures {
-  font: inherit;
-  background-color: #ebebeb;
-  color: #000;
-  border-radius: 4px;
-  border: 1px solid #000;
-  width: 40%;
-  padding: 8px;
-  align-content: center;
-}
+  .actionsContainerAddingLecture {
+    margin-top: 32px;
+    align-items: center;
 
-.selectClassLectures {
-  font: inherit;
-  background-color: #ebebeb;
-  color: #000;
-  border-radius: 4px;
-  border: 1px solid #000;
-  width: 40%;
-  padding: 8px;
-  align-content: center;
-}
-
-.labelTitle {
-  display: block;
-  color: #000;
-  font-weight: bold;
-  margin-top: 24px;
-  margin-bottom: 8px;
-}
-
-.labelBody {
-  display: block;
-  color: #000;
-  font-weight: bold;
-  margin-top: 24px;
-  padding: 2px;
-  margin-bottom: 8px;
+    .addingLectureButton {
+      @include button();
+    }
+  }
 }

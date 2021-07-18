@@ -13,10 +13,10 @@ import About from "./pages/about/about";
 import AddUsers from "./components/administration/addUsers/addUsers";
 import Teachers from "./pages/teachers/teachers";
 import Students from "./pages/students/students";
-import TeacherSchedule from "./components/administration/teacherSchedule/teacherSchedule";
+import TeacherClasses from "./components/administration/teacherClasses/teacherClasses";
 import ManageSchedule from "./components/teacherSchedule/manageSchedule/manageSchedule";
 import ClassSchedule from "./components/teacherSchedule/classSchedule/classSchedule";
-import classes from "./App.scss";
+import classes from "./App.module.scss";
 
 const App = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);
@@ -69,8 +69,8 @@ const App = () => {
             redirectPath={"/"}
           />
           <PrivateRoute
-            path={'/teacherSchedule'}
-            component={TeacherSchedule}
+            path={'/teacherClasses'}
+            component={TeacherClasses}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
             redirectPath={"/"}
           />

@@ -1,6 +1,6 @@
 import React from "react";
 import schoolLogo from "../../../images/schoolLogo.jpg";
-import classes from "./backgroundLogo.module.css";
+import classes from "./backgroundLogo.module.scss";
 
 const BackgroundLogo = ({ title }) => {
   return (
