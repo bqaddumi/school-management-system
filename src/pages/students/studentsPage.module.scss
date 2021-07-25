@@ -1,13 +1,13 @@
+@import "../../styles/styles.scss";
 
+.seactionConatainer {
+  @include section;
+  overflow: auto;
 
-.studentsPageContainer {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .imageStudent {
-    width: 30%;
+  .headerClassesTime {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 10px;
   }
 }

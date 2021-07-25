@@ -76,50 +76,50 @@ const ManageSchedule = () => {
 
     return (
         <>
-        <BackgroundLogo title={"Manage Schedule"}/>
-        <section className={classes.sectionContainer}>
-        <p className={classes.instruction}>Mange your Lecture by set day, Time and class # </p>
-            <form onSubmit={onAddingLectureHandler}>
-                <select placeholder="Monday" required className={classes.selectDaysLectures} onChange={selectDaysLecturesHandler}>
-                    <option></option>
-                    <option value="Sunday">Sunday</option>
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                </select>
-                <InputField
-                    label="From"
-                    onChange={selectTimeFromLecturesHandler}
-                    type="time"
-                    id="time"
-                    placeholder="time"
-                    value={timeFromLecture}
-                    required={true}
-                />
-                <InputField
-                    label="To"
-                    onChange={selectTimeToLecturesHandler}
-                    type="time"
-                    id="time"
-                    placeholder="time"
-                    value={timeToLecture}
-                    required={true}
-                />
-                <select required className={classes.selectClassLectures} onChange={selectClassLecturesHandler}>
-                    <option></option>
-                    <option value="1st">1st</option>
-                    <option value="2st">2st</option>
-                    <option value="3st">3st</option>
-                    <option value="4st">4st</option>
-                    <option value="5st">5st</option>
-                </select>
-                <div className={classes.actionsContainerAddingLecture}>
-                    <button className={classes.addingLectureButton}>Add Lecture Time</button>
-                </div>
-            </form>
-        </section >
-        <Footer/>
+            <BackgroundLogo title={"Manage Schedule"} />
+            <section className={classes.sectionContainer}>
+                <p className={classes.instruction}>Mange your Lecture by set day, Time and class # </p>
+                <form onSubmit={onAddingLectureHandler}>
+                    <select placeholder="Monday" required className={classes.selectDaysLectures} onChange={selectDaysLecturesHandler}>
+                        <option></option>
+                        <option value="Sunday">Sunday</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                    </select>
+                    <InputField
+                        label="From"
+                        onChange={selectTimeFromLecturesHandler}
+                        type="time"
+                        id="time"
+                        placeholder="time"
+                        value={timeFromLecture}
+                        required={true}
+                    />
+                    <InputField
+                        label="To"
+                        onChange={selectTimeToLecturesHandler}
+                        type="time"
+                        id="time"
+                        placeholder="time"
+                        value={timeToLecture}
+                        required={true}
+                    />
+                    <select required className={classes.selectClassLectures} onChange={selectClassLecturesHandler}>
+                        <option></option>
+                        <option value="1st">1st</option>
+                        <option value="2st">2st</option>
+                        <option value="3st">3st</option>
+                        <option value="4st">4st</option>
+                        <option value="5st">5st</option>
+                    </select>
+                    <div className={classes.actionsContainerAddingLecture}>
+                        <button className={classes.addingLectureButton}>Add Lecture Time</button>
+                    </div>
+                </form>
+            </section >
+            <Footer />
         </>
     )
 };
