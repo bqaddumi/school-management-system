@@ -1,10 +1,10 @@
 @import "../../styles/styles.scss";
 
-.seactionConatainer {
+.sectionContainer {
   @include section;
   overflow: auto;
 
-  .headerClassesTime {
+  .headerInformation {
     display: flex;
     flex-direction: column;
     text-align: center;

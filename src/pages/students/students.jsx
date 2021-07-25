@@ -1,10 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Table from "../../components/common/Tables/table";
 import BackgroundLogo from "../../components/common/backgroundLogo/backgroundLogo";
 import Footer from "../../components/common/footer/footer";
 import classes from "./studentsPage.module.scss";
+import { useSelector } from "react-redux";
+import Firebase from "../../database/config";
 
 const Students = () => {
+    const usersObject = useSelector((state) => state.auth.userInformation);
+    const userInformation = JSON.parse(usersObject ? usersObject : false);
+    const [information, setInformations] = useState([]);
+
+    useEffect(() => {
+        const db = Firebase.firestore();
+        return (
+            db.collection("teachers").onSnapshot((snapshot) => {
+                const postData = [];
+                snapshot.forEach((doc) => {
+                    return (
+                        db.collection("users")
+                            .doc(doc.data().token)
+                            .get()
+                            .then((response) => {
+                                return (
+                                    db.collection("classes")
+                                        .doc(userInformation.token)
+                                        .get()
+                                        .then((res) => {
+                                            if (doc.data().class === res.data().classNumber) {
+                                                postData.push({ ...doc.data(), ...response.data() });
+                                            }
+                                        })
+                                );
+                            })
+                    );
+                });
+                setInformations(postData);
+            })
+        );
+    }, [userInformation.token]);
+
+    console.log(information);
     const columns = React.useMemo(
         () => [
             {
@@ -28,8 +64,8 @@ const Students = () => {
                 Cell: ({ cell: { value } }) => value || "-",
             },
             {
-                Header: "E-mail Teacher",
-                accessor: "uid",
+                Header: "Teacher Name",
+                accessor: "userName",
                 Cell: ({ cell: { value } }) => value || "-",
             },
             {
@@ -44,9 +80,9 @@ const Students = () => {
     return (
         <>
             <BackgroundLogo title="Students Classes Time" />
-            <section className={classes.seactionConatainer}>
-                <div className={classes.headerClassesTime}>
-                    <Table columns={columns} data={[]} />
+            <section className={classes.sectionContainer}>
+                <div className={classes.headerInformation}>
+                    <Table columns={columns} data={information} />
                 </div>
             </section>
             <Footer />

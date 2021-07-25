@@ -3,6 +3,7 @@ import { useTable } from "react-table";
 import classes from '../../administration/usersTable/usersTable.module.scss';
 
 const Table = ({ columns, data }) => {
+  console.log(data);
   const {
     getTableProps,
     getTableBodyProps,
