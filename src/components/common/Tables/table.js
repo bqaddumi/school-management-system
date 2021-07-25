@@ -1,19 +1,21 @@
 import React from "react";
-import { useTable } from "react-table";
+import { useSortBy, useTable } from "react-table";
 import classes from '../../administration/usersTable/usersTable.module.scss';
 
 const Table = ({ columns, data }) => {
-  console.log(data);
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({
-    columns,
-    data,
-  })
+  } = useTable(
+    {
+      columns,
+      data,
+    },
+    useSortBy
+  )
 
   return (
     <table {...getTableProps()} className={classes.table}>
@@ -22,7 +24,7 @@ const Table = ({ columns, data }) => {
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
               <th className={classes.headerGroup}
-                {...column.getHeaderProps()}
+                {...column.getHeaderProps(column.getSortByToggleProps())}
               >
                 {column.render('Header')}
               </th>
