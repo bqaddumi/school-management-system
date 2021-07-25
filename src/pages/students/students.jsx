@@ -40,8 +40,6 @@ const Students = () => {
         );
     }, [userInformation.token]);
 
-    console.log(information);
-    console.log(information.sort(   ));
     const columns = React.useMemo(
         () => [
             {
