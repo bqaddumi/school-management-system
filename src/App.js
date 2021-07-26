@@ -9,7 +9,7 @@ import SigninPageForm from "./pages/signIn/signinPageForm";
 import Loader from "./components/common/loader/loader";
 import NotifiactionBar from "./components/common/notificatioBar/notifiactionBar";
 import Users from "./components/administration/usersTable/usersTable";
-import About from "./pages/about/about";
+// import About from "./pages/about/about";
 import AddUsers from "./components/administration/addUsers/addUsers";
 import AddStudents from "./components/administration/addStudents/addStudents";
 import Teachers from "./pages/teachers/teachers";
@@ -122,9 +122,9 @@ const App = () => {
           <Route path="/home" exact>
             <HomePage />
           </Route>
-          <Route path="/about" exact>
+          {/* <Route path="/about" >
             <About />
-          </Route>
+          </Route> */}
           <Route path="*">
             <Redirect to="/home" />
           </Route>
