@@ -54,12 +54,6 @@ const Users = () => {
     [dispatch]
   );
 
-  const options = [
-    { value: userRole.students, label: userRole.students },
-    { value: userRole.teacher, label: userRole.teacher },
-    { value: userRole.admin, label: userRole.admin },
-  ];
-
   const columns = useMemo(
     () => [
       {
@@ -76,13 +70,17 @@ const Users = () => {
         Cell: (cellObj) => (
           <Select
             onChange={(change) => handleClickEditRow(cellObj, change)}
-            options={options}
+            options={
+              ({ value: userRole.students, label: userRole.students },
+              { value: userRole.teacher, label: userRole.teacher },
+              { value: userRole.admin, label: userRole.admin })
+            }
             placeholder={cellObj.row.original.role}
           />
         ),
       },
     ],
-    [handleClickEditRow]
+    [handleClickEditRow, userRole.admin, userRole.students, userRole.teacher]
   );
 
   const saveButtonHanler = () => {};

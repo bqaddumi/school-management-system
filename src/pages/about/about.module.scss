@@ -66,8 +66,8 @@
   padding: 20px;
   text-align: center;
   bottom: 0;
-  color: white;
-  background-color:map-get($grey,base);;
+  color:  map-get($white, lighter);
+  background-color:map-get($grey,base);
   width: 100%;
   font-size: 13px;
   
