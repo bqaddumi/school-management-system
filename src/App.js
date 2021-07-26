@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import PrivateRoute from 'private-route-react';
+import PrivateRoute from "private-route-react";
 import MainNavbar from "./components/mainNavbar/mainNavbar";
 import HomePage from "./pages/home/homePage";
 import SignupPageForm from "./pages/signUp/signupPageForm";
@@ -11,6 +11,7 @@ import NotifiactionBar from "./components/common/notificatioBar/notifiactionBar"
 import Users from "./components/administration/usersTable/usersTable";
 // import About from "./pages/about/about";
 import AddUsers from "./components/administration/addUsers/addUsers";
+import AddStudents from "./components/administration/addStudents/addStudents";
 import Teachers from "./pages/teachers/teachers";
 import Students from "./pages/students/students";
 import TeacherClasses from "./components/administration/teacherClasses/teacherClasses";
@@ -33,12 +34,14 @@ const App = () => {
   };
 
   const isAbleToAccessRouteTeacher = () => {
-    if (userInformation && userInformation.role === userRole.teacher) return true;
+    if (userInformation && userInformation.role === userRole.teacher)
+      return true;
     return false;
   };
 
   const isAbleToAccessRouteStudent = () => {
-    if (userInformation && userInformation.role === userRole.students) return true;
+    if (userInformation && userInformation.role === userRole.students)
+      return true;
     return false;
   };
 
@@ -69,25 +72,31 @@ const App = () => {
             redirectPath={"/"}
           />
           <PrivateRoute
-            path={'/teacherClasses'}
+            path={"/teacherClasses"}
             component={TeacherClasses}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
             redirectPath={"/"}
           />
           <PrivateRoute
-            path={'/manageSchedule'}
+            path={"/manageSchedule"}
             component={ManageSchedule}
             isAbleToAccessRoute={isAbleToAccessRouteTeacher}
-            redirectPath={'/'}
+            redirectPath={"/"}
           />
           <PrivateRoute
-            path={'/classSchedule'}
+            path={"/classSchedule"}
             component={ClassSchedule}
             isAbleToAccessRoute={isAbleToAccessRouteTeacher}
-            redirectPath={'/'}
+            redirectPath={"/"}
           />
           <PrivateRoute
-            path={'/addUser'}
+            path={"/addStudents"}
+            component={AddStudents}
+            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
+            redirectPath={"/"}
+          />
+          <PrivateRoute
+            path={"/addUser"}
             component={AddUsers}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
             redirectPath={"/"}

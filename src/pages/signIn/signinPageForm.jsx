@@ -49,28 +49,28 @@ const SigninForm = () => {
         position: "top",
       })
     );
-    dispatch(loadingActions.setIsLoading(false));
     database
       .collection("users")
       .doc(res.user.uid)
       .get()
       .then((doc) => {
         dispatch(authActions.login(doc.data()));
+        dispatch(loadingActions.setIsLoading(false));
         switch (doc.data().role) {
           case userRole.admin:
-            history.push('/admin')
+            history.push("/admin");
             break;
           case userRole.teacher:
-            history.push('/teacher')
+            history.push("/teacher");
             break;
           case userRole.students:
-            history.push('/student')
+            history.push("/student");
             break;
           default:
-            history.push('/home')
+            history.push("/home");
             break;
         }
-      })
+      });
   };
 
   const onSigninHandler = (event) => {
