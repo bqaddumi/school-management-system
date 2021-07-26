@@ -42,7 +42,7 @@ const Students = () => {
                 dispatch(loadingActions.setIsLoading(false));
             })
         );
-    }, [userInformation.token]);
+    }, [userInformation.token, dispatch]);
 
     const columns = React.useMemo(
         () => [
