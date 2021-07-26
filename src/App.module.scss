@@ -50,8 +50,8 @@
     position: absolute;
     right: 0;
     z-index: 999;
-    -webkit-keyframes: hideAnimation 0s ease-in-out 0.5s;
-    animation: hideAnimation 0s ease-in-out 0.5s;
+    -webkit-keyframes: hideAnimation 0s ease-in-out 1s;
+    animation: hideAnimation 0s ease-in-out 1s;
     animation-fill-mode: forwards;
 
     @-webkit-keyframes hideAnimation {
