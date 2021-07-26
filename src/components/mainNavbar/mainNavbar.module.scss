@@ -102,8 +102,9 @@
     display: none;
     flex-direction: column;
     position: absolute;
+    margin-left: -70px;
     background-color: map-get($white, dark);
-    min-width: 200px;
+    min-width: 250px;
     box-shadow: 0px 8px 16px 0px map-get($black, lighter);
     z-index: 1;
     text-align: center;
