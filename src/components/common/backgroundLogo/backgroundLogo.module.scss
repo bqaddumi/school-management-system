@@ -1,5 +1,8 @@
+@import "../../../styles//palettes.scss";
+@import "../../../styles//styles.scss";
+
 .banner {
-    background: #fff;
+    background: map-get($white, lighter );
     height: 250px;
   }
   
@@ -11,14 +14,9 @@
   
   .sitename {
     text-align: left;
-    position: relative;
-    border-radius: 7px 7px 0 0;
-    top: -60px;
     height: 60px;
     line-height: 60px;
-    background: #FC898E;
-    color: #fff;
     padding-left: 20px;
-    max-width: 40%;
-    margin: 0 30%;
+    border-radius: 7px 7px 0 0;
+    @include modal-style;
   }

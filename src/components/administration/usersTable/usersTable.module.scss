@@ -1,84 +1,40 @@
 @import "../../../styles/palettes.scss";
+@import "../../../styles/styles.scss";
 
-.headerContainer {
-  display: flex;
-  flex-direction: column;
-  color: map-get($black, dark);
+.usersSection {
+  @include section;
+  max-height: 60%;
+  min-height: 30%;
+  overflow: auto;
+
+  .headerContainer {
+    display: flex;
+    flex-direction: column;
+    color: map-get($black, dark);
+    
+    .actions {
+      @include action;
+      margin: 10px 24px;
+
+      .saveButton {
+        @include button;
+      }
+    }
+  }
 }
 
 .loaderContainer {
-  width: 100vw;
-  height: 100vh;
-  background-color: map-get($black, base);
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include loader-container;
 }
 
 .table {
   border-spacing: 0;
   border: 1px solid map-get($grey, lighter);
-}
 
-.headerGroup {
-  margin: 0;
-  padding: 12px;
-  border-bottom: 1px solid map-get($grey, lighter);
-  border-right: 1px solid map-get($grey, lighter);
-  position: relative;
-}
-
-.selectUsersRole {
-  width: 100%;
-}
-
-.toastContainer {
-  visibility: visible;
-  width: 100%;
-  position: absolute;
-  top: 59px;
-  right: 0;
-  z-index: 999;
-  -webkit-keyframes: hideAnimation 0s ease-in-out 0.5s;
-  animation: hideAnimation 0s ease-in-out 0.5s;
-  animation-fill-mode: forwards;
-}
-
-.usersSection {
-  position: relative;
-  top: -60px;
-  margin: 0 30%;
-  max-height: 60%;
-  min-height: 30%;
-  background-color: map-get($white, lighter);
-  color: map-get($black, light);
-  overflow: auto;
-}
-
-.actions {
-  margin: 20px 50px 0 60px;
-  align-items: center;
-}
-
-.saveButton {
-  background: map-get($green, base);
-  color: map-get($white, lighter);
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
-  line-height: 1;
-  border: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 100%;
-  margin-bottom: 40px;
-
-  &:hover {
-    background-color:map-get($green, dark) ;
+  .headerGroup {
+    padding: 12px;
+    border-bottom: 1px solid map-get($grey, lighter);
+    border-right: 1px solid map-get($grey, lighter);
+    position: relative;
   }
 }

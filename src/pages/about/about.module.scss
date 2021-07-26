@@ -1,0 +1,74 @@
+@import "../../styles/palettes.scss";
+@import "../../styles/styles.scss";
+
+.aboutSection {
+  padding: 50px;
+  text-align: center;
+  background-color: map-get($map: $white, $key: lighter);
+  color: map-get($map: $black, $key: light);
+}
+
+.bodyTitle {
+  text-align: center;
+}
+
+.container::after,
+.cardsContainer::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.cardsContainer {
+  .cardContainer {
+    box-sizing: border-box;
+    float: left;
+    width: 33.3%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+
+    .cardDescription {
+      box-shadow: 0 4px 8px 0 map-get($black, base);
+      margin: 8px;
+
+      .imageProfile {
+        width: inherit;
+      }
+
+      .title {
+        color: map-get($grey, darker);
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .buttonContact {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: map-get($white, lighter);
+        background-color: map-get($green, base);
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+
+        &:hover {
+          background-color: map-get($green, dark);
+        }
+      }
+    }
+  }
+}
+
+.footerBody {
+  padding: 20px;
+  text-align: center;
+  bottom: 0;
+  color:  map-get($white, lighter);
+  background-color:map-get($grey,base);
+  width: 100%;
+  font-size: 13px;
+  
+}

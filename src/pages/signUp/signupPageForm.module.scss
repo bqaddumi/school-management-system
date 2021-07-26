@@ -1,63 +1,27 @@
 @import "../../styles/palettes.scss";
-
-.actions {
-  margin-top: 32px;
-  align-items: center;
-}
+@import "../../styles/styles.scss";
 
 .singupPageSection {
-  position: relative;
-  top: -60px;
-  margin: 0 30%;
-  max-width: 40%;
-  background-color: map-get($white, lighter);
+  @include section;
   padding: 5px 40px 20px 40px;
-  color: map-get($black, light);
-}
 
-.signupButton {  
-  background: map-get($green, base);
-  color: map-get($white, lighter);
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
-  line-height: 1;
-  border: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 100%;
-  margin-bottom: 40px;
-}
-.signupButton:hover {
-  background-color: map-get($green, dark);
-}
+  .instruction {
+    @include instruction;
+  }
 
-.instruction {
-  font-size: 20px;
-  display: block;
-  margin-block-start: 16px;
-  margin-block-end: 16px;
-}
+  .icons {
+    @include icon;
+  }
 
-.icons {
-  position: relative;
-  top: 35px;
-  left: 12px;
-  width: 16px;
-  height: 16px;
-  font-size: 19px;
-  line-height: 1;
-  color: #ccc;
-}
+  .actions {
+    @include action;
 
-.loginForward{
-  float: right;
-  color: map-get($grey, dark);
-  text-decoration: none;
-  margin-top: -15px;
-}
+    .signupButton {
+      @include button;
+    }
+  }
 
-.loginForward:hover{
-  text-decoration: underline;
+  .loginForward {
+    @include forward-link;
+  }
 }

@@ -1,31 +1,20 @@
 @import "../../../styles/palettes.scss";
+@import "../../../styles//styles.scss";
 
 .success {
-  background-color: #dff0d8;
-  color: map-get($green, dark);
-  text-align: center;
-  padding: 5px;
+  @include notification($color: $green, $key1: light);
 }
 
 .warning {
-  background-color: map-get($orange, light);
-  color: map-get($orange, dark);
-  text-align: center;
-  padding: 5px;
+  @include notification($color: $orange, $key1: light);
 }
 
 .note {
-  background-color: map-get($blue, light);
-  color: map-get($blue, dark);
-  text-align: center;
-  padding: 5px;
+  @include notification($color: $blue, $key1: light);
 }
 
 .failure {
-  background-color: map-get($red, lighter);
-  color: map-get($red, dark);
-  text-align: center;
-  padding: 5px;
+  @include notification;
 }
 
 .top-right {

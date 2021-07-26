@@ -9,14 +9,14 @@ import SigninPageForm from "./pages/signIn/signinPageForm";
 import Loader from "./components/common/loader/loader";
 import NotifiactionBar from "./components/common/notificatioBar/notifiactionBar";
 import Users from "./components/administration/usersTable/usersTable";
-import About from "./pages/about/about";
+// import About from "./pages/about/about";
 import AddUsers from "./components/administration/addUsers/addUsers";
 import Teachers from "./pages/teachers/teachers";
 import Students from "./pages/students/students";
-import TeacherSchedule from "./components/administration/teacherSchedule/teacherSchedule";
+import TeacherClasses from "./components/administration/teacherClasses/teacherClasses";
 import ManageSchedule from "./components/teacherSchedule/manageSchedule/manageSchedule";
 import ClassSchedule from "./components/teacherSchedule/classSchedule/classSchedule";
-import classes from "./App.scss";
+import classes from "./App.module.scss";
 
 const App = () => {
   const isLoading = useSelector((state) => state.loader.isLoading);
@@ -69,8 +69,8 @@ const App = () => {
             redirectPath={"/"}
           />
           <PrivateRoute
-            path={'/teacherSchedule'}
-            component={TeacherSchedule}
+            path={'/teacherClasses'}
+            component={TeacherClasses}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
             redirectPath={"/"}
           />
@@ -115,9 +115,9 @@ const App = () => {
           <Route path="/home" exact>
             <HomePage />
           </Route>
-          <Route path="/about" exact>
+          {/* <Route path="/about" >
             <About />
-          </Route>
+          </Route> */}
           <Route path="*">
             <Redirect to="/home" />
           </Route>

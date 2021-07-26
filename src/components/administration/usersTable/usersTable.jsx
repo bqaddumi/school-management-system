@@ -54,12 +54,6 @@ const Users = () => {
     [dispatch]
   );
 
-  const options = [
-    { value: userRole.students, label: userRole.students },
-    { value: userRole.teacher, label: userRole.teacher },
-    { value: userRole.admin, label: userRole.admin },
-  ];
-
   const columns = useMemo(
     () => [
       {
@@ -76,13 +70,17 @@ const Users = () => {
         Cell: (cellObj) => (
           <Select
             onChange={(change) => handleClickEditRow(cellObj, change)}
-            options={options}
+            options={
+              ({ value: userRole.students, label: userRole.students },
+              { value: userRole.teacher, label: userRole.teacher },
+              { value: userRole.admin, label: userRole.admin })
+            }
             placeholder={cellObj.row.original.role}
           />
         ),
       },
     ],
-    [handleClickEditRow]
+    [handleClickEditRow, userRole.admin, userRole.students, userRole.teacher]
   );
 
   const saveButtonHanler = () => {};
@@ -92,11 +90,6 @@ const Users = () => {
       <BackgroundLogo title="Users Table" />
       <section className={classes.usersSection}>
         <div className={classes.headerContainer}>
-          {isLoadingAdmin && (
-            <div className={classes.loaderContainer}>
-              <Loader type="loader" />
-            </div>
-          )}
           <div className={classes.actions}>
             <button className={classes.saveButton} onClick={saveButtonHanler}>
               Save
@@ -105,6 +98,11 @@ const Users = () => {
           <Table columns={columns} data={usersExceptCurrent} />
         </div>
       </section>
+      {isLoadingAdmin && (
+        <div className={classes.loaderContainer}>
+          <Loader type="loader" />
+        </div>
+      )}
       <Footer />
     </>
   );

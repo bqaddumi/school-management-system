@@ -1,6 +1,4 @@
-.imageTeacher {
-  width: 30%;
-}
+
 
 .teachersPageContainer {
   width: 100%;
@@ -8,4 +6,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .imageTeacher {
+    width: 30%;
+  }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import teachers from "../../images/teacher.png";
-import classes from "./teachersPage.module.css";
+import classes from "./teachersPage.module.scss";
 
 const Teachers = () => {
     return (

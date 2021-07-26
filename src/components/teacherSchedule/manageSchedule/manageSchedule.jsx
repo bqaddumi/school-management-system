@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Firebase from '../../../database/config';
 import { useSelector } from "react-redux";
 import InputField from "../../common/InputField/InputField";
+import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo";
+import Footer from "../../common/footer/footer";
 import classes from './manageSchedule.module.scss';
 
 const ManageSchedule = () => {
@@ -73,11 +75,12 @@ const ManageSchedule = () => {
     };
 
     return (
-        <section className={classes.headerContainer}>
-            <h1 className={classes.labelTitle}>Manage Schedule</h1>
+        <>
+        <BackgroundLogo title={"Manage Schedule"}/>
+        <section className={classes.sectionContainer}>
+        <p className={classes.instruction}>Mange your Lecture by set day, Time and class # </p>
             <form onSubmit={onAddingLectureHandler}>
-                <label className={classes.labelBody}>Days</label>
-                <select required className={classes.selectDaysLectures} onChange={selectDaysLecturesHandler}>
+                <select placeholder="Monday" required className={classes.selectDaysLectures} onChange={selectDaysLecturesHandler}>
                     <option></option>
                     <option value="Sunday">Sunday</option>
                     <option value="Monday">Monday</option>
@@ -103,7 +106,6 @@ const ManageSchedule = () => {
                     value={timeToLecture}
                     required={true}
                 />
-                <label className={classes.labelBody}>Class</label>
                 <select required className={classes.selectClassLectures} onChange={selectClassLecturesHandler}>
                     <option></option>
                     <option value="1st">1st</option>
@@ -117,6 +119,8 @@ const ManageSchedule = () => {
                 </div>
             </form>
         </section >
+        <Footer/>
+        </>
     )
 };
 

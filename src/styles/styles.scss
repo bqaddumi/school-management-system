@@ -1,0 +1,204 @@
+@import "./palettes.scss";
+
+@mixin shared-body {
+  background-color: map-get($grey, lighter);
+  text-align: center;
+}
+
+@mixin action {
+  margin-top: 35px;
+  align-items: center;
+}
+
+@mixin section($width: 40%, $margin: 0 30%) {
+  @include modal-style(
+    $background: map-get($white, lighter),
+    $color: map-get($black, light),
+    $width: $width,
+    $margin: $margin
+  );
+}
+
+@mixin section-padding($padding: 5px 40px 20px 40px) {
+  padding: $padding;
+}
+
+@mixin button($width: 100%, $margin: 0 0 40px 0) {
+  background: map-get($green, base);
+  color: map-get($white, lighter);
+  font-size: 16px;
+  margin: $margin;
+  padding: 10px;
+  @include box($width);
+
+  &:hover {
+    background-color: map-get($green, dark);
+  }
+}
+
+@mixin instruction {
+  font-size: 20px;
+  display: block;
+  margin-block-start: 16px;
+  margin-block-end: 16px;
+}
+
+@mixin icon {
+  position: relative;
+  top: 35px;
+  left: 12px;
+  width: 16px;
+  height: 16px;
+  font-size: 19px;
+  line-height: 1;
+  color: map-get($grey, light);
+}
+
+@mixin forward-link {
+  position: relative;
+  float: right;
+  color: map-get($grey, dark);
+  text-decoration: none;
+  top: -15px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@mixin select {
+  @include input($margin: 35px 5px, $padding: 10px 30px);
+}
+
+@mixin loader-container {
+  @include app-container;
+  height: 100vh;
+  background-color: map-get($black, base);
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin app-container {
+  width: 100vw;
+  position: absolute;
+  right: 0;
+  z-index: 999;
+}
+
+@mixin toast-container {
+  @include app-container;
+  visibility: visible;
+  top: 79px;
+  -webkit-keyframes: hideAnimation 0s ease-in-out 0.5s;
+  animation: hideAnimation 0s ease-in-out 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@mixin modal-style(
+  $background: map-get($pink, dark),
+  $color: map-get($white, lighter),
+  $width: 40%,
+  $margin: 0 30%
+) {
+  position: relative;
+  top: -60px;
+  margin: $margin;
+  max-width: $width;
+  background-color: $background;
+  color: $color;
+}
+
+@mixin box($width: 100%) {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 0;
+  width: $width;
+}
+
+@mixin input(
+  $color: $white,
+  $key: darker,
+  $padding: 10px 0,
+  $margin: 10px 5px,
+  $width: 100%
+) {
+  background: map-get($color, $key);
+  margin: $margin;
+  padding: $padding;
+  padding-left: 40px;
+  @include box($width: $width);
+}
+
+@mixin notification($color: $red, $key1: lighter, $key2: dark) {
+  background-color: map-get($color, $key1);
+  color: map-get($color, $key2);
+  text-align: center;
+  padding: 5px;
+}
+
+@mixin link(
+  $color1: $grey,
+  $key1: darker,
+  $color2: $pink,
+  $key2: base,
+  $padding: 12px 0
+) {
+  position: relative;
+  color: map-get($color1, $key1);
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: 0.5s;
+  font-weight: 500;
+  padding: $padding;
+
+  &:hover {
+    color: map-get($color2, $key2);
+  }
+}
+
+@mixin logoutButton(
+  $color1: $grey,
+  $key1: darker,
+  $color2: $pink,
+  $key2: base,
+  $padding: 0px
+) {
+  font: inherit;
+  background-color: transparent;
+  color: map-get($color1, $key1);
+  padding: $padding;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 0;
+  &:hover {
+    color: map-get($color2, $key2);
+  }
+}
+
+@mixin header($background: "") {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  top: 0;
+  left: 0;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.6s;
+  padding: 5px 100px;
+  background-color: $background;
+  margin-top: 0px;
+  z-index: 9999;
+}
+
+@mixin conatiner-list {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}

@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import classes from "../mainNavbar.module.scss";
 
-const UsersSettings = ({ navLink, userName }) => {
+const AdminSetting = ({ navLink, userName }) => {
   return (
     <div className={classes.dropdown}>
       <div className={classes[navLink]}>{userName}</div>
@@ -13,15 +13,15 @@ const UsersSettings = ({ navLink, userName }) => {
         <NavLink className={classes[navLink]} to="/admin">
           User Role
         </NavLink>
-        {/* <NavLink className={classes[navLink]} to="/teacherSchedule">
-          Scheduler Teacher
+        <NavLink className={classes[navLink]} to="/teacherClasses">
+          Teacher Classes
         </NavLink>
         <NavLink className={classes[navLink]} to="/about">
           About
-        </NavLink> */}
+        </NavLink>
       </div>
     </div>
   );
 };
 
-export default UsersSettings;
+export default AdminSetting;
