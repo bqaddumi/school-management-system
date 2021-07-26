@@ -3,16 +3,19 @@ import Table from "../../components/common/Tables/table";
 import BackgroundLogo from "../../components/common/backgroundLogo/backgroundLogo";
 import Footer from "../../components/common/footer/footer";
 import classes from "./studentsPage.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Firebase from "../../database/config";
+import { loadingActions } from "../../store/loading";
 
 const Students = () => {
     const usersObject = useSelector((state) => state.auth.userInformation);
     const userInformation = JSON.parse(usersObject ? usersObject : false);
     const [information, setInformations] = useState([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const db = Firebase.firestore();
+        dispatch(loadingActions.setIsLoading(true));
         return (
             db.collection("teachers").onSnapshot((snapshot) => {
                 const postData = [];
@@ -36,6 +39,7 @@ const Students = () => {
                     );
                 });
                 setInformations(postData);
+                dispatch(loadingActions.setIsLoading(false));
             })
         );
     }, [userInformation.token]);
