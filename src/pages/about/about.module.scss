@@ -1,8 +1,11 @@
+@import "../../styles/palettes.scss";
+@import "../../styles/styles.scss";
+
 .aboutSection {
   padding: 50px;
   text-align: center;
-  background-color: #474e5d;
-  color: white;
+  background-color: map-get($map: $white, $key: lighter);
+  color: map-get($map: $black, $key: light);
 }
 
 .bodyTitle {
@@ -25,7 +28,7 @@
     padding: 0 8px;
 
     .cardDescription {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 8px 0 map-get($black, base);
       margin: 8px;
 
       .imageProfile {
@@ -33,7 +36,7 @@
       }
 
       .title {
-        color: grey;
+        color: map-get($grey, darker);
       }
 
       .container {
@@ -45,14 +48,14 @@
         outline: 0;
         display: inline-block;
         padding: 8px;
-        color: white;
-        background-color: #000;
+        color: map-get($white, lighter);
+        background-color: map-get($green, base);
         text-align: center;
         cursor: pointer;
         width: 100%;
 
         &:hover {
-          background-color: #555;
+          background-color: map-get($green, dark);
         }
       }
     }
@@ -62,8 +65,10 @@
 .footerBody {
   padding: 20px;
   text-align: center;
-  color: white;
-  background-color: #474e5d;
   bottom: 0;
+  color: white;
+  background-color:map-get($grey,base);;
   width: 100%;
+  font-size: 13px;
+  
 }

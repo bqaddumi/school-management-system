@@ -9,7 +9,7 @@ const TeacherClasses = () => {
   const [users, setUsers] = useState([]);
   const [changeSheetTeacherHandler, setChangeSheetTeacherHandler] = useState();
   const [viewSheet, setViewSheet] = useState();
-  const [tabulationSheets, setTabulationSheets] = useState([]);
+  const [teacherClasses, setTeacherClasses] = useState([]);
 
   useEffect(() => {
     const db = Firebase.firestore();
@@ -25,7 +25,7 @@ const TeacherClasses = () => {
             }
           });
       });
-      setTabulationSheets(teacherDataSchedule);
+      setTeacherClasses(teacherDataSchedule);
     });
   }, []);
 
@@ -42,7 +42,7 @@ const TeacherClasses = () => {
     });
   }, []);
 
-  const searchByTeacherName = tabulationSheets.filter((res) => {
+  const searchByTeacherName = teacherClasses.filter((res) => {
     return res.userName === changeSheetTeacherHandler;
   });
 
