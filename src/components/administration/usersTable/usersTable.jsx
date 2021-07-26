@@ -71,9 +71,11 @@ const Users = () => {
           <Select
             onChange={(change) => handleClickEditRow(cellObj, change)}
             options={
-              ({ value: userRole.students, label: userRole.students },
-              { value: userRole.teacher, label: userRole.teacher },
-              { value: userRole.admin, label: userRole.admin })
+              [
+                { value: userRole.students, label: userRole.students },
+                { value: userRole.teacher, label: userRole.teacher },
+                { value: userRole.admin, label: userRole.admin }
+              ]
             }
             placeholder={cellObj.row.original.role}
           />
@@ -83,7 +85,7 @@ const Users = () => {
     [handleClickEditRow, userRole.admin, userRole.students, userRole.teacher]
   );
 
-  const saveButtonHanler = () => {};
+  const saveButtonHanler = () => { };
 
   return (
     <>
