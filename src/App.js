@@ -11,6 +11,7 @@ import NotifiactionBar from "./components/common/notificatioBar/notifiactionBar"
 import Users from "./components/administration/usersTable/usersTable";
 // import About from "./pages/about/about";
 import AddUsers from "./components/administration/addUsers/addUsers";
+import AddStudents from "./components/administration/addStudents/addStudents";
 import Teachers from "./pages/teachers/teachers";
 import Students from "./pages/students/students";
 import TeacherClasses from "./components/administration/teacherClasses/teacherClasses";
@@ -84,6 +85,12 @@ const App = () => {
             path={'/classSchedule'}
             component={ClassSchedule}
             isAbleToAccessRoute={isAbleToAccessRouteTeacher}
+            redirectPath={'/'}
+          />
+          <PrivateRoute
+            path={'/addStudents'}
+            component={AddStudents}
+            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
             redirectPath={'/'}
           />
           <PrivateRoute

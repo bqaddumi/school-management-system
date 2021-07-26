@@ -10,6 +10,9 @@ const AdminSetting = ({ navLink, userName }) => {
         <NavLink className={classes[navLink]} to="/addUser">
           Add Users
         </NavLink>
+        <NavLink className={classes[navLink]} to="/addStudents">
+          Add Students to Classes
+        </NavLink>
         <NavLink className={classes[navLink]} to="/admin">
           User Role
         </NavLink>

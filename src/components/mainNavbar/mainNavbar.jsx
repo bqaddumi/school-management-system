@@ -6,7 +6,7 @@ import { MdHome } from "react-icons/md";
 import { authActions } from "../../store/auth";
 import AdminSetting from "./adminSetting/adminSetting";
 import Firebase from "../../database/config";
-import schoolLogo from "../../images/educationSchoolLogo.jpg";
+import schoolLogo from "../../images/profileSchoolLogo.jpg";
 import TeachersSettings from "./teachersSettings/teachersSettings";
 import classes from "./mainNavbar.module.scss";
 
