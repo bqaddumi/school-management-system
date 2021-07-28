@@ -70,11 +70,11 @@ const Users = () => {
         Cell: (cellObj) => (
           <Select
             onChange={(change) => handleClickEditRow(cellObj, change)}
-            options={
-              ({ value: userRole.students, label: userRole.students },
+            options={[
+              { value: userRole.students, label: userRole.students },
               { value: userRole.teacher, label: userRole.teacher },
-              { value: userRole.admin, label: userRole.admin })
-            }
+              { value: userRole.admin, label: userRole.admin },
+            ]}
             placeholder={cellObj.row.original.role}
           />
         ),
