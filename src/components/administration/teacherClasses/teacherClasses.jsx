@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Firebase from "../../../database/config";
 import Table from "../../common/Tables/table";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo";
@@ -10,6 +11,8 @@ const TeacherClasses = () => {
   const [changeSheetTeacherHandler, setChangeSheetTeacherHandler] = useState();
   const [viewSheet, setViewSheet] = useState();
   const [teacherClasses, setTeacherClasses] = useState([]);
+  const usersObject = useSelector((state) => state.auth.userInformation);
+  const userInformation = JSON.parse(usersObject ? usersObject : false);
 
   useEffect(() => {
     const db = Firebase.firestore();
@@ -92,9 +95,18 @@ const TeacherClasses = () => {
     setViewSheet(!viewSheet);
   };
 
+  console.log(teacherClasses);
   return (
     <>
-      <BackgroundLogo title="Teacher Classes Time" />
+      {!!(searchByTeacherName[0])? (
+        <BackgroundLogo
+          title={"Teacher Classes Time " + searchByTeacherName[0]?.uid}
+          major={searchByTeacherName[0]?.major}
+        />
+      ) : (
+        <BackgroundLogo title={"Teacher Classes Time "} />
+      )}
+
       <section className={classes.seactionConatainer}>
         <form onSubmit={onViewSheetHandler}>
           <div className={classes.classesTime}>
