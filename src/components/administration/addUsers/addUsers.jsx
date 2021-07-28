@@ -129,7 +129,7 @@ const AddUsers = () => {
             onChange={onNameChanged}
             type="text"
             id="userName"
-            placeholder="userName"
+            placeholder="User Name"
             value={name}
             required={true}
           />
@@ -139,7 +139,7 @@ const AddUsers = () => {
           <InputField
             onChange={onEmailChanged}
             type="email"
-            placeholder="userName@gmail.com"
+            placeholder="username@gmail.com"
             valdationRegex={emailRegex}
             value={email}
             errorEmailMessage={"It should be an e-mail"}
@@ -153,7 +153,7 @@ const AddUsers = () => {
             onChange={onPasswordChanged}
             type="password"
             id="pasword"
-            placeholder="password"
+            placeholder="Password"
             value={password}
             required={true}
             autoComplete="on"
@@ -165,7 +165,7 @@ const AddUsers = () => {
             onChange={onConfirmPasswordChanged}
             type="password"
             id="confirmPassword"
-            placeholder="confirmPassword"
+            placeholder="Confirm Password"
             value={confirmPassword}
             errorPasswordMessage={"It should be match password"}
             required={true}
