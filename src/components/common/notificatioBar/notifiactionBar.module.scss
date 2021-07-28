@@ -10,7 +10,7 @@
 }
 
 .note {
-  @include notification($color: $blue, $key1: light);
+  @include notification($color: $blue, $key1: lighter);
 }
 
 .failure {

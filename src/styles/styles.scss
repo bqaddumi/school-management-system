@@ -10,7 +10,8 @@
   align-items: center;
 }
 
-@mixin section($width: 40%, $margin: 0 30%) {
+@mixin section($width: 40%, $margin: 0 30%, $maxHeight: 80%) {
+  max-height: $maxHeight;
   @include modal-style(
     $background: map-get($white, lighter),
     $color: map-get($black, light),
@@ -36,8 +37,8 @@
   }
 }
 
-@mixin instruction {
-  font-size: 20px;
+@mixin instruction($fontSize: 20px) {
+  font-size: $fontSize;
   display: block;
   margin-block-start: 16px;
   margin-block-end: 16px;
