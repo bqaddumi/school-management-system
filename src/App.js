@@ -122,7 +122,13 @@ const App = () => {
             {!userInformation && <SignupPageForm />}
           </Route>
           <Route path="/home" exact>
-            <HomePage />
+            {userInformation.role === "Teachers" ? (
+              <Teachers />
+            ) : userInformation.role === "Students" ? (
+              <Students />
+            ) : (
+              <HomePage />
+            )}
           </Route>
           {/* <Route path="/about" >
             <About />
