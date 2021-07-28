@@ -2,7 +2,7 @@ import React from "react";
 import schoolLogo from "../../../images/schoolLogo.jpg";
 import classes from "./backgroundLogo.module.scss";
 
-const BackgroundLogo = ({ title }) => {
+const BackgroundLogo = ({ title, major }) => {
   return (
     <>
       <div className={classes.banner}>
@@ -12,7 +12,10 @@ const BackgroundLogo = ({ title }) => {
           alt="School Logo"
         />
       </div>
-      <div className={classes.sitename}>{title}</div>
+      <div className={classes.sectionInformation}>
+        <p>{title}</p>
+        <p> {major}</p>
+      </div>
     </>
   );
 };
