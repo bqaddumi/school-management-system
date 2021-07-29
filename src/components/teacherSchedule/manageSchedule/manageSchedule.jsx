@@ -78,7 +78,6 @@ const ManageSchedule = () => {
         }
       });
   };
-  console.log(daysLecture, classLecture);
 
   return (
     <>
