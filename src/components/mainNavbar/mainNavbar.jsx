@@ -27,6 +27,15 @@ const MainNavbar = () => {
           dispatch(authActions.setUserRole(doc.data()));
         });
       });
+
+    database
+      .collection("majorTypes")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          dispatch(authActions.setTeachersMajor(doc.data()));
+        });
+      });
   }, [dispatch, database]);
 
   const logoutUser = () => {
