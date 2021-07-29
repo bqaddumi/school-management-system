@@ -37,7 +37,29 @@ const AddUsers = () => {
     );
   };
 
-  const successCreateAccountInformation = () => {
+  const successCreateAccountInformation = (token) => {
+    if (usersRole === "Teachers") {
+      database
+        .collection("teachersInfo")
+        .doc(token)
+        .set({
+          uid: email,
+          userName: name,
+          token: token,
+          major: major,
+        })
+        .then(() => {
+          dispatch(loadingActions.setIsLoading(false));
+          dispatch(
+            toastActions.toast({
+              type: "success",
+              message: "Signup Successfully",
+              position: "top",
+            })
+          );
+          history.push("/home");
+        });
+    }
     dispatch(loadingActions.setIsLoading(false));
     dispatch(
       toastActions.toast({
@@ -70,7 +92,7 @@ const AddUsers = () => {
         token: res.user.uid,
         major: major,
       })
-      .then(successCreateAccountInformation)
+      .then(successCreateAccountInformation(res.user.uid))
       .catch(errorCreateAccountInformation);
   };
 

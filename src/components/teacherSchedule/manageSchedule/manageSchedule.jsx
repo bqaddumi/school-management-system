@@ -12,8 +12,8 @@ const ManageSchedule = () => {
   const userInformation = JSON.parse(usersObject ? usersObject : false);
   const [timeFromLecture, setTimeFromLecture] = useState("");
   const [timeToLecture, setTimeToLecture] = useState("");
-  const [daysLecture, setDaysLecture] = useState();
-  const [classLecture, setClassLecture] = useState();
+  const [daysLecture, setDaysLecture] = useState("Sunday");
+  const [classLecture, setClassLecture] = useState("1st");
 
   const successAddingNewLecture = (res) => {
     alert("success Adding New Lecture");
@@ -91,10 +91,9 @@ const ManageSchedule = () => {
             required
             className={classes.selectDaysLectures}
             onChange={selectDaysLecturesHandler}
+            defaultValue={"Sunday"}
           >
-            <option value="Sunday" selected>
-              Sunday
-            </option>
+            <option value="Sunday">Sunday</option>
             <option value="Monday">Monday</option>
             <option value="Tuesday">Tuesday</option>
             <option value="Wednesday">Wednesday</option>
@@ -122,10 +121,9 @@ const ManageSchedule = () => {
             required
             className={classes.selectClassLectures}
             onChange={selectClassLecturesHandler}
+            defaultValue={"1st"}
           >
-            <option value="1st" selected>
-              1st
-            </option>
+            <option value="1st">1st</option>
             <option value="2nd">2nd</option>
             <option value="3rd">3rd</option>
             <option value="4th">4th</option>
