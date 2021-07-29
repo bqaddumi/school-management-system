@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import Firebase from "../../../database/config";
 import Table from "../../common/Tables/table";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo";
@@ -7,47 +6,39 @@ import Footer from "../../common/footer/footer";
 import classes from "./teacherClasses.module.scss";
 
 const TeacherClasses = () => {
-  const [users, setUsers] = useState([]);
-  const [changeSheetTeacherHandler, setChangeSheetTeacherHandler] = useState();
+  const [teachers, setTeachers] = useState([]);
+  const [teacherNameHandler, setTeacherNameHandler] = useState();
   const [viewSheet, setViewSheet] = useState();
   const [teacherClasses, setTeacherClasses] = useState([]);
-  const usersObject = useSelector((state) => state.auth.userInformation);
-  const userInformation = JSON.parse(usersObject ? usersObject : false);
-
+  
   useEffect(() => {
     const db = Firebase.firestore();
+    const teacherLectures = [];
     return db.collection("teachers").onSnapshot((snapshot) => {
-      const teacherDataSchedule = [];
       snapshot.forEach((doc) => {
-        db.collection("users")
-          .doc(doc.data().token)
-          .get()
-          .then((res) => {
-            if (doc.data().token === res.data().token) {
-              teacherDataSchedule.push({ ...doc.data(), ...res.data() });
-            }
-          });
-      });
-      setTeacherClasses(teacherDataSchedule);
-    });
-  }, []);
-
-  useEffect(() => {
-    const db = Firebase.firestore();
-    return db.collection("users").onSnapshot((snapshot) => {
-      const postData = [];
-      snapshot.forEach((doc) => {
-        if (doc.data().role === "Teachers") {
-          postData.push({ ...doc.data() });
+        if (
+          doc.data().token ===
+          teachers.find(
+            (teacherName) => teacherName.userName === teacherNameHandler
+          )?.token
+        ) {
+          teacherLectures.push({ ...doc.data() });
         }
       });
-      setUsers(postData);
+      setTeacherClasses(teacherLectures);
+    });
+  }, [teacherNameHandler,teachers]);
+
+  useEffect(() => {
+    const db = Firebase.firestore();
+    return db.collection("teachersInfo").onSnapshot((snapshot) => {
+      const postData = [];
+      snapshot.forEach((doc) => {
+        postData.push({ ...doc.data() });
+      });
+      setTeachers(postData);
     });
   }, []);
-
-  const searchByTeacherName = teacherClasses.filter((res) => {
-    return res.userName === changeSheetTeacherHandler;
-  });
 
   const columns = React.useMemo(
     () => [
@@ -71,16 +62,6 @@ const TeacherClasses = () => {
         accessor: "timeTo",
         Cell: ({ cell: { value } }) => value || "-",
       },
-      {
-        Header: "E-mail Teacher",
-        accessor: "uid",
-        Cell: ({ cell: { value } }) => value || "-",
-      },
-      {
-        Header: "Major Teacher",
-        accessor: "major",
-        Cell: ({ cell: { value } }) => value || "-",
-      },
     ],
     []
   );
@@ -90,23 +71,31 @@ const TeacherClasses = () => {
     setViewSheet(!viewSheet);
   };
 
-  const onChangeSheetTeacherHandler = (event) => {
-    setChangeSheetTeacherHandler(event.target.value);
+  const onSelectTeacherNameHandler = (event) => {
+    setTeacherNameHandler(event.target.value);
     setViewSheet(!viewSheet);
   };
 
-  console.log(teacherClasses);
   return (
     <>
-      {!!(searchByTeacherName[0])? (
+      {teacherNameHandler ? (
         <BackgroundLogo
-          title={"Teacher Classes Time " + searchByTeacherName[0]?.uid}
-          major={searchByTeacherName[0]?.major}
+          title={
+            "Teacher Email: " +
+            teachers.find(
+              (teacherInfo) => teacherInfo.userName === teacherNameHandler
+            )?.uid
+          }
+          major={
+            "Major: " +
+            teachers.find(
+              (teacherInfo) => teacherInfo.userName === teacherNameHandler
+            )?.major
+          }
         />
       ) : (
         <BackgroundLogo title={"Teacher Classes Time "} />
       )}
-
       <section className={classes.seactionConatainer}>
         <form onSubmit={onViewSheetHandler}>
           <div className={classes.classesTime}>
@@ -115,10 +104,10 @@ const TeacherClasses = () => {
               <select
                 required
                 className={classes.selectTeachersName}
-                onChange={onChangeSheetTeacherHandler}
+                onChange={onSelectTeacherNameHandler}
               >
                 <option></option>
-                {users.map((user, index) => {
+                {teachers.map((user, index) => {
                   return (
                     <option value={user.userName} key={index}>
                       {user.userName}
@@ -133,7 +122,7 @@ const TeacherClasses = () => {
           </div>
           {viewSheet && (
             <div className={classes.headerClassesTime}>
-              <Table columns={columns} data={searchByTeacherName} />
+              <Table columns={columns} data={teacherClasses} />
             </div>
           )}
         </form>
