@@ -14,6 +14,7 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const isLoadingAdmin = useSelector((state) => state.loader.isLoadingAdmin);
   const userRole = useSelector((state) => state.auth.userRole);
+  const teachersMajor = useSelector((state) => state.auth.teachersMajor);
   const dispatch = useDispatch();
   const currentUserRole = useSelector((state) => state.auth.userInformation);
   const userInformation = JSON.parse(currentUserRole ? currentUserRole : false);
@@ -54,6 +55,27 @@ const Users = () => {
     [dispatch]
   );
 
+  const handleClickEditMajor = useCallback(
+    (rowIndex, change) => {
+      const db = Firebase.firestore();
+      db.collection("users")
+        .doc(rowIndex.row.original.id)
+        .update({
+          major: change.value,
+        })
+        .then(() => {
+          dispatch(
+            toastActions.toast({
+              type: "success",
+              message: "Successfully Modifying Major",
+              position: "top",
+            })
+          );
+        });
+    },
+    [dispatch]
+  );
+
   const columns = useMemo(
     () => [
       {
@@ -66,7 +88,7 @@ const Users = () => {
       },
       {
         Header: "Users Role",
-        accessor: "Editing",
+        accessor: "RoleEditing",
         Cell: (cellObj) => (
           <Select
             onChange={(change) => handleClickEditRow(cellObj, change)}
@@ -79,8 +101,37 @@ const Users = () => {
           />
         ),
       },
+      {
+        Header: "Users Major",
+        accessor: "MajorEditing",
+        Cell: (cellObj) => (
+          <Select
+            onChange={(change) => handleClickEditMajor(cellObj, change)}
+            options={[
+              { value: teachersMajor.Math, label: teachersMajor.Math },
+              { value: teachersMajor.Arabic, label: teachersMajor.Arabic },
+              { value: teachersMajor.English, label: teachersMajor.English },
+              { value: teachersMajor.Art, label: teachersMajor.Art },
+              { value: teachersMajor.Piology, label: teachersMajor.Piology },
+            ]}
+            placeholder={cellObj.row.original.major}
+            isDisabled={cellObj.row.original.role !== userRole.teacher}
+          />
+        ),
+      },
     ],
-    [handleClickEditRow, userRole.admin, userRole.students, userRole.teacher]
+    [
+      handleClickEditRow,
+      handleClickEditMajor,
+      userRole.admin,
+      userRole.students,
+      userRole.teacher,
+      teachersMajor.Piology,
+      teachersMajor.Math,
+      teachersMajor.English,
+      teachersMajor.Art,
+      teachersMajor.Arabic
+    ]
   );
 
   const saveButtonHanler = () => {};

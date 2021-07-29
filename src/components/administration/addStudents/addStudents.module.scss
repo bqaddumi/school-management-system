@@ -10,7 +10,7 @@
   }
 
   .selectStudentsClasses {
-    @include input;
+    @include input($padding-left: 0px, $padding: 0px);
   }
 
   .actionsContainerAddingStudents {
