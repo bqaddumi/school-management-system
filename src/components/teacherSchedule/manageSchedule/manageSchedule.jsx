@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Firebase from "../../../database/config";
 import { useSelector } from "react-redux";
 import InputField from "../../common/InputField/InputField";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo";
 import Footer from "../../common/footer/footer";
+import Firebase from "../../../database/config";
 import classes from "./manageSchedule.module.scss";
 
 const ManageSchedule = () => {
