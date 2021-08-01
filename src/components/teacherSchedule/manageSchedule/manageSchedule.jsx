@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import InputField from "../../common/InputField/InputField";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo";
 import Footer from "../../common/footer/footer";
 import Firebase from "../../../database/config";
+import { loadingActions } from "../../../store/loading";
+import { toastActions } from "../../../store/notification";
+import Loader from "../../common/loader/loader"
 import classes from "./manageSchedule.module.scss";
 
 const ManageSchedule = () => {
@@ -14,13 +17,32 @@ const ManageSchedule = () => {
   const [timeToLecture, setTimeToLecture] = useState("");
   const [daysLecture, setDaysLecture] = useState("Sunday");
   const [classLecture, setClassLecture] = useState("1st");
+  const dispatch = useDispatch();
+const isLoadingAdmin = useSelector((state) =>state.loader.isLoadingAdmin);
+
+
+
 
   const successAddingNewLecture = (res) => {
-    alert("success Adding New Lecture");
+    dispatch(loadingActions.setIsLoading(false));
+    dispatch(
+      toastActions.toast({
+        type: "success",
+        message: "Adding new lecture Successfully",
+        position: "top",
+      })
+    );
   };
 
   const errorAddingNewLecture = (error) => {
-    alert("error Adding New Lecture");
+    dispatch(loadingActions.setIsLoading(false));
+    dispatch(
+      toastActions.toast({
+        type: "failure",
+        message: error,
+        position: "top",
+      })
+    );
   };
 
   const selectTimeFromLecturesHandler = (event) => {
@@ -42,6 +64,7 @@ const ManageSchedule = () => {
   const onAddingLectureHandler = (event) => {
     let isConflict = "";
     event.preventDefault();
+    dispatch(loadingActions.setIsLoading(true));
     database
       .collection("teachers")
       .get()
@@ -59,8 +82,13 @@ const ManageSchedule = () => {
       })
       .then(() => {
         if (!!isConflict) {
-          alert(
-            "There is a conflict with a reserve the room at that time, try another time"
+          dispatch(loadingActions.setIsLoading(false));
+          dispatch(
+            toastActions.toast({
+              type: "failure",
+              message: "There is a conflict with a reserve the room at that time, try another time",
+              position: "top",
+            })
           );
         } else {
           database
@@ -81,6 +109,11 @@ const ManageSchedule = () => {
 
   return (
     <>
+    {isLoadingAdmin && (
+        <div className={classes.loaderContainer}>
+          <Loader type="loader" />
+        </div>
+      )}
       <BackgroundLogo title={"Manage Schedule"} />
       <section className={classes.sectionContainer}>
         <p className={classes.instruction}>

@@ -24,18 +24,19 @@ const Users = () => {
   });
 
   useEffect(() => {
-    dispatch(loadingActions.setIsLoadingAdmin(true));
+    dispatch(loadingActions.setIsLoading(true));
     const db = Firebase.firestore();
     return db.collection("users").onSnapshot((snapshot) => {
       const postData = [];
       snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
       setUsers(postData);
-      dispatch(loadingActions.setIsLoadingAdmin(false));
+      dispatch(loadingActions.setIsLoading(false));
     });
   }, [dispatch]);
 
   const handleClickEditRow = useCallback(
     (rowIndex, change) => {
+      dispatch(loadingActions.setIsLoading(true));
       const db = Firebase.firestore();
       db.collection("users")
         .doc(rowIndex.row.original.id)
@@ -43,6 +44,7 @@ const Users = () => {
           role: change.value,
         })
         .then(() => {
+          dispatch(loadingActions.setIsLoading(false));
           dispatch(
             toastActions.toast({
               type: "success",
@@ -55,26 +57,26 @@ const Users = () => {
     [dispatch]
   );
 
-  const handleClickEditMajor = useCallback(
-    (rowIndex, change) => {
-      const db = Firebase.firestore();
-      db.collection("users")
-        .doc(rowIndex.row.original.id)
-        .update({
-          major: change.value,
-        })
-        .then(() => {
-          dispatch(
-            toastActions.toast({
-              type: "success",
-              message: "Successfully Modifying Major",
-              position: "top",
-            })
-          );
-        });
-    },
-    [dispatch]
-  );
+   const handleClickEditMajor = useCallback(
+  //   (rowIndex, change) => {
+  //     const db = Firebase.firestore();
+  //     db.collection("users")
+  //       .doc(rowIndex.row.original.id)
+  //       .update({
+  //         major: change.value,
+  //       })
+  //       .then(() => {
+  //         dispatch(
+  //           toastActions.toast({
+  //             type: "success",
+  //             message: "Successfully Modifying Major",
+  //             position: "top",
+  //           })
+  //         );
+  //       });
+  //   },
+  //   [dispatch]
+   );
 
   const columns = useMemo(
     () => [
@@ -149,11 +151,6 @@ const Users = () => {
           <Table columns={columns} data={usersExceptCurrent} />
         </div>
       </section>
-      {isLoadingAdmin && (
-        <div className={classes.loaderContainer}>
-          <Loader type="loader" />
-        </div>
-      )}
       <Footer />
     </>
   );

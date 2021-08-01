@@ -22,6 +22,10 @@
       transition: 0.6s;
       text-decoration: none;
     }
+
+    &:hover {
+      transform: scale(1.09);
+    }
   }
 
   .navContainerList {
@@ -42,10 +46,14 @@
       }
     }
   }
+
+  .menuIcon {
+    display: none;
+  }
 }
 
 .sticky {
-  @include header($background: map-get($white, dark));
+  @include header($background: map-get($white, dark), $top: 0);
 
   .stickyLink {
     @include link($color1: $pink, $key1: base, $color2: $grey, $key2: lighter);
@@ -57,6 +65,9 @@
       font-weight: 700;
       transition: 0.6s;
       text-decoration: none;
+    }
+    &:hover {
+      transform: scale(1.09);
     }
   }
 
@@ -81,6 +92,10 @@
           $key2: lighter,
           $padding: 8px
         );
+      }
+
+      .menuIcon {
+        display: none;
       }
     }
   }
@@ -113,6 +128,48 @@
 
     &:hover {
       transform: scale(1);
+    }
+  }
+}
+
+//tablet
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .header {
+    .menuIcon {
+      display: block;
+    }
+    .navContainerList {
+      display: none;
+    }
+  }
+
+  .sticky {
+    .menuIcon {
+      display: block;
+    }
+    .navContainerList {
+      display: none;
+    }
+  }
+}
+
+//phone
+@media screen and (max-width: 767px) {
+  .header {
+    .menuIcon {
+      display: block;
+    }
+    .navContainerList {
+      display: none;
+    }
+  }
+
+  .sticky {
+    .menuIcon {
+      display: block;
+    }
+    .navContainerList {
+      display: none;
     }
   }
 }
