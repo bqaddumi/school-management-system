@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadingActions } from "../../store/loading";
+import Firebase from "../../database/config";
 import Table from "../../components/common/Tables/table";
 import BackgroundLogo from "../../components/common/backgroundLogo/backgroundLogo";
 import Footer from "../../components/common/footer/footer";
 import classes from "./studentsPage.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import Firebase from "../../database/config";
-import { loadingActions } from "../../store/loading";
 
 const Students = () => {
     const usersObject = useSelector((state) => state.auth.userInformation);

@@ -177,6 +177,7 @@
   border-radius: 6px;
   cursor: pointer;
   border: 0;
+  
   &:hover {
     color: map-get($color2, $key2);
   }
