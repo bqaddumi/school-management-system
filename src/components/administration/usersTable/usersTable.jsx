@@ -5,14 +5,12 @@ import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
 import Firebase from "../../../database/config";
 import Table from "../../common/Tables/table";
-import Loader from "../../common/loader/loader";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo.jsx";
 import Footer from "../../common/footer/footer";
 import classes from "./usersTable.module.scss";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
-  const isLoadingAdmin = useSelector((state) => state.loader.isLoadingAdmin);
   const userRole = useSelector((state) => state.auth.userRole);
   const teachersMajor = useSelector((state) => state.auth.teachersMajor);
   const dispatch = useDispatch();
@@ -24,18 +22,19 @@ const Users = () => {
   });
 
   useEffect(() => {
-    dispatch(loadingActions.setIsLoadingAdmin(true));
+    dispatch(loadingActions.setIsLoading(true));
     const db = Firebase.firestore();
     return db.collection("users").onSnapshot((snapshot) => {
       const postData = [];
       snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
       setUsers(postData);
-      dispatch(loadingActions.setIsLoadingAdmin(false));
+      dispatch(loadingActions.setIsLoading(false));
     });
   }, [dispatch]);
 
   const handleClickEditRow = useCallback(
     (rowIndex, change) => {
+      dispatch(loadingActions.setIsLoading(true));
       const db = Firebase.firestore();
       db.collection("users")
         .doc(rowIndex.row.original.id)
@@ -43,6 +42,7 @@ const Users = () => {
           role: change.value,
         })
         .then(() => {
+          dispatch(loadingActions.setIsLoading(false));
           dispatch(
             toastActions.toast({
               type: "success",
@@ -130,7 +130,7 @@ const Users = () => {
       teachersMajor.Math,
       teachersMajor.English,
       teachersMajor.Art,
-      teachersMajor.Arabic
+      teachersMajor.Arabic,
     ]
   );
 
@@ -149,11 +149,6 @@ const Users = () => {
           <Table columns={columns} data={usersExceptCurrent} />
         </div>
       </section>
-      {isLoadingAdmin && (
-        <div className={classes.loaderContainer}>
-          <Loader type="loader" />
-        </div>
-      )}
       <Footer />
     </>
   );

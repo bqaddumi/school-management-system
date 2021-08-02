@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
+import { useDispatch } from "react-redux";
 import Firebase from "../../../database/config";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo";
 import Footer from "../../common/footer/footer";
+import { loadingActions } from "../../../store/loading";
+import { toastActions } from "../../../store/notification";
 import classes from "./addStudents.module.scss";
 
 const AddStudents = () => {
@@ -10,17 +13,33 @@ const AddStudents = () => {
   const [students, setStudents] = useState([]);
   const [studentName, setStudentName] = useState();
   const [classNumber, setClassNumber] = useState();
+  const dispatch = useDispatch();
 
   const successAddingStudent = () => {
-    console.log("successAddingStudent");
+    dispatch(loadingActions.setIsLoading(false));
+    dispatch(
+      toastActions.toast({
+        type: "success",
+        message: "Add student classroom Successfully",
+        position: "top",
+      })
+    );
   };
 
-  const errorAddingStudent = () => {
-    console.log("errorAddingStudent");
+  const errorAddingStudent = (error) => {
+    dispatch(loadingActions.setIsLoading(false));
+    dispatch(
+      toastActions.toast({
+        type: "failure",
+        message: error,
+        position: "top",
+      })
+    );
   };
 
   const onAddingStudentsToClasses = (event) => {
     event.preventDefault();
+    dispatch(loadingActions.setIsLoading(true));
     if (studentName && classNumber) {
       database
         .collection("classes")

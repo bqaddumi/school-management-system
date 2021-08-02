@@ -96,6 +96,11 @@ const MainNavbar = () => {
       <NavLink to="/home" className={classes[navLink]}>
         <MdHome className={classes.logo} />
       </NavLink>
+      <input type="checkbox" className={classes.menubtn} id="menubtn" />
+      <label htmlFor="menubtn" className={classes.menuicon}>
+        <span className={classes.menuiconline}></span>
+      </label>
+      
       <ul className={classes.navContainerList}>
         {userInformation ? (
           <>

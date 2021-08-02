@@ -1,5 +1,9 @@
 @import "../../../styles/styles.scss";
 
+.loaderContainer {
+  @include loader-container;
+}
+
 .sectionContainer {
   @include section;
   @include section-padding($padding: 5px 80px 20px 40px);
