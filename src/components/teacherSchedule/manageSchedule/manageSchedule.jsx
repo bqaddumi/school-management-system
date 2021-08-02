@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import InputField from "../../common/InputField/InputField";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo";
 import Footer from "../../common/footer/footer";
 import Firebase from "../../../database/config";
 import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
-import Loader from "../../common/loader/loader"
+import Loader from "../../common/loader/loader";
 import classes from "./manageSchedule.module.scss";
 
 const ManageSchedule = () => {
@@ -18,10 +18,7 @@ const ManageSchedule = () => {
   const [daysLecture, setDaysLecture] = useState("Sunday");
   const [classLecture, setClassLecture] = useState("1st");
   const dispatch = useDispatch();
-const isLoadingAdmin = useSelector((state) =>state.loader.isLoadingAdmin);
-
-
-
+  const isLoadingAdmin = useSelector((state) => state.loader.isLoadingAdmin);
 
   const successAddingNewLecture = (res) => {
     dispatch(loadingActions.setIsLoading(false));
@@ -86,7 +83,8 @@ const isLoadingAdmin = useSelector((state) =>state.loader.isLoadingAdmin);
           dispatch(
             toastActions.toast({
               type: "failure",
-              message: "There is a conflict with a reserve the room at that time, try another time",
+              message:
+                "There is a conflict with a reserve the room at that time, try another time",
               position: "top",
             })
           );
@@ -109,7 +107,7 @@ const isLoadingAdmin = useSelector((state) =>state.loader.isLoadingAdmin);
 
   return (
     <>
-    {isLoadingAdmin && (
+      {isLoadingAdmin && (
         <div className={classes.loaderContainer}>
           <Loader type="loader" />
         </div>

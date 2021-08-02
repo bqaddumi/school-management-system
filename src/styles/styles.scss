@@ -75,7 +75,6 @@
   @include app-container;
   height: 100vh;
   background-color: map-get($black, base);
-  // position: absolute;
   top: 0;
   display: flex;
   align-items: center;
@@ -177,13 +176,13 @@
   border-radius: 6px;
   cursor: pointer;
   border: 0;
-  
+
   &:hover {
     color: map-get($color2, $key2);
   }
 }
 
-@mixin header($background: "",$top: 40px) {
+@mixin header($background: "", $top: 40px) {
   position: fixed;
   display: flex;
   width: 100%;

@@ -14,31 +14,42 @@ const Students = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const db = Firebase.firestore();
     dispatch(loadingActions.setIsLoading(true));
-    return db.collection("teachers").onSnapshot((snapshot) => {
+    const db = Firebase.firestore();
+    async function fetchData() {
       const postData = [];
-      snapshot.forEach((doc) => {
-        return db
-          .collection("users")
-          .doc(doc.data().token)
-          .get()
-          .then((response) => {
-            return db
-              .collection("classes")
-              .doc(userInformation.token)
-              .get()
-              .then((res) => {
-                if (doc.data().class === res.data().classNumber) {
-                  postData.push({ ...doc.data(), ...response.data() });
-                }
+      const getRequestTeachersInfo = await db.collection("teachersInfo");
+      const getRequestTeachers = await db.collection("teachers");
+
+      const request = await db
+        .collection("classes")
+        .doc(userInformation.token)
+        .get()
+        .then((classes) => {
+          getRequestTeachers
+            .where("class", "==", classes.data().classNumber)
+            .get()
+            .then((teachersClasses) => {
+              teachersClasses.forEach((teachersClass) => {
+                getRequestTeachersInfo.onSnapshot((teachersInfo) => {
+                  teachersInfo.forEach((teacherInfo) => {
+                    if (
+                      teacherInfo.data().token === teachersClass.data().token
+                    ) {
+                      postData.push(
+                        Object.assign(teacherInfo.data(), teachersClass.data())
+                      );
+                    }
+                  });
+                });
               });
-          });
-      });
+            });
+        });
       setInformations(postData);
       dispatch(loadingActions.setIsLoading(false));
-    });
-  }, [userInformation.token, dispatch]);
+    }
+    fetchData();
+  }, [dispatch]);
 
   const columns = React.useMemo(
     () => [

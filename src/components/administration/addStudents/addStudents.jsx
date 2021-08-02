@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import Firebase from "../../../database/config";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo";
 import Footer from "../../common/footer/footer";
@@ -14,7 +14,6 @@ const AddStudents = () => {
   const [studentName, setStudentName] = useState();
   const [classNumber, setClassNumber] = useState();
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.loader.isLoading);
 
   const successAddingStudent = () => {
     dispatch(loadingActions.setIsLoading(false));

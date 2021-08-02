@@ -5,14 +5,12 @@ import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
 import Firebase from "../../../database/config";
 import Table from "../../common/Tables/table";
-import Loader from "../../common/loader/loader";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo.jsx";
 import Footer from "../../common/footer/footer";
 import classes from "./usersTable.module.scss";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
-  const isLoadingAdmin = useSelector((state) => state.loader.isLoadingAdmin);
   const userRole = useSelector((state) => state.auth.userRole);
   const teachersMajor = useSelector((state) => state.auth.teachersMajor);
   const dispatch = useDispatch();
@@ -57,26 +55,26 @@ const Users = () => {
     [dispatch]
   );
 
-   const handleClickEditMajor = useCallback(
-  //   (rowIndex, change) => {
-  //     const db = Firebase.firestore();
-  //     db.collection("users")
-  //       .doc(rowIndex.row.original.id)
-  //       .update({
-  //         major: change.value,
-  //       })
-  //       .then(() => {
-  //         dispatch(
-  //           toastActions.toast({
-  //             type: "success",
-  //             message: "Successfully Modifying Major",
-  //             position: "top",
-  //           })
-  //         );
-  //       });
-  //   },
-  //   [dispatch]
-   );
+  const handleClickEditMajor = useCallback(
+    (rowIndex, change) => {
+      const db = Firebase.firestore();
+      db.collection("users")
+        .doc(rowIndex.row.original.id)
+        .update({
+          major: change.value,
+        })
+        .then(() => {
+          dispatch(
+            toastActions.toast({
+              type: "success",
+              message: "Successfully Modifying Major",
+              position: "top",
+            })
+          );
+        });
+    },
+    [dispatch]
+  );
 
   const columns = useMemo(
     () => [
@@ -132,7 +130,7 @@ const Users = () => {
       teachersMajor.Math,
       teachersMajor.English,
       teachersMajor.Art,
-      teachersMajor.Arabic
+      teachersMajor.Arabic,
     ]
   );
 
