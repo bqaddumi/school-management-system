@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { useDispatch } from "react-redux";
+import Slide from "react-reveal/Slide";
 import Firebase from "../../../database/config";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo";
 import Footer from "../../common/footer/footer";
@@ -74,7 +75,9 @@ const AddStudents = () => {
     <>
       <BackgroundLogo title={"Add Students To Classes"} />
       <section className={classes.sectionContainer}>
-        <p className={classes.instruction}>Adding Students To Classes</p>
+        <Slide left>
+          <p className={classes.instruction}>Adding Students To Classes</p>
+        </Slide>
         <form onSubmit={onAddingStudentsToClasses}>
           <Select
             className={classes.selectStudentsClasses}

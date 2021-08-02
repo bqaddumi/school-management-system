@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { MdPerson } from "react-icons/md";
 import { MdLock } from "react-icons/md";
+import Slide from "react-reveal/Slide";
 import { emailRegex } from "../../../consts/RegEx";
 import { loadingActions } from "../../../store/loading";
 import { toastActions } from "../../../store/notification";
@@ -136,7 +137,9 @@ const AddUsers = () => {
     <>
       <BackgroundLogo title="Add Users" />
       <section className={classes.tableSection}>
-        <p className={classes.instruction}>Add A New User With Role</p>
+        <Slide left>
+          <p className={classes.instruction}>Add A New User With Role</p>
+        </Slide>
         <form onSubmit={onSignupHandler}>
           <div className={classes.icons}>
             <MdPerson />

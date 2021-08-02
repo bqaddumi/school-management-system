@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Slide from "react-reveal/Slide";
 import InputField from "../../common/InputField/InputField";
 import BackgroundLogo from "../../common/backgroundLogo/backgroundLogo";
 import Footer from "../../common/footer/footer";
@@ -114,9 +115,11 @@ const ManageSchedule = () => {
       )}
       <BackgroundLogo title={"Manage Schedule"} />
       <section className={classes.sectionContainer}>
-        <p className={classes.instruction}>
-          Mange your Lecture by set day, Time and class #{" "}
-        </p>
+        <Slide left>
+          <p className={classes.instruction}>
+            Mange your Lecture by set day, Time and class #{" "}
+          </p>
+        </Slide>
         <form onSubmit={onAddingLectureHandler}>
           <select
             required

@@ -21,7 +21,7 @@ const Students = () => {
       const getRequestTeachersInfo = await db.collection("teachersInfo");
       const getRequestTeachers = await db.collection("teachers");
 
-      const request = await db
+      await db
         .collection("classes")
         .doc(userInformation.token)
         .get()
@@ -49,7 +49,7 @@ const Students = () => {
       dispatch(loadingActions.setIsLoading(false));
     }
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, userInformation.token]);
 
   const columns = React.useMemo(
     () => [
