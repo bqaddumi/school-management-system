@@ -48,6 +48,7 @@ const AddStudents = () => {
         .set({
           studentName: studentName.label,
           classNumber: classNumber.label,
+          token: studentName.value,
         })
         .then(successAddingStudent)
         .catch(errorAddingStudent);
@@ -91,9 +92,10 @@ const AddStudents = () => {
             onChange={(state) => setClassNumber(state)}
             options={[
               { value: "1st", label: "1st" },
-              { value: "2st", label: "2st" },
-              { value: "3st", label: "3st" },
-              { value: "4st", label: "4st" },
+              { value: "2nd", label: "2nd" },
+              { value: "3rd", label: "3rd" },
+              { value: "4th", label: "4th" },
+              { value: "5th", label: "5th" },
             ]}
             placeholder={"Classes Name"}
             required

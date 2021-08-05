@@ -15,6 +15,7 @@ import Users from "./components/administration/usersTable/usersTable";
 import AddUsers from "./components/administration/addUsers/addUsers";
 import AddStudents from "./components/administration/addStudents/addStudents";
 import TeacherClasses from "./components/administration/teacherClasses/teacherClasses";
+import Classes from "./components/administration/classes/classes";
 import ManageSchedule from "./components/teacherSchedule/manageSchedule/manageSchedule";
 import ClassSchedule from "./components/teacherSchedule/classSchedule/classSchedule";
 import classes from "./App.module.scss";
@@ -74,6 +75,12 @@ const App = () => {
           <PrivateRoute
             path={"/teacherClasses"}
             component={TeacherClasses}
+            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
+            redirectPath={"/"}
+          />
+           <PrivateRoute
+            path={"/classes"}
+            component={Classes}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
             redirectPath={"/"}
           />
