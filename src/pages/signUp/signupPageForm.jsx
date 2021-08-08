@@ -63,7 +63,7 @@ const SignupPageForm = () => {
       .set({
         uid: email,
         userName: name,
-        role: "",
+        role: "Guest",
         token: res.user.uid,
       })
       .then(successCreateAccountInformation)

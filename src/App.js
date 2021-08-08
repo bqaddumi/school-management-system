@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import PrivateRoute from "private-route-react";
 import HomePage from "./pages/home/homePage";
+import GuestPage from "./pages/guestPage/guestPage";
 import SignupPageForm from "./pages/signUp/signupPageForm";
 import SigninPageForm from "./pages/signIn/signinPageForm";
 import Teachers from "./pages/teachers/teachers";
@@ -78,7 +79,7 @@ const App = () => {
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
             redirectPath={"/"}
           />
-           <PrivateRoute
+          <PrivateRoute
             path={"/classes"}
             component={Classes}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
@@ -120,6 +121,7 @@ const App = () => {
             isAbleToAccessRoute={isAbleToAccessRouteStudent}
             redirectPath={"/student"}
           />
+
           <Route path="/login">
             {userInformation && <Redirect to="/home" />}
             {!userInformation && <SigninPageForm />}
@@ -133,7 +135,9 @@ const App = () => {
               <Teachers />
             ) : userInformation.role === "Students" ? (
               <Students />
-            ) : (
+              ) : userInformation.role === "Guest" ? (
+              <GuestPage />
+              ) : (
               <HomePage />
             )}
           </Route>
