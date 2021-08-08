@@ -68,7 +68,7 @@ const SigninForm = () => {
             history.push("/student");
             break;
           default:
-            history.push("/home");
+            history.push("/guest");
             break;
         }
       });
