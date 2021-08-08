@@ -79,6 +79,12 @@ const App = () => {
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
             redirectPath={"/"}
           />
+           <PrivateRoute
+            path={"/classes"}
+            component={Classes}
+            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
+            redirectPath={"/"}
+          />
           <PrivateRoute
             path={"/classes"}
             component={Classes}
