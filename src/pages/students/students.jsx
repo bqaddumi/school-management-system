@@ -55,7 +55,6 @@ const Students = () => {
     }
     fetchData();
   }, [dispatch, userInformation.token]);
-  console.log(information);
 
   const columns = React.useMemo(
     () => [
