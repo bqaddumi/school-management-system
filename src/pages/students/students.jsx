@@ -10,7 +10,7 @@ import classes from "./studentsPage.module.scss";
 const Students = () => {
   const usersObject = useSelector((state) => state.auth.userInformation);
   const userInformation = JSON.parse(usersObject ? usersObject : false);
-  const [information, setInformations] = useState([]);
+  const [information, setInformations] = useState([{class:"",uid:""}]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,16 +54,11 @@ const Students = () => {
       dispatch(loadingActions.setIsLoading(false));
     }
     fetchData();
-
   }, [dispatch, userInformation.token]);
+  console.log(information);
 
   const columns = React.useMemo(
     () => [
-      {
-        Header: "ClassRoom",
-        accessor: "class",
-        Cell: ({ cell: { value } }) => value || "-",
-      },
       {
         Header: "Days",
         accessor: "day",
@@ -95,7 +90,10 @@ const Students = () => {
 
   return (
     <>
-      <BackgroundLogo title="Students Classes Time" />
+      <BackgroundLogo
+        title="Students Classes Time"
+        major={information[0].class + " Class"}
+      />
       <section className={classes.sectionContainer}>
         <div className={classes.headerInformation}>
           <Table columns={columns} data={information} />
