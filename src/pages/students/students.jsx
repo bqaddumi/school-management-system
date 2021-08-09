@@ -10,7 +10,7 @@ import classes from "./studentsPage.module.scss";
 const Students = () => {
   const usersObject = useSelector((state) => state.auth.userInformation);
   const userInformation = JSON.parse(usersObject ? usersObject : false);
-  const [information, setInformations] = useState([{class:"",uid:""}]);
+  const [information, setInformations] = useState([{ class: "", uid: "" }]);
   const dispatch = useDispatch();
 
   useEffect(() => {
