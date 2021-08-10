@@ -32,46 +32,53 @@ const Users = () => {
     });
   }, [dispatch]);
 
-  const handleClickEditRow = useCallback(
+  const handleClickEditRole = useCallback(
     (rowIndex, change) => {
-      dispatch(loadingActions.setIsLoading(true));
-      const db = Firebase.firestore();
-      db.collection("users")
-        .doc(rowIndex.row.original.id)
-        .update({
-          role: change.value,
-        })
-        .then(() => {
-          dispatch(loadingActions.setIsLoading(false));
-          dispatch(
-            toastActions.toast({
-              type: "success",
-              message: "Successfully Modifying",
-              position: "top",
-            })
-          );
-        });
+      if (rowIndex.row.original.role !== change.value) {
+        console.log(rowIndex.row.original.role, change.value);
+
+        dispatch(loadingActions.setIsLoading(true));
+        const db = Firebase.firestore();
+        db.collection("users")
+          .doc(rowIndex.row.original.id)
+          .update({
+            role: change.value,
+          })
+          .then(() => {
+            dispatch(loadingActions.setIsLoading(false));
+            dispatch(
+              toastActions.toast({
+                type: "success",
+                message: "Successfully Modifying",
+                position: "top",
+              })
+            );
+          });
+      }
     },
     [dispatch]
   );
 
   const handleClickEditMajor = useCallback(
     (rowIndex, change) => {
-      const db = Firebase.firestore();
-      db.collection("users")
-        .doc(rowIndex.row.original.id)
-        .update({
-          major: change.value,
-        })
-        .then(() => {
-          dispatch(
-            toastActions.toast({
-              type: "success",
-              message: "Successfully Modifying Major",
-              position: "top",
-            })
-          );
-        });
+      console.log(rowIndex.row.original.major === change.value);
+      if (rowIndex.row.original.major !== change.value) {
+        const db = Firebase.firestore();
+        db.collection("users")
+          .doc(rowIndex.row.original.id)
+          .update({
+            major: change.value,
+          })
+          .then(() => {
+            dispatch(
+              toastActions.toast({
+                type: "success",
+                message: "Successfully Modifying Major",
+                position: "top",
+              })
+            );
+          });
+      }
     },
     [dispatch]
   );
@@ -91,7 +98,7 @@ const Users = () => {
         accessor: "RoleEditing",
         Cell: (cellObj) => (
           <Select
-            onChange={(change) => handleClickEditRow(cellObj, change)}
+            onChange={(change) => handleClickEditRole(cellObj, change)}
             options={[
               { value: userRole.students, label: userRole.students },
               { value: userRole.teacher, label: userRole.teacher },
@@ -121,7 +128,7 @@ const Users = () => {
       },
     ],
     [
-      handleClickEditRow,
+      handleClickEditRole,
       handleClickEditMajor,
       userRole.admin,
       userRole.students,
@@ -142,7 +149,10 @@ const Users = () => {
       <section className={classes.usersSection}>
         <div className={classes.headerContainer}>
           <div className={classes.actions}>
-            <button className={classes.saveButton} onClick={saveButtonHanler}>
+            <button
+              className={classes.saveButton}
+              onClick={saveButtonHanler}
+            >
               Save
             </button>
           </div>
