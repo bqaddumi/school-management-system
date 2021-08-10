@@ -32,7 +32,8 @@
   padding: 10px;
   @include box($width);
 
-  &:hover {
+  &:hover,
+  &:disabled {
     background-color: map-get($green, dark);
   }
 }
