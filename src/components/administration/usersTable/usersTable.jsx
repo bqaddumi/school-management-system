@@ -16,6 +16,11 @@ const Users = () => {
   const dispatch = useDispatch();
   const currentUserRole = useSelector((state) => state.auth.userInformation);
   const userInformation = JSON.parse(currentUserRole ? currentUserRole : false);
+  const [disable, setDisable] = useState(true);
+  const [usersRoleOriginal, setUsersRoleOriginal] = useState([]);
+  const [majorOriginal, setMajorOriginal] = useState([]);
+  const [changeValues, setChangeValues] = useState([]);
+  const [changeMajor, setChangeMajor] = useState([]);
 
   const usersExceptCurrent = users.filter((user) => {
     return user.id !== userInformation.token;
@@ -32,56 +37,35 @@ const Users = () => {
     });
   }, [dispatch]);
 
-  const handleClickEditRole = useCallback(
-    (rowIndex, change) => {
-      if (rowIndex.row.original.role !== change.value) {
-        console.log(rowIndex.row.original.role, change.value);
+  useEffect(() => {
+    if (usersRoleOriginal.length === 0 && majorOriginal.length === 0)
+      setDisable(true);
+    else setDisable(false);
+  }, [usersRoleOriginal.length, majorOriginal.length]);
 
-        dispatch(loadingActions.setIsLoading(true));
-        const db = Firebase.firestore();
-        db.collection("users")
-          .doc(rowIndex.row.original.id)
-          .update({
-            role: change.value,
-          })
-          .then(() => {
-            dispatch(loadingActions.setIsLoading(false));
-            dispatch(
-              toastActions.toast({
-                type: "success",
-                message: "Successfully Modifying",
-                position: "top",
-              })
-            );
-          });
-      }
-    },
-    [dispatch]
-  );
+  const handleClickEditRole = useCallback((rowIndex, change) => {
+    setUsersRoleOriginal(
+      usersRoleOriginal.filter((user) => {
+        return user.id !== rowIndex.row.original.id;
+      })
+    );
+    if (rowIndex.row.original.role !== change.value) {
+      setUsersRoleOriginal((oldArray) => [rowIndex.row.original, ...oldArray]);
+      setChangeValues((oldArray) => [change.value, ...oldArray]);
+    }
+  }, []);
 
-  const handleClickEditMajor = useCallback(
-    (rowIndex, change) => {
-      console.log(rowIndex.row.original.major === change.value);
-      if (rowIndex.row.original.major !== change.value) {
-        const db = Firebase.firestore();
-        db.collection("users")
-          .doc(rowIndex.row.original.id)
-          .update({
-            major: change.value,
-          })
-          .then(() => {
-            dispatch(
-              toastActions.toast({
-                type: "success",
-                message: "Successfully Modifying Major",
-                position: "top",
-              })
-            );
-          });
-      }
-    },
-    [dispatch]
-  );
+  const handleClickEditMajor = useCallback((rowIndex, change) => {
+    setMajorOriginal(
+      majorOriginal.filter((user) => {
+        return user.id !== rowIndex.row.original.id;
+      })
+    );
+    if (rowIndex.row.original.major !== change.value) {
+      setMajorOriginal((oldArray) => [rowIndex.row.original, ...oldArray]);
+      setChangeMajor((oldArray) => [change.value, ...oldArray]);
+    }
+  }, []);
 
   const columns = useMemo(
     () => [
@@ -141,7 +125,38 @@ const Users = () => {
     ]
   );
 
-  const saveButtonHanler = () => {};
+  const saveButtonHanler = async () => {
+    let index = 0,
+      majorIndex = 0;
+    dispatch(loadingActions.setIsLoading(true));
+    await usersRoleOriginal.map(async (userOriginal) => {
+      const db = Firebase.firestore();
+      await db.collection("users").doc(userOriginal.id).update({
+        role: changeValues[index],
+      });
+      return index++;
+    });
+
+    await majorOriginal.map(async (majorOriginal) => {
+      const db = Firebase.firestore();
+      await db.collection("users").doc(majorOriginal.id).update({
+        major: changeMajor[index],
+      });
+      return majorIndex++;
+    });
+    dispatch(loadingActions.setIsLoading(false));
+    dispatch(
+      toastActions.toast({
+        type: "success",
+        message: "Successfully Modifying",
+        position: "top",
+      })
+    );
+    setUsersRoleOriginal([]);
+    setMajorOriginal([]);
+    setChangeValues([]);
+    setChangeMajor([]);
+  };
 
   return (
     <>
@@ -151,6 +166,7 @@ const Users = () => {
           <div className={classes.actions}>
             <button
               className={classes.saveButton}
+              disabled={disable}
               onClick={saveButtonHanler}
             >
               Save
