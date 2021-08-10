@@ -53,7 +53,7 @@ const Users = () => {
       setUsersRoleOriginal((oldArray) => [rowIndex.row.original, ...oldArray]);
       setChangeValues((oldArray) => [change.value, ...oldArray]);
     }
-  }, []);
+  }, [usersRoleOriginal]);
 
   const handleClickEditMajor = useCallback((rowIndex, change) => {
     setMajorOriginal(
@@ -65,7 +65,7 @@ const Users = () => {
       setMajorOriginal((oldArray) => [rowIndex.row.original, ...oldArray]);
       setChangeMajor((oldArray) => [change.value, ...oldArray]);
     }
-  }, []);
+  }, [majorOriginal]);
 
   const columns = useMemo(
     () => [
