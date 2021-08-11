@@ -78,7 +78,6 @@ const Classes = () => {
   return (
     <>
       <BackgroundLogo title={"Class Students "} />
-
       <section className={classes.sectionConatainer}>
         <div className={classes.classesTime}>
           <div className={classes.teachers}>
