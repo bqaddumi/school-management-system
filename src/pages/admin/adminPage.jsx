@@ -1,26 +1,26 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import guest from "../../images/guest.jpg";
+import admin from "../../images/admin.jpg";
 import BackgroundLogo from "../../components/common/backgroundLogo/backgroundLogo";
 import Footer from "../../components/common/footer/footer";
-import classes from "./guestPage.module.scss";
+import classes from "./adminPage.module.scss";
 
-const GuestPage = () => {
+const AdminPage = () => {
   const usersObject = useSelector((state) => state.auth.userInformation);
   const userInformation = JSON.parse(usersObject ? usersObject : false);
-  const guestName =
+  const adminName =
     userInformation.userName.charAt(0).toUpperCase() +
     userInformation.userName.slice(1);
-  const guestEmail = userInformation.uid;
+  const adminEmail = userInformation.uid;
 
   return (
     <div>
-      <BackgroundLogo title={"Welcome " + guestName} major={guestEmail} />
+      <BackgroundLogo title={"Welcome " + adminName} major={adminEmail} />
       <div className={classes.sectionContainer}>
         <img
-          src={guest}
+          src={admin}
           alt="Logo Guest Page"
-          className={classes.imageGuest}
+          className={classes.imageAdmin}
         />
       </div>
       <Footer />
@@ -28,4 +28,4 @@ const GuestPage = () => {
   );
 };
 
-export default GuestPage;
+export default AdminPage;
