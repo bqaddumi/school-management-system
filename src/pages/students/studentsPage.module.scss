@@ -1,34 +1,30 @@
-@import "../../../src/styles/styles.scss";
+@import "../../styles/styles.scss";
 
 .sectionContainer {
-  @include section($maxHeight: 50%);
-  overflow: auto;
+  @include section;
 
-  .headerInformation {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    border-radius: 10px;
+  .imageStudent {
+    width: 100%;
   }
 }
 
 //desktop
 @media screen and (min-width: 1025px) {
   .sectionContainer {
-    @include section($maxHeight: 50%, $width: 60%, $margin: 0 20%);
+    @include section($width: 60%, $margin: 0 20%);
   }
 }
 
 //tablet
 @media screen and (max-width: 1024px) and (min-width: 768px) {
   .sectionContainer {
-    @include section($maxHeight: 50%, $width: 80%, $margin: 0 10%);
+    @include section($width: 80%, $margin: 0 10%);
   }
 }
 
 //phone
 @media screen and (max-width: 767px) {
   .sectionContainer {
-    @include section($maxHeight: 50%, $width: 96%, $margin: 0 2%);
+    @include section($width: 96%, $margin: 0 2%);
   }
 }

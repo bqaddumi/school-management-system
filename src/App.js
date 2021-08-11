@@ -9,6 +9,7 @@ import SignupPageForm from "./pages/signUp/signupPageForm";
 import SigninPageForm from "./pages/signIn/signinPageForm";
 import Teachers from "./pages/teachers/teachers";
 import Students from "./pages/students/students";
+import StudentClasses from "./components/studentClasses/studentClasses";
 // import About from "./pages/about/about";
 import Loader from "./components/common/loader/loader";
 import MainNavbar from "./components/mainNavbar/mainNavbar";
@@ -99,6 +100,12 @@ const App = () => {
             redirectPath={"/"}
           />
           <PrivateRoute
+            path={"/classes"}
+            component={Classes}
+            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
+            redirectPath={"/"}
+          />
+          <PrivateRoute
             path={"/teacher"}
             component={Teachers}
             isAbleToAccessRoute={isAbleToAccessRouteTeacher}
@@ -123,10 +130,10 @@ const App = () => {
             redirectPath={"/student"}
           />
           <PrivateRoute
-            path={"/classes"}
-            component={Classes}
-            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
-            redirectPath={"/"}
+            path={"/classesTime"}
+            component={StudentClasses}
+            isAbleToAccessRoute={isAbleToAccessRouteStudent}
+            redirectPath={"/classesTime"}
           />
           <Route path="/login">
             {userInformation && <Redirect to="/home" />}

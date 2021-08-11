@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import classNames from "classnames";
 import { MdHome } from "react-icons/md";
-import TeachersSettings from "./teachersSettings/teachersSettings";
-import { authActions } from "../../store/auth";
+import classNames from "classnames";
 import AdminSetting from "./adminSetting/adminSetting";
+import TeachersSettings from "./teachersSettings/teachersSettings";
+import StudentSetting from "./studentSetting/studentSetting";
 import Firebase from "../../database/config";
+import { authActions } from "../../store/auth";
 import schoolLogo from "../../images/profileSchoolLogo.jpg";
 import classes from "./mainNavbar.module.scss";
 
@@ -73,6 +74,8 @@ const MainNavbar = () => {
       <AdminSetting userName={userInformation.userName} navLink={navLink} />
     ) : userInformation.role === "Teachers" ? (
       <TeachersSettings userName={userInformation.userName} navLink={navLink} />
+    ) : userInformation.role === "Students" ? (
+      <StudentSetting userName={userInformation.userName} navLink={navLink} />
     ) : (
       <div className={classes[navLink]}>{userInformation.userName}</div>
     ),
@@ -100,7 +103,7 @@ const MainNavbar = () => {
       <label htmlFor="menubtn" className={classes.menuicon}>
         <span className={classes.menuiconline}></span>
       </label>
-      
+
       <ul className={classes.navContainerList}>
         {userInformation ? (
           <>
