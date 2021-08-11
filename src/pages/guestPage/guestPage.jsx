@@ -15,11 +15,11 @@ const GuestPage = () => {
 
   return (
     <div>
-      <BackgroundLogo title={"Welcome " + guestName} major={guestEmail} />
+      <BackgroundLogo title={"Welcome " + guestName +" in WIX school"} major={guestEmail} />
       <div className={classes.sectionContainer}>
         <img
-          src={guest}
-          alt="Logo Guest Page"
+          src={guest}Guest
+          alt="Logo  Page"
           className={classes.imageGuest}
         />
       </div>
