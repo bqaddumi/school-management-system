@@ -34,6 +34,13 @@ const Users = () => {
       snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
       setUsers(postData);
       dispatch(loadingActions.setIsLoading(false));
+      dispatch(
+        toastActions.toast({
+          type: "",
+          message: "",
+          position: "",
+        })
+      );
     });
   }, [dispatch]);
 
@@ -43,29 +50,38 @@ const Users = () => {
     else setDisable(false);
   }, [usersRoleOriginal.length, majorOriginal.length]);
 
-  const handleClickEditRole = useCallback((rowIndex, change) => {
-    setUsersRoleOriginal(
-      usersRoleOriginal.filter((user) => {
-        return user.id !== rowIndex.row.original.id;
-      })
-    );
-    if (rowIndex.row.original.role !== change.value) {
-      setUsersRoleOriginal((oldArray) => [rowIndex.row.original, ...oldArray]);
-      setChangeValues((oldArray) => [change.value, ...oldArray]);
-    }
-  }, [usersRoleOriginal]);
+  const handleClickEditRole = useCallback(
+    (rowIndex, change) => {
+      setUsersRoleOriginal(
+        usersRoleOriginal.filter((user) => {
+          return user.id !== rowIndex.row.original.id;
+        })
+      );
+      if (rowIndex.row.original.role !== change.value) {
+        setUsersRoleOriginal((oldArray) => [
+          rowIndex.row.original,
+          ...oldArray,
+        ]);
+        setChangeValues((oldArray) => [change.value, ...oldArray]);
+      }
+    },
+    [usersRoleOriginal]
+  );
 
-  const handleClickEditMajor = useCallback((rowIndex, change) => {
-    setMajorOriginal(
-      majorOriginal.filter((user) => {
-        return user.id !== rowIndex.row.original.id;
-      })
-    );
-    if (rowIndex.row.original.major !== change.value) {
-      setMajorOriginal((oldArray) => [rowIndex.row.original, ...oldArray]);
-      setChangeMajor((oldArray) => [change.value, ...oldArray]);
-    }
-  }, [majorOriginal]);
+  const handleClickEditMajor = useCallback(
+    (rowIndex, change) => {
+      setMajorOriginal(
+        majorOriginal.filter((user) => {
+          return user.id !== rowIndex.row.original.id;
+        })
+      );
+      if (rowIndex.row.original.major !== change.value) {
+        setMajorOriginal((oldArray) => [rowIndex.row.original, ...oldArray]);
+        setChangeMajor((oldArray) => [change.value, ...oldArray]);
+      }
+    },
+    [majorOriginal]
+  );
 
   const columns = useMemo(
     () => [

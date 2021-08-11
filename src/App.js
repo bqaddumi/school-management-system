@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import PrivateRoute from "private-route-react";
 import HomePage from "./pages/home/homePage";
 import GuestPage from "./pages/guestPage/guestPage";
+import AdminPage from "./pages/admin/adminPage";
 import SignupPageForm from "./pages/signUp/signupPageForm";
 import SigninPageForm from "./pages/signIn/signinPageForm";
 import Teachers from "./pages/teachers/teachers";
@@ -69,38 +70,14 @@ const App = () => {
         <Switch>
           <PrivateRoute
             path={"/admin"}
+            component={AdminPage}
+            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
+            redirectPath={"/"}
+          />
+          <PrivateRoute
+            path={"/usersRole"}
             component={Users}
             isAbleToAccessRoute={isAbleToAccessRouteAdmin}
-            redirectPath={"/"}
-          />
-          <PrivateRoute
-            path={"/teacherClasses"}
-            component={TeacherClasses}
-            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
-            redirectPath={"/"}
-          />
-           <PrivateRoute
-            path={"/classes"}
-            component={Classes}
-            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
-            redirectPath={"/"}
-          />
-          <PrivateRoute
-            path={"/classes"}
-            component={Classes}
-            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
-            redirectPath={"/"}
-          />
-          <PrivateRoute
-            path={"/manageSchedule"}
-            component={ManageSchedule}
-            isAbleToAccessRoute={isAbleToAccessRouteTeacher}
-            redirectPath={"/"}
-          />
-          <PrivateRoute
-            path={"/classSchedule"}
-            component={ClassSchedule}
-            isAbleToAccessRoute={isAbleToAccessRouteTeacher}
             redirectPath={"/"}
           />
           <PrivateRoute
@@ -116,10 +93,28 @@ const App = () => {
             redirectPath={"/"}
           />
           <PrivateRoute
+            path={"/teacherClasses"}
+            component={TeacherClasses}
+            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
+            redirectPath={"/"}
+          />
+          <PrivateRoute
             path={"/teacher"}
             component={Teachers}
             isAbleToAccessRoute={isAbleToAccessRouteTeacher}
             redirectPath={"/teacher"}
+          />
+          <PrivateRoute
+            path={"/manageSchedule"}
+            component={ManageSchedule}
+            isAbleToAccessRoute={isAbleToAccessRouteTeacher}
+            redirectPath={"/"}
+          />
+          <PrivateRoute
+            path={"/classSchedule"}
+            component={ClassSchedule}
+            isAbleToAccessRoute={isAbleToAccessRouteTeacher}
+            redirectPath={"/"}
           />
           <PrivateRoute
             path={"/student"}
@@ -127,7 +122,12 @@ const App = () => {
             isAbleToAccessRoute={isAbleToAccessRouteStudent}
             redirectPath={"/student"}
           />
-
+          <PrivateRoute
+            path={"/classes"}
+            component={Classes}
+            isAbleToAccessRoute={isAbleToAccessRouteAdmin}
+            redirectPath={"/"}
+          />
           <Route path="/login">
             {userInformation && <Redirect to="/home" />}
             {!userInformation && <SigninPageForm />}
@@ -141,9 +141,11 @@ const App = () => {
               <Teachers />
             ) : userInformation.role === "Students" ? (
               <Students />
-              ) : userInformation.role === "Guest" ? (
+            ) : userInformation.role === "Guest" ? (
               <GuestPage />
-              ) : (
+            ) : userInformation.role === userRole.admin ? (
+              <AdminPage />
+            ) : (
               <HomePage />
             )}
           </Route>
