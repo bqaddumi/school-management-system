@@ -19,7 +19,7 @@ const AdminPage = () => {
       <div className={classes.sectionContainer}>
         <img
           src={admin}
-          alt="Logo Guest Page"
+          alt="Logo Admin Page"
           className={classes.imageAdmin}
         />
       </div>
