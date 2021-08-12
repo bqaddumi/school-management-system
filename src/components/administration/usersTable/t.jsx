@@ -16,7 +16,6 @@ const Users = () => {
   const dispatch = useDispatch();
   const currentUserRole = useSelector((state) => state.auth.userInformation);
   const userInformation = JSON.parse(currentUserRole ? currentUserRole : false);
-
   const [disable, setDisable] = useState(true);
   const [usersRoleOriginal, setUsersRoleOriginal] = useState([]);
   const [majorOriginal, setMajorOriginal] = useState([]);
@@ -24,10 +23,18 @@ const Users = () => {
   const [changeMajor, setChangeMajor] = useState([]);
   const [roleValue, setRoleValue] = useState();
   const [changeValue, setChangeValue] = useState();
-
+  
   const usersExceptCurrent = users.filter((user) => {
     return user.id !== userInformation.token;
   });
+  
+  dispatch(
+    toastActions.toast({
+      type: "",
+      message: "",
+      position: "",
+    })
+  );
 
   useEffect(() => {
     dispatch(loadingActions.setIsLoading(true));
@@ -37,13 +44,6 @@ const Users = () => {
       snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
       setUsers(postData);
       dispatch(loadingActions.setIsLoading(false));
-      dispatch(
-        toastActions.toast({
-          type: "",
-          message: "",
-          position: "",
-        })
-      );
     });
   }, [dispatch]);
 
@@ -103,16 +103,16 @@ const Users = () => {
         accessor: "RoleEditing",
         Cell: (cellObj) => (
           <>
-         { setRoleValue(cellObj.row.original.role)}
-          <Select
-            onChange={(change) => handleClickEditRole(cellObj, change)}
-            options={[
-              { value: userRole.students, label: userRole.students },
-              { value: userRole.teacher, label: userRole.teacher },
-              { value: userRole.admin, label: userRole.admin },
-            ]}
-            placeholder={roleValue}
-          />
+            {setRoleValue(cellObj.row.original.role)}
+            <Select
+              onChange={(change) => handleClickEditRole(cellObj, change)}
+              options={[
+                { value: userRole.students, label: userRole.students },
+                { value: userRole.teacher, label: userRole.teacher },
+                { value: userRole.admin, label: userRole.admin },
+              ]}
+              placeholder={cellObj.row.original.role}
+            />
           </>
         ),
       },
@@ -121,24 +121,26 @@ const Users = () => {
         accessor: "MajorEditing",
         Cell: (cellObj) => (
           <>
-          {setChangeValue(cellObj.row.original.major)}
-          <Select
-            onChange={(change) => handleClickEditMajor(cellObj, change)}
-            options={[
-              { value: teachersMajor.Math, label: teachersMajor.Math },
-              { value: teachersMajor.Arabic, label: teachersMajor.Arabic },
-              { value: teachersMajor.English, label: teachersMajor.English },
-              { value: teachersMajor.Art, label: teachersMajor.Art },
-              { value: teachersMajor.Piology, label: teachersMajor.Piology },
-            ]}
-            placeholder={changeValue}
-            isDisabled={cellObj.row.original.role !== userRole.teacher}
-          />
+            {setChangeValue(cellObj.row.original.major)}
+            <Select
+              onChange={(change) => handleClickEditMajor(cellObj, change)}
+              options={[
+                { value: teachersMajor.Math, label: teachersMajor.Math },
+                { value: teachersMajor.Arabic, label: teachersMajor.Arabic },
+                { value: teachersMajor.English, label: teachersMajor.English },
+                { value: teachersMajor.Art, label: teachersMajor.Art },
+                { value: teachersMajor.Piology, label: teachersMajor.Piology },
+              ]}
+              placeholder={cellObj.row.original.major}
+              isDisabled={cellObj.row.original.role !== userRole.teacher}
+            />
           </>
         ),
       },
     ],
     [
+      // roleValue,
+      // changeValue,
       handleClickEditRole,
       handleClickEditMajor,
       userRole.admin,
