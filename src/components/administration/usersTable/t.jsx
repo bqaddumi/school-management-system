@@ -16,16 +16,25 @@ const Users = () => {
   const dispatch = useDispatch();
   const currentUserRole = useSelector((state) => state.auth.userInformation);
   const userInformation = JSON.parse(currentUserRole ? currentUserRole : false);
-
   const [disable, setDisable] = useState(true);
   const [usersRoleOriginal, setUsersRoleOriginal] = useState([]);
   const [majorOriginal, setMajorOriginal] = useState([]);
   const [changeValues, setChangeValues] = useState([]);
   const [changeMajor, setChangeMajor] = useState([]);
-
+  const [roleValue, setRoleValue] = useState();
+  const [changeValue, setChangeValue] = useState();
+  
   const usersExceptCurrent = users.filter((user) => {
     return user.id !== userInformation.token;
   });
+  
+  dispatch(
+    toastActions.toast({
+      type: "",
+      message: "",
+      position: "",
+    })
+  );
 
   useEffect(() => {
     dispatch(loadingActions.setIsLoading(true));
@@ -35,13 +44,6 @@ const Users = () => {
       snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
       setUsers(postData);
       dispatch(loadingActions.setIsLoading(false));
-      dispatch(
-        toastActions.toast({
-          type: "",
-          message: "",
-          position: "",
-        })
-      );
     });
   }, [dispatch]);
 
@@ -53,6 +55,7 @@ const Users = () => {
 
   const handleClickEditRole = useCallback(
     (rowIndex, change) => {
+      setRoleValue(change.value);
       setUsersRoleOriginal(
         usersRoleOriginal.filter((user) => {
           return user.id !== rowIndex.row.original.id;
@@ -71,6 +74,7 @@ const Users = () => {
 
   const handleClickEditMajor = useCallback(
     (rowIndex, change) => {
+      setChangeValue(change.value);
       setMajorOriginal(
         majorOriginal.filter((user) => {
           return user.id !== rowIndex.row.original.id;
@@ -98,37 +102,45 @@ const Users = () => {
         Header: "Users Role",
         accessor: "RoleEditing",
         Cell: (cellObj) => (
-          <Select
-            onChange={(change) => handleClickEditRole(cellObj, change)}
-            options={[
-              { value: userRole.students, label: userRole.students },
-              { value: userRole.teacher, label: userRole.teacher },
-              { value: userRole.admin, label: userRole.admin },
-            ]}
-            placeholder={cellObj.row.original.role}
-          />
+          <>
+            {setRoleValue(cellObj.row.original.role)}
+            <Select
+              onChange={(change) => handleClickEditRole(cellObj, change)}
+              options={[
+                { value: userRole.students, label: userRole.students },
+                { value: userRole.teacher, label: userRole.teacher },
+                { value: userRole.admin, label: userRole.admin },
+              ]}
+              placeholder={cellObj.row.original.role}
+            />
+          </>
         ),
       },
       {
         Header: "Users Major",
         accessor: "MajorEditing",
         Cell: (cellObj) => (
-          <Select
-            onChange={(change) => handleClickEditMajor(cellObj, change)}
-            options={[
-              { value: teachersMajor.Math, label: teachersMajor.Math },
-              { value: teachersMajor.Arabic, label: teachersMajor.Arabic },
-              { value: teachersMajor.English, label: teachersMajor.English },
-              { value: teachersMajor.Art, label: teachersMajor.Art },
-              { value: teachersMajor.Piology, label: teachersMajor.Piology },
-            ]}
-            placeholder={cellObj.row.original.major}
-            isDisabled={cellObj.row.original.role !== userRole.teacher}
-          />
+          <>
+            {setChangeValue(cellObj.row.original.major)}
+            <Select
+              onChange={(change) => handleClickEditMajor(cellObj, change)}
+              options={[
+                { value: teachersMajor.Math, label: teachersMajor.Math },
+                { value: teachersMajor.Arabic, label: teachersMajor.Arabic },
+                { value: teachersMajor.English, label: teachersMajor.English },
+                { value: teachersMajor.Art, label: teachersMajor.Art },
+                { value: teachersMajor.Piology, label: teachersMajor.Piology },
+              ]}
+              placeholder={cellObj.row.original.major}
+              isDisabled={cellObj.row.original.role !== userRole.teacher}
+            />
+          </>
         ),
       },
     ],
     [
+      // roleValue,
+      // changeValue,
       handleClickEditRole,
       handleClickEditMajor,
       userRole.admin,
