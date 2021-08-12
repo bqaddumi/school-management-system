@@ -81,7 +81,7 @@ const Classes = () => {
       <section className={classes.sectionConatainer}>
         <div className={classes.classesTime}>
           <div className={classes.teachers}>
-            <div className={classes.labelName}>Teacher Name</div>
+            <div className={classes.labelName}>Class Number</div>
             <select
               required
               className={classes.selectTeachersName}
